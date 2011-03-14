@@ -60,7 +60,7 @@
 	url = git://github.com/vim-scripts/RDoc.git
 [submodule "bundle/gemfile"]
 	path = bundle/gemfile
-	url = git://github.com/vim-scripts/syntaxGemfile.vim.git
+	url = git://github.com/tobiassvn/vim-gemfile.git
 [submodule "bundle/sinatra"]
 	path = bundle/sinatra
 	url = git://github.com/vim-scripts/RubySinatra.git
