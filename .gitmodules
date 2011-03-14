@@ -61,3 +61,6 @@
 [submodule "bundle/rdoc"]
 	path = bundle/rdoc
 	url = git://github.com/vim-scripts/RDoc.git
+[submodule "bundle/gemfile"]
+	path = bundle/gemfile
+	url = git://github.com/vim-scripts/syntaxGemfile.vim.git
