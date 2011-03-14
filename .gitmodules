@@ -19,3 +19,6 @@
 [submodule "bundle/reorder-tabs"]
 	path = bundle/reorder-tabs
 	url = https://github.com/vim-scripts/reorder-tabs.git
+[submodule "bundle/surround"]
+	path = bundle/surround
+	url = https://github.com/tpope/vim-surround.git
