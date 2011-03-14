@@ -16,6 +16,15 @@ set autowrite
 set encoding=utf-8
 set fileencoding=utf-8
 
+" detect the type of file
+filetype on
+
+" load filetype plugins
+filetype plugin on
+
+" load indent files for specific filetypes
+filetype indent on
+
 " add : as a file-name character (allow gf to work with http://foo.bar/)
 set isfname+=:
 
@@ -24,6 +33,9 @@ set ttyfast
 
 " faster!
 set timeout timeoutlen=3000 ttimeoutlen=100
+
+" faster!! do not redraw while running macros (much faster) (LazyRedraw)
+set lazyredraw
 
 " le système d'exploitation décide à la place de Vim du bon moment pour vider le cache
 set nofsync
@@ -45,7 +57,7 @@ set sidescroll=5
 set listchars+=precedes:<,extends:>
 
 " affiche les numéros de ligne sur le coté
-set number
+set nu!
 
 " met en évidence la ligne actuellement éditée
 set cursorline
@@ -58,10 +70,6 @@ set noerrorbells
 
 " ne *pas* faire clignoter l'écran lors d'une erreur (relou^2)
 set novisualbell
-
-" active les plugins et les indentations par type de fichier
-filetype on
-filetype plugin indent on
 
 " quand on tape par ex. un ")", Vim montre le "(" correspondant
 set showmatch
@@ -81,11 +89,11 @@ if !has("gui_running")
   set mouse=a
 endif
 
+" show chars on end of line, white spaces, tabs, etc
+set list
+
 " don't move the cursor to the start of the line when changing buffers
 set nostartofline
-
-" hide the mouse in the gui while typing
-set mousehide
 
 " {{{ correction orthographique
 
@@ -229,6 +237,9 @@ let html_use_css = 1
 
 " {{{ Statusline, menu, onglets
 
+" all… right
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+
 " use tab for auto-expansion in menus
 set wc=<TAB>
 
@@ -348,6 +359,9 @@ map <Leader><Left> :tabprevious<CR>
 " tabnext
 map <Leader><Right> :tabnext<CR>
 
+" Toggle line numbering
+noremap <silent> <F11> :se nu!<CR>
+
 " navigation spéciale clavier bépo (dvorak) -- bepo.fr
 " ie. en mode normal/commande, maintenir Alt et utiliser les doigts au
 " repos pour des déplacements rapides, sans flèches
@@ -424,7 +438,6 @@ let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 if has("autocmd")
   augroup augroup_autocmd
     au!
-    filetype plugin on
 
     " se placer à la position du curseur lors de la fermeture du fichier
     autocmd BufReadPost *
