@@ -34,3 +34,6 @@
 [submodule "bundle/delimitmate"]
 	path = bundle/delimitmate
 	url = git://github.com/vim-scripts/delimitMate.vim.git
+[submodule "bundle/snipMate"]
+	path = bundle/snipMate
+	url = git://github.com/vim-scripts/snipMate.git
