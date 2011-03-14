@@ -37,3 +37,6 @@
 [submodule "bundle/snipMate"]
 	path = bundle/snipMate
 	url = git://github.com/vim-scripts/snipMate.git
+[submodule "bundle/supertab-continued"]
+	path = bundle/supertab-continued
+	url = git://github.com/vim-scripts/SuperTab-continued..git
