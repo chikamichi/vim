@@ -52,3 +52,6 @@
 [submodule "bundle/markdown"]
 	path = bundle/markdown
 	url = git://github.com/vim-scripts/Markdown.git
+[submodule "bundle/railscasts"]
+	path = bundle/railscasts
+	url = git://github.com/vim-scripts/railscasts.git
