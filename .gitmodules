@@ -103,3 +103,6 @@
 [submodule "bundle/snipmate-snippets"]
 	path = bundle/snipmate-snippets
 	url = git://github.com/scrooloose/snipmate-snippets.git
+[submodule "bundle/jquery"]
+	path = bundle/jquery
+	url = git://github.com/vim-scripts/jQuery.git

@@ -439,6 +439,11 @@ let Tlist_Sort_Type = 'name' " And sort them by name
 " fugitive
 set statusline+=\ %{fugitive#statusline()}
 
+" supertab
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabCrMapping = 0
+
 " Plugins }}}
 
 " {{{ Commandes automatiques
