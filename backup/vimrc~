@@ -679,7 +679,6 @@ endif
 " Commandes automatiques }}}
 
 " Ack
-" https://github.com/mileszs/ack.vim
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 
 " Plugins }}}
