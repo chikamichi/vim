@@ -46,3 +46,6 @@
 [submodule "bundle/matchit-ruby"]
 	path = bundle/matchit-ruby
 	url = git://github.com/vim-scripts/ruby-matchit.git
+[submodule "bundle/cucumber"]
+	path = bundle/cucumber
+	url = git://github.com/vim-scripts/cucumber.zip.git
