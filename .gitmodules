@@ -70,3 +70,9 @@
 [submodule "bundle/blockle"]
 	path = bundle/blockle
 	url = git://github.com/vim-scripts/blockle.vim.git
+[submodule "bundle/textobj-rubyblock"]
+	path = bundle/textobj-rubyblock
+	url = git://github.com/vim-scripts/textobj-rubyblock.git
+[submodule "bundle/textobj-user"]
+	path = bundle/textobj-user
+	url = git://github.com/vim-scripts/textobj-user.git
