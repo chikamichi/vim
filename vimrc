@@ -387,13 +387,13 @@ command! Unixformat :set ff=unix
 command! Dosformat  :set ff=dos
 
 " scroll vers le bas sans bouger le curseur
-map <C-DOWN> <C-E>
+"map <C-DOWN> <C-E>
 " scroll vers le haut sans bouger le curseur
-map <C-UP> <C-Y>
+"map <C-UP> <C-Y>
 
 " tout séléctionner
-noremap <C-A> gggH<C-O>G
-cnoremap <C-A> <C-C>gggH<C-O>G
+"noremap <C-A> gggH<C-O>G
+"cnoremap <C-A> <C-C>gggH<C-O>G
 
 " <F1> lance la commande d'aide au lieu d'afficher l'intro de l'aide
 nnoremap <F1> :help<Space>
@@ -443,6 +443,14 @@ set statusline+=\ %{fugitive#statusline()}
 let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabCrMapping = 0
+
+" unimpaired
+" Bubble single lines
+nmap <C-Up> [e
+nmap <C-Down> ]e
+" Bubble multiple lines
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
 
 " Plugins }}}
 
