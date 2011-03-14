@@ -238,7 +238,20 @@ let html_use_css = 1
 " {{{ Statusline, menu, onglets
 
 " all… right
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+set statusline=
+set statusline+=%3.3n\                       " buffer number
+set statusline+=%f\                          " file name
+set statusline+=%h%1*%m%r%w%0*               " flags
+set statusline+=\[%{strlen(&ft)?&ft:'none'}, " filetype
+set statusline+=%{strlen(&fenc)?&fenc:&enc}%{&bomb?'/bom':''}, " encoding
+set statusline+=%{&fileformat}]              " file format
+set statusline+=%{exists('loaded_VCSCommand')?VCSCommandGetStatusLine():''} " show vcs status
+set statusline+=%{exists('loaded_scmbag')?SCMbag_Info():''} " show vcs status
+set statusline+=%=                           " right align
+set statusline+=\[%{exists('loaded_taglist')?Tlist_Get_Tag_Prototype_By_Line(expand('%'),line('.')):'no\ tags'}]\   " show tag prototype
+set statusline+=0x%-8B\                      " current char
+set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
 
 " use tab for auto-expansion in menus
 set wc=<TAB>
