@@ -88,3 +88,6 @@
 [submodule "bundle/rubycomplete"]
 	path = bundle/rubycomplete
 	url = git://github.com/vim-scripts/rubycomplete.vim.git
+[submodule "bundle/haml"]
+	path = bundle/haml
+	url = git://github.com/tpope/vim-haml.git
