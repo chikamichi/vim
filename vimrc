@@ -437,7 +437,7 @@ let Tlist_Show_One_File = 1  " Only show tags from the current file
 let Tlist_Sort_Type = 'name' " And sort them by name
 
 " fugitive
-set statusline+=%{fugitive#statusline()}
+set statusline+=\ %{fugitive#statusline()}
 
 " Plugins }}}
 
