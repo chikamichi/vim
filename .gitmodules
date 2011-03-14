@@ -31,3 +31,6 @@
 [submodule "bundle/nerdtree"]
 	path = bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
+[submodule "bundle/delimitmate"]
+	path = bundle/delimitmate
+	url = git://github.com/vim-scripts/delimitMate.vim.git
