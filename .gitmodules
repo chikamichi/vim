@@ -55,3 +55,6 @@
 [submodule "bundle/railscasts"]
 	path = bundle/railscasts
 	url = git://github.com/vim-scripts/railscasts.git
+[submodule "bundle/paper"]
+	path = bundle/paper
+	url = git://github.com/vim-scripts/paper.git
