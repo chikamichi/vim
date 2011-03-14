@@ -49,3 +49,6 @@
 [submodule "bundle/cucumber"]
 	path = bundle/cucumber
 	url = git://github.com/vim-scripts/cucumber.zip.git
+[submodule "bundle/markdown"]
+	path = bundle/markdown
+	url = git://github.com/vim-scripts/Markdown.git
