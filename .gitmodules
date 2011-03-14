@@ -34,9 +34,9 @@
 [submodule "bundle/delimitmate"]
 	path = bundle/delimitmate
 	url = git://github.com/vim-scripts/delimitMate.vim.git
-[submodule "bundle/snipMate"]
-	path = bundle/snipMate
-	url = git://github.com/vim-scripts/snipMate.git
+[submodule "bundle/snipmate"]
+	path = bundle/snipmate
+	url = git://github.com/msanders/snipmate.vim.git
 [submodule "bundle/supertab-continued"]
 	path = bundle/supertab-continued
 	url = git://github.com/vim-scripts/SuperTab-continued..git
@@ -100,3 +100,6 @@
 [submodule "bundle/taglist"]
 	path = bundle/taglist
 	url = git://github.com/vim-scripts/taglist.vim
+[submodule "bundle/snipmate-snippets"]
+	path = bundle/snipmate-snippets
+	url = git://github.com/scrooloose/snipmate-snippets.git

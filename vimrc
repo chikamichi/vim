@@ -427,9 +427,17 @@ map <F2> :A<CR>
 call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
 
-" Ack
+" ack-grep
 " https://github.com/mileszs/ack.vim
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+
+" taglist
+nmap <silent> <F7> :TlistToggle<CR> 
+let Tlist_Show_One_File = 1  " Only show tags from the current file
+let Tlist_Sort_Type = 'name' " And sort them by name
+
+" fugitive
+set statusline+=%{fugitive#statusline()}
 
 " Plugins }}}
 
