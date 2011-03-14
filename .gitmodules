@@ -64,3 +64,6 @@
 [submodule "bundle/gemfile"]
 	path = bundle/gemfile
 	url = git://github.com/vim-scripts/syntaxGemfile.vim.git
+[submodule "bundle/sinatra"]
+	path = bundle/sinatra
+	url = git://github.com/vim-scripts/RubySinatra.git
