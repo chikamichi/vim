@@ -34,9 +34,6 @@
 [submodule "bundle/delimitmate"]
 	path = bundle/delimitmate
 	url = git://github.com/vim-scripts/delimitMate.vim.git
-[submodule "bundle/snipmate"]
-	path = bundle/snipmate
-	url = git://github.com/msanders/snipmate.vim.git
 [submodule "bundle/supertab"]
         path = bundle/supertab
         url = git://github.com/ervandew/supertab.git
@@ -67,9 +64,6 @@
 [submodule "bundle/sinatra"]
 	path = bundle/sinatra
 	url = git://github.com/vim-scripts/RubySinatra.git
-[submodule "bundle/blockle"]
-	path = bundle/blockle
-	url = git://github.com/vim-scripts/blockle.vim.git
 [submodule "bundle/textobj-rubyblock"]
 	path = bundle/textobj-rubyblock
 	url = git://github.com/vim-scripts/textobj-rubyblock.git
@@ -82,12 +76,6 @@
 [submodule "bundle/eruby"]
 	path = bundle/eruby
 	url = git://github.com/vim-scripts/eruby.vim.git
-[submodule "bundle/ri-browser"]
-	path = bundle/ri-browser
-	url = git://github.com/vim-scripts/ri-browser.git
-[submodule "bundle/rubycomplete"]
-	path = bundle/rubycomplete
-	url = git://github.com/vim-scripts/rubycomplete.vim.git
 [submodule "bundle/haml"]
 	path = bundle/haml
 	url = git://github.com/tpope/vim-haml.git
@@ -100,6 +88,9 @@
 [submodule "bundle/taglist"]
 	path = bundle/taglist
 	url = git://github.com/vim-scripts/taglist.vim
+[submodule "bundle/snipmate"]
+	path = bundle/snipmate
+	url = git://github.com/msanders/snipmate.vim.git
 [submodule "bundle/snipmate-snippets"]
 	path = bundle/snipmate-snippets
 	url = git://github.com/scrooloose/snipmate-snippets.git
@@ -121,3 +112,6 @@
 [submodule "bundle/ruby-debugger"]
 	path = bundle/ruby-debugger
 	url = git://github.com/astashov/vim-ruby-debugger.git
+[submodule "bundle/nginx"]
+	path = bundle/nginx
+	url = git://github.com/vim-scripts/nginx.vim.git
