@@ -80,7 +80,7 @@ set mouse=a
 set printoptions=paper:a4
 set ruler
 set rulerformat=%40(%=%t%h%m%r%w%<\ (%n)\ %4.7l,%-7.(%c%V%)\ %P%)
-set runtimepath=~/.vim,~/.vim/bundle/fugitive,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim72,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after
+set runtimepath=~/.vim,~/.vim/bundle/ack,~/.vim/bundle/fugitive,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim72,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after
 set scrolloff=3
 set shiftround
 set shiftwidth=2
@@ -106,20 +106,18 @@ set winminheight=0
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/.vim
+cd ~/af83/atypic/dev/atypic-api-admin
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 .git/objects/08/923d0367621d2ae742119c1a9e56aee9dade07
 silent! argdel *
-edit .git/objects/08/923d0367621d2ae742119c1a9e56aee9dade07
 set splitbelow splitright
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
 argglobal
-cnoremap <buffer> <expr>  fugitive#buffer().rev()
+enew
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -211,20 +209,13 @@ if &syntax != ''
 setlocal syntax=
 endif
 setlocal tabstop=8
-setlocal tags=./tags,./TAGS,tags,TAGS,~/.vim/.git/tags
+setlocal tags=
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 1 - ((0 * winheight(0) + 18) / 37)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-1
-normal! 0
-lcd ~/.vim
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
