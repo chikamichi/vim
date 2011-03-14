@@ -16,3 +16,6 @@
 [submodule "bundle/rainbow-parenthesis"]
 	path = bundle/rainbow-parenthesis
 	url = https://github.com/vim-scripts/Rainbow-Parenthesis.git
+[submodule "bundle/reorder-tabs"]
+	path = bundle/reorder-tabs
+	url = https://github.com/vim-scripts/reorder-tabs.git
