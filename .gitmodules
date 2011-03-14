@@ -7,3 +7,9 @@
 [submodule "bundle/autoclose"]
 	path = bundle/autoclose
 	url = https://github.com/Townk/vim-autoclose.git
+[submodule "bundle/vim-scripts-a"]
+	path = bundle/vim-scripts-a
+	url = https://github.com/vim-scripts/a.vim.git
+[submodule "bundle/rails"]
+	path = bundle/rails
+	url = https://github.com/tpope/vim-rails.git
