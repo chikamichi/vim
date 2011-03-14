@@ -1,6 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =6
 let g:netrw_dirhist_1='/home/jd/.vim'
 let g:netrw_dirhist_2='/home/jd/.vim/.git'
 let g:netrw_dirhist_3='/home/jd/.vim/.git/objects'
 let g:netrw_dirhist_4='/home/jd/.vim/.git/objects/08'
+let g:netrw_dirhist_5='/home/jd/dev/ruby/apotomo/lib/apotomo/widget'
+let g:netrw_dirhist_6='/home/jd/.rvm/gems/ruby-1.8.7-p334@atypic-api-admin/gems/apotomo-1.1.0/lib/apotomo/widget'
