@@ -76,3 +76,6 @@
 [submodule "bundle/textobj-user"]
 	path = bundle/textobj-user
 	url = git://github.com/vim-scripts/textobj-user.git
+[submodule "bundle/fokus"]
+	path = bundle/fokus
+	url = git://github.com/vim-scripts/fokus.git
