@@ -82,3 +82,6 @@
 [submodule "bundle/eruby"]
 	path = bundle/eruby
 	url = git://github.com/vim-scripts/eruby.vim.git
+[submodule "bundle/ri-browser"]
+	path = bundle/ri-browser
+	url = git://github.com/vim-scripts/ri-browser.git
