@@ -124,3 +124,6 @@
 [submodule "bundle/coffee-script"]
 	path = bundle/coffee-script
 	url = git://github.com/kchmck/vim-coffee-script.git
+[submodule "bundle/trailing-whitespace"]
+	path = bundle/trailing-whitespace
+	url = git://github.com/bronson/vim-trailing-whitespace.git
