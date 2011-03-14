@@ -1,0 +1,11 @@
+require 'autotest_notification'
+require 'autotest/timestamp'
+
+SPEAKING      = false
+DOOM_EDITION  = false
+BUUF          = false
+PENDING       = false
+STICKY        = false
+SUCCESS_SOUND = ''
+FAILURE_SOUND = ''
+

@@ -1,0 +1,604 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>~/.vimrc.html</title>
+<meta name="Generator" content="Vim/7.1">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+.Normal { color: #cccccc; background-color: #000000; }
+.Special { color: #ffdead; }
+.Identifier { color: #98fb98; }
+.Type { color: #bdb76b; font-weight: bold; }
+.Constant { color: #ffa0a0; }
+.PreProc { color: #cd5c5c; }
+pre { font-family: monospace; color: #cccccc; background-color: #000000; }
+body { font-family: monospace; color: #cccccc; background-color: #000000; }
+.Comment { color: #87ceeb; }
+.Statement { color: #f0e68c; font-weight: bold; }
+-->
+</style>
+</head>
+<body>
+<pre>
+<span class="Comment">&quot; {{{ Génériques</span>
+
+<span class="Comment">&quot; recharger ce fichier s'il a été modifié (et sauvegardé)</span>
+<span class="Comment">&quot; pour moi, ça n'a jamais vraiment bien fonctionné ^^</span>
+<span class="Comment">&quot;autocmd! BufWritePost .vimrc source ~/.vimrc</span>
+
+<span class="Comment">&quot; mise-à-jour automatique si le fichier a été modifié ailleurs que dans Vim</span>
+<span class="Statement">set</span> <span class="PreProc">autoread</span>
+
+<span class="Comment">&quot; modifie le &lt;leader&gt; (« \ » par défaut)</span>
+<span class="Comment">&quot; j'utilise la virgule car sur le clavier bépo, elle est située en plein</span>
+<span class="Comment">&quot; centre du clavier !</span>
+<span class="Statement">let</span>   mapleader <span class="Statement">=</span> <span class="Constant">&quot;,&quot;</span>
+<span class="Statement">let</span> g:<span class="Statement">map</span>leader = &quot;,&quot;
+
+
+<span class="Comment">&quot; hauteur de la ligne de status (utile pour les plugins de library hints)</span>
+<span class="Statement">set</span> <span class="PreProc">ch</span>=2
+
+<span class="Comment">&quot; une ligne de status avec plus d'information !</span>
+<span class="Comment">&quot; attention au %{VimBuddy()} qui nécessite le plugin VimBuddy (à enlever sinon)</span>
+<span class="Statement">set</span> <span class="PreProc">laststatus</span>=2
+<span class="Statement">set</span> <span class="PreProc">statusline</span>=%F%m%r%h%w\ [FORMAT=%{&amp;ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l<span class="Statement">,</span>%04v][%p%%]\ [LEN=%L]\ %{VimBuddy()}
+
+<span class="Comment">&quot; gestion des lignes longues (:help wrap)</span>
+<span class="Statement">set</span> <span class="PreProc">wrap</span>
+<span class="Statement">set</span> <span class="PreProc">sidescroll</span>=5
+<span class="Statement">set</span> <span class="PreProc">listchars</span>+=precedes<span class="Statement">:</span>&lt;<span class="Statement">,</span>extends<span class="Statement">:</span>&gt;
+
+<span class="Comment">&quot; affiche les numéros de ligne sur le coté</span>
+<span class="Statement">set</span> <span class="PreProc">number</span>
+
+<span class="Comment">&quot; met en évidence la ligne actuellement éditée</span>
+<span class="Statement">set</span> <span class="PreProc">cursorline</span>
+<span class="Statement">highlight</span> CursorLine <span class="Type">guibg</span>=<span class="Constant">#BBCEBB</span>
+
+<span class="Comment">&quot; place le curseur là où il était lors de la fermeture du fichier</span>
+<span class="Statement">au</span> <span class="Type">BufReadPost</span> * <span class="Statement">if</span> <span class="Identifier">line</span><span class="Statement">(</span><span class="Constant">&quot;'\&quot;&quot;</span><span class="Statement">)</span> <span class="Statement">&gt;</span> <span class="Constant">0</span> <span class="Statement">&amp;&amp;</span> <span class="Identifier">line</span><span class="Statement">(</span><span class="Constant">&quot;'\&quot;&quot;</span><span class="Statement">)</span> <span class="Statement">&lt;=</span> <span class="Identifier">line</span><span class="Statement">(</span><span class="Constant">&quot;$&quot;</span><span class="Statement">)</span> | <span class="Statement">exe</span> <span class="Constant">&quot;normal g'\&quot;&quot;</span> <span class="Statement">|</span> <span class="Statement">endif</span>
+
+<span class="Comment">&quot; la touche backspace peut supprimer tout et n'importe quoi, dans tous les</span>
+<span class="Comment">&quot; modes</span>
+<span class="Statement">set</span> <span class="PreProc">backspace</span>=2
+
+<span class="Comment">&quot; pas de compatiblité avec VI !</span>
+<span class="Statement">set</span> <span class="PreProc">nocompatible</span>
+
+<span class="Comment">&quot; pas de bip! lors d'une erreur</span>
+<span class="Statement">set</span> <span class="PreProc">noerrorbells</span>
+
+<span class="Comment">&quot; ne PAS faire clignoter l'écran lors d'une erreur (relou)</span>
+<span class="Statement">set</span> <span class="PreProc">novisualbell</span>
+
+<span class="Comment">&quot; active les plugins et les indentations par type de fichier</span>
+<span class="Statement">filetype</span> <span class="Type">on</span>
+<span class="Statement">filetype</span> <span class="Type">plugin</span> <span class="Type">indent</span> <span class="Type">on</span>
+
+<span class="Comment">&quot; quand on tape par ex. un </span><span class="Constant">&quot;)&quot;</span><span class="Comment">, Vim montre furtivement le </span><span class="Constant">&quot;(&quot;</span><span class="Comment"> correspondant</span>
+<span class="Statement">set</span> <span class="PreProc">showmatch</span>
+
+<span class="Comment">&quot; définitions de ce que sont les commentaires</span>
+<span class="Statement">set</span> <span class="PreProc">com</span><span class="PreProc">&amp;</span> <span class="Comment">&quot; reset to default</span>
+<span class="Statement">set</span> <span class="PreProc">com</span>^=sr<span class="Statement">:</span>*\ -<span class="Statement">,</span>mb<span class="Statement">:</span>*\ \ <span class="Statement">,</span>el<span class="Statement">:</span>*/ <span class="PreProc">com</span>^=sr<span class="Statement">:</span>//\ -<span class="Statement">,</span>mb<span class="Statement">:</span>//\ \ <span class="Statement">,</span>el<span class="Statement">:</span>///
+
+<span class="Comment">&quot; ajoute une marge à gauche pour afficher les +/- des replis (folds)</span>
+<span class="Statement">if</span> <span class="Identifier">has</span><span class="Statement">(</span><span class="Constant">&quot;gui_running&quot;</span><span class="Statement">)</span>
+    <span class="Statement">set</span> <span class="PreProc">foldcolumn</span>=2
+<span class="Statement">endif</span>
+
+<span class="Comment">&quot; autorise le folding</span>
+<span class="Statement">set</span> <span class="PreProc">foldenable</span>
+
+<span class="Comment">&quot; critère par défaut pour replier les blocs : marqueurs explicites {{{ … }}}</span>
+<span class="Statement">set</span> <span class="PreProc">foldmethod</span>=marker
+
+<span class="Comment">&quot; prévisualisation dans Firefox</span>
+<span class="Statement">command</span>! Preview :!firefox <span class="Identifier">%</span>&lt;CR&gt;
+
+<span class="Comment">&quot; navigation parmi les onglets « à la Firefox »</span>
+<span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">C-S-tab</span><span class="Special">&gt;</span>       :tabprevious<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">C-tab</span><span class="Special">&gt;</span>         :tabnext<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="Statement">map</span>  <span class="Special">&lt;</span><span class="Special">C-S-tab</span><span class="Special">&gt;</span>       :tabprevious<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="Statement">map</span>  <span class="Special">&lt;</span><span class="Special">C-tab</span><span class="Special">&gt;</span>         :tabnext<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="Statement">imap</span> <span class="Special">&lt;</span><span class="Special">C-S-tab</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">Esc</span><span class="Special">&gt;</span> :tabprevious<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>i
+<span class="Statement">imap</span> <span class="Special">&lt;</span><span class="Special">C-tab</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">Esc</span><span class="Special">&gt;</span>   :tabnext<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>i
+<span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">C-t</span><span class="Special">&gt;</span>           :tabnew<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="Statement">imap</span> <span class="Special">&lt;</span><span class="Special">C-t</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">Esc</span><span class="Special">&gt;</span>     :tabnew<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="Statement">map</span>  <span class="Special">&lt;</span><span class="Special">C-M-w</span><span class="Special">&gt;</span>         :tabclose<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+
+<span class="Comment">&quot; se placer automatiquement dans le dossier du fichier actuellement édité</span>
+<span class="Comment">&quot; désactivé pour conserver la fonctionnalité d'OmniCompletion</span>
+<span class="Comment">&quot;autocmd BufEnter * lcd %:p:h</span>
+
+<span class="Comment">&quot; Génériques }}}</span>
+
+<span class="Comment">&quot; {{{ Indentation</span>
+
+<span class="Comment">&quot; conserver d'une ligne à l'autre l'indentation d'un paragraphe</span>
+<span class="Statement">set</span> <span class="PreProc">autoindent</span>
+
+<span class="Comment">&quot; utilise des espaces plutot que le caractère TAB</span>
+<span class="Statement">set</span> <span class="PreProc">expandtab</span>
+
+<span class="Comment">&quot; nombre d'espaces pour une tabulation</span>
+<span class="Statement">set</span> <span class="PreProc">shiftwidth</span>=4
+
+<span class="Comment">&quot; nombre d'espaces pour une tabulation, bis</span>
+<span class="Statement">set</span> <span class="PreProc">softtabstop</span>=4
+
+<span class="Comment">&quot; nombre d'espaces pour une tabulation, ter</span>
+<span class="Statement">set</span> <span class="PreProc">tabstop</span>=4
+
+<span class="Comment">&quot; tabulation, un petit dernier</span>
+<span class="Statement">set</span> <span class="PreProc">ts</span>=4
+
+<span class="Comment">&quot; some nice options for cindenting, by FOLKE</span>
+<span class="Statement">set</span> <span class="PreProc">cinoptions</span>={.5s<span class="Statement">,</span>+.5s<span class="Statement">,</span>t0<span class="Statement">,</span>n-2<span class="Statement">,</span>p2s<span class="Statement">,</span>(03s<span class="Statement">,</span>=.5s<span class="Statement">,</span>&gt;1s<span class="Statement">,</span>=1s<span class="Statement">,:</span>1s
+
+<span class="Comment">&quot; {{{ pour le plugin surround</span>
+<span class="Comment">&quot; permet de redonner la main à vim pour gérer l'indentation automatique</span>
+<span class="Statement">let</span> b:surround_indent <span class="Statement">=</span> <span class="Constant">1</span>
+<span class="Comment">&quot; surround }}}</span>
+
+<span class="Comment">&quot; Indentation }}}</span>
+
+<span class="Comment">&quot; {{{ Recherche et substitution</span>
+
+<span class="Comment">&quot; ignorer la casse des caractères dans les recherches de chaînes</span>
+<span class="Statement">set</span> <span class="PreProc">ignorecase</span>
+
+<span class="Comment">&quot; mais ne pas l'ignorer s'il y a explicitement des majuscules</span>
+<span class="Statement">set</span> <span class="PreProc">scs</span>
+
+<span class="Comment">&quot; regexp version magic</span>
+<span class="Statement">set</span> <span class="PreProc">magic</span>
+
+<span class="Comment">&quot; recherche circulaire (pour couvrir tout le fichier, quel que soit le point</span>
+<span class="Comment">&quot; de départ de la recherche)</span>
+<span class="Statement">set</span> <span class="PreProc">wrapscan</span>
+
+<span class="Comment">&quot; résultats dynamiques au cours de la recherche (amène le curseur sur le</span>
+<span class="Comment">&quot; résultat pour le motif actuellement recherché)</span>
+<span class="Statement">set</span> <span class="PreProc">sm</span>
+
+<span class="Comment">&quot; surlignage des résultats</span>
+<span class="Statement">set</span> <span class="PreProc">hls</span>
+
+<span class="Comment">&quot; … y compris en cours de frappe</span>
+<span class="Statement">set</span> <span class="PreProc">incsearch</span>
+
+<span class="Comment">&quot; !!! use 'g'-flag when substituting (subst. all matches in that line, not only first)</span>
+<span class="Comment">&quot; to turn off, use g (why is there no -g ?)</span>
+<span class="Comment">&quot; set gdefault</span>
+
+<span class="Comment">&quot; auto-complete avec &lt;tab&gt;</span>
+<span class="Statement">function</span>! TabWrapper<span class="Statement">()</span>
+    <span class="Statement">let</span> col <span class="Statement">=</span> <span class="Identifier">col</span><span class="Statement">(</span><span class="Constant">&quot;.&quot;</span><span class="Statement">)</span> <span class="Statement">-</span> <span class="Constant">1</span>
+    <span class="Statement">if</span> <span class="Statement">col</span> <span class="Statement">&amp;&amp;</span> <span class="Identifier">getline</span><span class="Statement">(</span><span class="Constant">&quot;.&quot;</span><span class="Statement">)</span>[<span class="Constant">0</span>:<span class="Statement">col</span> <span class="Statement">-</span> <span class="Constant">1</span>] <span class="Statement">=~</span> <span class="Constant">'[.&gt;a-zA-Z0-0_]'</span>
+        <span class="Statement">return</span> <span class="Constant">&quot;\&lt;c-n&gt;&quot;</span>
+    <span class="Statement">else</span>
+        <span class="Statement">return</span> <span class="Constant">&quot;\&lt;tab&gt;&quot;</span>
+    <span class="Statement">end</span>
+<span class="Statement">endfunction</span>
+<span class="Statement">inoremap</span> <span class="Special">&lt;</span><span class="Special">expr</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">tab</span><span class="Special">&gt;</span> TabWrapper()
+
+<span class="Comment">&quot; &lt;espace&gt; en mode normal efface les messages et les résultats de recherche</span>
+<span class="Statement">nnoremap</span> <span class="Special">&lt;</span><span class="Special">silent</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">Space</span><span class="Special">&gt;</span> :silent noh<span class="Special">&lt;</span><span class="Special">Bar</span><span class="Special">&gt;</span>echo<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+
+<span class="Comment">&quot; {{{ plugin SnippetsEmu</span>
+<span class="Comment">&quot; touche de trigger perso</span>
+<span class="Statement">let</span> g:snippetsEmu_key <span class="Statement">=</span> <span class="Constant">&quot;&lt;C-Space&gt;&quot;</span>
+<span class="Comment">&quot; plugin SnippetsEmu }}}</span>
+
+<span class="Comment">&quot; }}}</span>
+
+<span class="Comment">&quot; {{{ Coloration syntaxique, couleurs, polices</span>
+
+<span class="Comment">&quot; active la coloration syntaxique quand c'est possible</span>
+<span class="Statement">if</span> &amp;t_Co <span class="Statement">&gt;</span> <span class="Constant">2</span> <span class="Statement">||</span> <span class="Identifier">has</span><span class="Statement">(</span><span class="Constant">&quot;gui_running&quot;</span><span class="Statement">)</span>
+        <span class="Statement">syntax</span> <span class="Type">on</span>
+<span class="Statement">endif</span>
+
+<span class="Statement">if</span> <span class="Identifier">has</span><span class="Statement">(</span><span class="Constant">&quot;gui_running&quot;</span><span class="Statement">)</span>
+<span class="Comment">        &quot; tente de maximiser la fenêtre GVim (problème avec Gnome et Metacity</span>
+<span class="Comment">        &quot; non solvable par la configuration de Vim seule)</span>
+        <span class="Statement">set</span> <span class="PreProc">lines</span>=99999 <span class="PreProc">columns</span>=99999
+
+<span class="Comment">        &quot; police par défaut</span>
+        <span class="Statement">if</span> <span class="Identifier">has</span><span class="Statement">(</span><span class="Constant">&quot;win32&quot;</span><span class="Statement">)</span>
+                <span class="Statement">set</span> <span class="PreProc">guifont</span>=Fixedsys<span class="Statement">:</span>h9<span class="Statement">:</span>cANSI
+<span class="Comment">                &quot;set guifont=Courier:h10:cANSI</span>
+        <span class="Statement">else</span>
+                <span class="Statement">set</span> <span class="PreProc">guifont</span>=Deja\ Vu\ Sans\ Mono\ 12
+                <span class="Statement">set</span> <span class="PreProc">guioptions</span>=gimrLtTa
+        <span class="Statement">endif</span>
+
+<span class="Comment">        &quot; thème de coloration syntaxique par défaut</span>
+        <span class="Statement">colorscheme</span> desert256
+<span class="Statement">endif</span>
+
+<span class="Comment">&quot; how many lines to sync backwards</span>
+<span class="Statement">syn</span> <span class="Type">sync</span> minlines=<span class="Constant">10000</span> maxlines<span class="Statement">=</span><span class="Constant">10000</span>
+
+<span class="Comment">&quot; export HTML (:TOhtml) *avec CSS*</span>
+<span class="Statement">let</span> html_use_css <span class="Statement">=</span> <span class="Constant">1</span>
+
+<span class="Comment">&quot; Recherche et substitution }}}</span>
+
+<span class="Comment">&quot; {{{ Statusline, menu, onglets</span>
+
+<span class="Comment">&quot; use tab for auto-expansion in menus</span>
+<span class="Statement">set</span> <span class="PreProc">wc</span>=<span class="Special">&lt;</span><span class="Special">TAB</span><span class="Special">&gt;</span>
+
+<span class="Comment">&quot; show a list of all matches when tabbing a command</span>
+<span class="Statement">set</span> <span class="PreProc">wmnu</span>
+
+<span class="Comment">&quot; how command line completion works</span>
+<span class="Statement">set</span> <span class="PreProc">wildmode</span>=list<span class="Statement">:</span>longest<span class="Statement">,</span>list<span class="Statement">:</span>full
+
+<span class="Comment">&quot; ignore some files for filename completion</span>
+<span class="Statement">set</span> <span class="PreProc">wildignore</span>=*.o<span class="Statement">,</span>*.r<span class="Statement">,</span>*.so<span class="Statement">,</span>*.sl<span class="Statement">,</span>*.tar<span class="Statement">,</span>*.tgz<span class="Statement">,</span>*.pyc<span class="Statement">,</span>*~
+
+<span class="Comment">&quot; some filetypes got lower priority</span>
+<span class="Statement">set</span> <span class="PreProc">su</span>=.h<span class="Statement">,</span>.bak<span class="Statement">,</span>~<span class="Statement">,</span>.o<span class="Statement">,</span>.info<span class="Statement">,</span>.swp<span class="Statement">,</span>.obj
+
+<span class="Comment">&quot; enhanced command-line completion mode</span>
+<span class="Statement">set</span> <span class="PreProc">wildmenu</span>
+
+<span class="Comment">&quot; remember last 2000 typed commands</span>
+<span class="Statement">set</span> <span class="PreProc">hi</span>=2000
+
+<span class="Comment">&quot; afficher la position du curseur</span>
+<span class="Statement">set</span> <span class="PreProc">ruler</span>
+
+<span class="Comment">&quot; toujours afficher le mode courant</span>
+<span class="Statement">set</span> <span class="PreProc">showmode</span>
+
+<span class="Comment">&quot; Show (partial) command in status line</span>
+<span class="Statement">set</span> <span class="PreProc">showcmd</span>
+
+<span class="Comment">&quot; utiliser des messages courts</span>
+<span class="Statement">set</span> <span class="PreProc">shm</span>=a
+
+<span class="Comment">&quot; la ligne de status est toujours visible</span>
+<span class="Statement">set</span> <span class="PreProc">laststatus</span>=2
+
+<span class="Comment">&quot; une fonction intéressante de <a href="http://blog.golden-ratio.net/2008/08/19/using-tabs-in-vim/">http://blog.golden-ratio.net/2008/08/19/using-tabs-in-vim/</a></span>
+<span class="Statement">function</span>! GuiTabLabel<span class="Statement">()</span>
+<span class="Comment">    &quot; add the tab number</span>
+    <span class="Statement">let</span> label <span class="Statement">=</span> <span class="Constant">'['</span><span class="Statement">.</span><span class="Identifier">tabpagenr</span><span class="Statement">()</span>
+
+<span class="Comment">    &quot; modified since the last save?</span>
+    <span class="Statement">let</span> buflist <span class="Statement">=</span> <span class="Identifier">tabpagebuflist</span><span class="Statement">(</span>v:lnum<span class="Statement">)</span>
+    <span class="Statement">for</span> bufnr <span class="Statement">in</span> buflist
+        <span class="Statement">if</span> <span class="Identifier">getbufvar</span><span class="Statement">(</span>bufnr, <span class="Constant">'&amp;modified'</span><span class="Statement">)</span>
+            <span class="Statement">let</span> label <span class="Statement">.=</span> <span class="Constant">'*'</span>
+            <span class="Statement">break</span>
+        <span class="Statement">endif</span>
+    <span class="Statement">endfor</span>
+
+<span class="Comment">    &quot; count number of open windows in the tab</span>
+    <span class="Statement">let</span> wincount <span class="Statement">=</span> <span class="Identifier">tabpagewinnr</span><span class="Statement">(</span>v:lnum, <span class="Constant">'$'</span><span class="Statement">)</span>
+    <span class="Statement">if</span> wincount <span class="Statement">&gt;</span> <span class="Constant">1</span>
+        <span class="Statement">let</span> label <span class="Statement">.=</span> <span class="Constant">', '</span><span class="Statement">.</span>wincount
+    <span class="Statement">endif</span>
+    <span class="Statement">let</span> label <span class="Statement">.=</span> <span class="Constant">'] '</span>
+
+<span class="Comment">    &quot; add the file name without path information</span>
+    <span class="Statement">let</span> n <span class="Statement">=</span> <span class="Identifier">bufname</span><span class="Statement">(</span>buflist[tabpagewinnr<span class="Statement">(</span>v:lnum<span class="Statement">)</span> <span class="Statement">-</span> <span class="Constant">1</span>]<span class="Statement">)</span>
+    <span class="Statement">let</span> label <span class="Statement">.=</span> <span class="Identifier">fnamemodify</span><span class="Statement">(</span>n, <span class="Constant">':t'</span><span class="Statement">)</span>
+
+    <span class="Statement">return</span> label
+<span class="Statement">endfunction</span>
+<span class="Statement">set</span> <span class="PreProc">guitablabel</span>=%{GuiTabLabel()}
+
+<span class="Comment">&quot; Statusline, menu, onglets }}}</span>
+
+<span class="Comment">&quot; {{{ Gestion du fenêtrage</span>
+
+<span class="Statement">if</span> <span class="Identifier">has</span><span class="Statement">(</span><span class="Constant">&quot;gui_running&quot;</span><span class="Statement">)</span>
+<span class="Comment">    &quot; le focus suit la souris</span>
+    <span class="Statement">set</span> <span class="PreProc">mousef</span>
+<span class="Comment">    &quot; le bouton droit affiche une popup</span>
+    <span class="Statement">set</span> <span class="PreProc">mousemodel</span>=popup_setpos
+<span class="Statement">endif</span>
+
+<span class="Comment">&quot; minimal number of lines used for the current window</span>
+<span class="Statement">set</span> <span class="PreProc">wh</span>=1
+
+<span class="Comment">&quot; minimal number of lines used for any window</span>
+<span class="Statement">set</span> <span class="PreProc">wmh</span>=0
+
+<span class="Comment">&quot; make all windows the same size when adding/removing windows</span>
+<span class="Statement">set</span> <span class="PreProc">noequalalways</span>
+
+<span class="Comment">&quot; les nouvelles fenêtres sont crées sous l'actuelle</span>
+<span class="Statement">set</span> <span class="PreProc">splitbelow</span>
+
+<span class="Comment">&quot; Gestion du fenêtrage }}}</span>
+
+<span class="Comment">&quot; {{{ Sauvegarde</span>
+
+<span class="Comment">&quot; répertoire de sauvegarde automatique</span>
+<span class="Statement">set</span> <span class="PreProc">backupdir</span>=$HOME/.vim/backup
+
+<span class="Comment">&quot; activation de la sauvagarde</span>
+<span class="Statement">set</span> <span class="PreProc">backup</span>
+
+<span class="Comment">&quot; activation du plugin de gestion de backup numéroté</span>
+<span class="Comment">&quot;set patchmode=.bak</span>
+
+<span class="Comment">&quot; conservation de l'historique de 10 sauvegardes</span>
+<span class="Comment">&quot;let savevers_max=10</span>
+
+<span class="Comment">&quot; … avec le même répertoire de sauvegarde que pour le backup classique</span>
+<span class="Statement">let</span> savevers_dirs <span class="Statement">=</span> &amp;backupdir
+
+<span class="Comment">&quot; le swap est mis à jour aprés 50 caractères saisies</span>
+<span class="Comment">&quot;set updatecount=500</span>
+<span class="Comment">&quot; suppression de l'utilisation du fichier d'échange</span>
+<span class="Statement">set</span> <span class="PreProc">updatecount</span>=0
+
+<span class="Comment">&quot; Sauvegarde }}}</span>
+
+<span class="Comment">&quot; {{{ Mapping</span>
+
+<span class="Comment">&quot; raccourci classique pour sauvegarder</span>
+<span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">c-s</span><span class="Special">&gt;</span> :w<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="Statement">imap</span> <span class="Special">&lt;</span><span class="Special">c-s</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">Esc</span><span class="Special">&gt;</span>:w<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>a
+<span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>w :w!<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+
+<span class="Comment">&quot; collage propre depuis le buffer extérieur (indentations)</span>
+<span class="Comment">&quot;inoremap &lt;C-v&gt; &lt;esc&gt;:set paste&lt;cr&gt;mui&lt;C-R&gt;+&lt;esc&gt;mv'uV'v=:set nopaste&lt;cr&gt;</span>
+
+<span class="Comment">&quot; raccourci pratique pour rechercher</span>
+<span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">leader</span><span class="Special">&gt;</span>f :find<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+
+<span class="Comment">&quot; supprime tout les blancs en debut de ligne</span>
+<span class="Statement">nmap</span> _S :%s/^\s\+//<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+
+<span class="Comment">&quot; déplace la ligne courante vers le bas</span>
+<span class="Statement">nmap</span> _j :move .+1<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="Comment">&quot; déplace la ligne courante vers le haut</span>
+<span class="Statement">nmap</span> _k :move .-2<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+
+<span class="Comment">&quot; converts file format to/from unix</span>
+<span class="Statement">command</span>! Unixformat :<span class="Statement">set</span> <span class="PreProc">ff</span>=unix
+<span class="Statement">command</span>! Dosformat  :<span class="Statement">set</span> <span class="PreProc">ff</span>=dos
+
+<span class="Comment">&quot; raccourcis classiques pour annuler</span>
+<span class="Statement">inoremap</span> <span class="Special">&lt;</span><span class="Special">C-Z</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-O</span><span class="Special">&gt;</span>u
+<span class="Statement">noremap</span>  <span class="Special">&lt;</span><span class="Special">C-Z</span><span class="Special">&gt;</span> u
+
+<span class="Comment">&quot; raccourcis classiques pour refaire</span>
+<span class="Comment">&quot; (supprimé car en confit avec le scroll montant)</span>
+<span class="Comment">&quot;noremap &lt;C-Y&gt; &lt;C-R&gt;</span>
+<span class="Comment">&quot;inoremap &lt;C-Y&gt; &lt;C-O&gt;&lt;C-R&gt;</span>
+
+<span class="Comment">&quot; scroll vers le bas sans bouger le curseur</span>
+<span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">C-DOWN</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-E</span><span class="Special">&gt;</span>
+<span class="Comment">&quot; scroll vers le haut sans bouger le curseur</span>
+<span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">C-UP</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-Y</span><span class="Special">&gt;</span>
+
+<span class="Comment">&quot; tout séléctionner</span>
+<span class="Statement">noremap</span> <span class="Special">&lt;</span><span class="Special">C-A</span><span class="Special">&gt;</span> gggH<span class="Special">&lt;</span><span class="Special">C-O</span><span class="Special">&gt;</span>G
+<span class="Comment">&quot;inoremap &lt;C-A&gt; &lt;C-O&gt;gg&lt;C-O&gt;gH&lt;C-O&gt;G</span>
+<span class="Statement">cnoremap</span> <span class="Special">&lt;</span><span class="Special">C-A</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-C</span><span class="Special">&gt;</span>gggH<span class="Special">&lt;</span><span class="Special">C-O</span><span class="Special">&gt;</span>G
+
+<span class="Comment">&quot; indentation automatique (à la Emacs)</span>
+<span class="Statement">vnoremap</span> <span class="Special">&lt;</span><span class="Special">C-F</span><span class="Special">&gt;</span>   =$
+<span class="Statement">vnoremap</span> <span class="Special">&lt;</span><span class="Special">tab</span><span class="Special">&gt;</span>   =
+<span class="Statement">nnoremap</span> <span class="Special">&lt;</span><span class="Special">tab</span><span class="Special">&gt;</span>   =$
+<span class="Statement">nnoremap</span> <span class="Special">&lt;</span><span class="Special">C-tab</span><span class="Special">&gt;</span> mzvip=`z
+
+<span class="Comment">&quot; &lt;F1&gt; lance la commande d'aide au lieu d'afficher l'intro de l'aide</span>
+<span class="Statement">nnoremap</span> <span class="Special">&lt;</span><span class="Special">F1</span><span class="Special">&gt;</span> :help<span class="Special">&lt;</span><span class="Special">Space</span><span class="Special">&gt;</span>
+<span class="Statement">vmap</span> <span class="Special">&lt;</span><span class="Special">F1</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-C</span><span class="Special">&gt;&lt;</span><span class="Special">F1</span><span class="Special">&gt;</span>
+<span class="Statement">omap</span> <span class="Special">&lt;</span><span class="Special">F1</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-C</span><span class="Special">&gt;&lt;</span><span class="Special">F1</span><span class="Special">&gt;</span>
+<span class="Statement">map!</span> <span class="Special">&lt;</span><span class="Special">F1</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-C</span><span class="Special">&gt;&lt;</span><span class="Special">F1</span><span class="Special">&gt;</span>
+
+<span class="Comment">&quot; forcer la fermeture d'un tampon</span>
+<span class="Statement">map</span>  <span class="Special">&lt;</span><span class="Special">F4</span><span class="Special">&gt;</span> :bd!<span class="Special">&lt;</span><span class="Special">cr</span><span class="Special">&gt;</span>
+<span class="Statement">imap</span> <span class="Special">&lt;</span><span class="Special">F4</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">C-O</span><span class="Special">&gt;</span>:bd!<span class="Special">&lt;</span><span class="Special">cr</span><span class="Special">&gt;</span>
+<span class="Statement">cmap</span> <span class="Special">&lt;</span><span class="Special">F4</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">c-c</span><span class="Special">&gt;</span>:bd!<span class="Special">&lt;</span><span class="Special">cr</span><span class="Special">&gt;</span>
+
+<span class="Comment">&quot; mets en commentaire</span>
+<span class="Statement">map</span>  <span class="Special">&lt;</span><span class="Special">F7</span><span class="Special">&gt;</span> &lt;Leader&gt;c
+<span class="Statement">imap</span> <span class="Special">&lt;</span><span class="Special">F7</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">esc</span><span class="Special">&gt;&lt;</span><span class="Special">F7</span><span class="Special">&gt;</span>
+
+<span class="Comment">&quot; active/désactive la navigation par tags</span>
+<span class="Statement">nnoremap</span> <span class="Special">&lt;</span><span class="Special">silent</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">F8</span><span class="Special">&gt;</span> :Tlist<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+
+<span class="Statement">if</span> <span class="Identifier">has</span><span class="Statement">(</span><span class="Constant">&quot;gui_running&quot;</span><span class="Statement">)</span>
+<span class="Comment">    &quot; alt jumps to menu</span>
+    <span class="Statement">set</span> <span class="PreProc">winaltkeys</span>=menu
+<span class="Comment">    &quot; clipboard to autoselect</span>
+    <span class="Statement">set</span> <span class="PreProc">guioptions</span>+=a
+<span class="Comment">    &quot; Shift-[flèche] pour sélectionner un bloc</span>
+    <span class="Statement">map</span>  <span class="Special">&lt;</span><span class="Special">S-Up</span><span class="Special">&gt;</span>    vk
+    <span class="Statement">vmap</span> <span class="Special">&lt;</span><span class="Special">S-Up</span><span class="Special">&gt;</span>    k
+    <span class="Statement">map</span>  <span class="Special">&lt;</span><span class="Special">S-Down</span><span class="Special">&gt;</span>  vj
+    <span class="Statement">vmap</span> <span class="Special">&lt;</span><span class="Special">S-Down</span><span class="Special">&gt;</span>  j
+    <span class="Statement">map</span>  <span class="Special">&lt;</span><span class="Special">S-Right</span><span class="Special">&gt;</span> v
+    <span class="Statement">vmap</span> <span class="Special">&lt;</span><span class="Special">S-Right</span><span class="Special">&gt;</span> l
+    <span class="Statement">map</span>  <span class="Special">&lt;</span><span class="Special">S-Left</span><span class="Special">&gt;</span>  v
+    <span class="Statement">vmap</span> <span class="Special">&lt;</span><span class="Special">S-Left</span><span class="Special">&gt;</span>  h
+<span class="Statement">endif</span>
+
+<span class="Comment">&quot; gestion du caractère NULL dans tous les modes</span>
+<span class="Statement">imap</span> <span class="Special">&lt;</span><span class="Special">Nul</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">Space</span><span class="Special">&gt;</span>
+<span class="Statement">map</span>  <span class="Special">&lt;</span><span class="Special">Nul</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">Nop</span><span class="Special">&gt;</span>
+<span class="Statement">vmap</span> <span class="Special">&lt;</span><span class="Special">Nul</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">Nop</span><span class="Special">&gt;</span>
+<span class="Statement">cmap</span> <span class="Special">&lt;</span><span class="Special">Nul</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">Nop</span><span class="Special">&gt;</span>
+<span class="Statement">nmap</span> <span class="Special">&lt;</span><span class="Special">Nul</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">Nop</span><span class="Special">&gt;</span>
+
+<span class="Comment">&quot; Mapping }}}</span>
+
+<span class="Comment">&quot; {{{ Plugins</span>
+
+<span class="Comment">&quot; {{{ Commandes automatiques</span>
+<span class="Statement">if</span> <span class="Identifier">has</span><span class="Statement">(</span><span class="Constant">&quot;autocmd&quot;</span><span class="Statement">)</span>
+
+    <span class="Statement">augroup</span> augroup_autocmd
+    <span class="Statement">au</span>!
+
+        <span class="Statement">filetype</span> plugin <span class="Statement">on</span>
+        <span class="Statement">autocmd</span> <span class="Type">FileType</span> text <span class="Statement">setlocal</span> <span class="PreProc">textwidth</span>=78
+
+<span class="Comment">        &quot; se placer à la position du curseur lors de la fermeture du fichier</span>
+        <span class="Statement">autocmd</span> <span class="Type">BufReadPost</span> *
+<span class="Special">        \</span> <span class="Statement">if</span> line(<span class="Constant">&quot;'\&quot;&quot;</span>) <span class="Statement">&gt;</span> <span class="Constant">0</span> <span class="Statement">&amp;&amp;</span> line(<span class="Constant">&quot;'\&quot;&quot;</span>) <span class="Statement">&lt;=</span> line(<span class="Constant">&quot;$&quot;</span>) |
+<span class="Special">        \</span>   exe <span class="Constant">&quot;normal g`\&quot;&quot;</span> |
+<span class="Special">        \</span> <span class="Statement">endif</span>
+
+<span class="Comment">        &quot; par type de fichier</span>
+        <span class="Statement">autocmd</span> <span class="Type">FileType</span> text        <span class="Statement">setlocal</span> <span class="PreProc">textwidth</span>=78 <span class="PreProc">nocindent</span>
+        <span class="Statement">autocmd</span> <span class="Type">FileType</span> html        <span class="Statement">set</span>      <span class="PreProc">formatoptions</span>+=tl
+        <span class="Statement">autocmd</span> <span class="Type">FileType</span> css         <span class="Statement">set</span>      <span class="PreProc">smartindent</span>
+        <span class="Statement">autocmd</span> <span class="Type">FileType</span> html,css    <span class="Statement">set</span>      <span class="PreProc">noexpandtab</span> <span class="PreProc">tabstop</span>=2
+        <span class="Statement">autocmd</span> <span class="Type">FileType</span> c,cpp,slang <span class="Statement">set</span>      <span class="PreProc">cindent</span>
+
+<span class="Comment">        &quot; par extension, pour les cas tricky</span>
+        <span class="Statement">autocmd</span> <span class="Type">BufNewFile</span>,<span class="Type">BufRead</span> *.pc           <span class="Statement">set</span> <span class="PreProc">ft</span>=proc
+        <span class="Statement">autocmd</span> <span class="Type">BufNewFile</span>,<span class="Type">BufRead</span> *.phtm,*.phtml <span class="Statement">set</span> <span class="PreProc">ft</span>=php
+
+    <span class="Statement">augroup</span> END
+
+<span class="Statement">endif</span>
+<span class="Comment">&quot; Commandes automatiques }}}</span>
+
+<span class="Comment">&quot; {{{ LaTeX avec le plugin latex-suite</span>
+
+<span class="Comment">&quot;</span> <span class="PreProc">IMPORTANT:</span><span class="Comment"> grep will sometimes skip displaying the file name if you</span>
+<span class="Comment">&quot; search in a single file. This will confuse Latex-Suite. Set your grep</span>
+<span class="Comment">&quot; program to always generate a file-name.</span>
+<span class="Statement">set</span> <span class="PreProc">grepprg</span>=grep\ -nH\ $*
+
+<span class="Comment">&quot;</span> <span class="PreProc">OPTIONAL:</span><span class="Comment"> Starting with Vim 7, the filetype of empty .tex files defaults to</span>
+<span class="Comment">&quot; 'plaintex' instead of 'tex', which results in vim-latex not being loaded.</span>
+<span class="Comment">&quot; The following changes the default filetype back to 'tex':</span>
+<span class="Statement">let</span> g:tex_flavor<span class="Statement">=</span><span class="Constant">'latex'</span>
+
+<span class="Comment">&quot; petits raccourcis en plus pour les IMAP persos de latexsuite</span>
+<span class="Statement">imap</span> <span class="Special">&lt;</span><span class="Special">C-B</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">Plug</span><span class="Special">&gt;</span>IMAP_JumpForward
+<span class="Statement">imap</span> <span class="Special">&lt;</span><span class="Special">C-M-B</span><span class="Special">&gt;</span> <span class="Special">&lt;</span><span class="Special">Plug</span><span class="Special">&gt;</span>IMAP_JumpBack
+<span class="Comment">&quot; supprime le raccourci qui transforme ^a en \mathbf{} et crée un raccourci &lt;Alt-B&gt; qui écrit \mathbf{}</span>
+<span class="Statement">imap</span> &lt;Alt-B&gt; <span class="Special">&lt;</span><span class="Special">Plug</span><span class="Special">&gt;</span>Tex_MathBF
+
+<span class="Comment">&quot; }}}</span>
+
+<span class="Comment">&quot; {{{ ctags, OmniCompletion</span>
+
+<span class="Comment">&quot; pour OmniCompletion</span>
+<span class="Comment">&quot; à créer, par exemple, avec : ctags -R -f ~/.vim/systags /usr/include /usr/local/include</span>
+<span class="Comment">&quot; sans oublier de lui donner les droits de lecture !</span>
+<span class="Comment">&quot;</span>
+<span class="Comment">&quot; pour créer une base « locale » (fichiers du répertoire courant, par</span>
+<span class="Comment">&quot; exemple), dans le cas du C/C++ avec le plugin OmniCppComplete :</span>
+<span class="Comment">&quot; ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .</span>
+<span class="Comment">&quot;</span>
+<span class="Comment">&quot; perso, j'utilise :</span>
+<span class="Comment">&quot; ctags -R --c++-kinds=+p --fields=+iaS --extra=+q -f ~/.vim/systags /usr/include /usr/local/include</span>
+<span class="Comment">&quot; puis je map Ctrl+F12 pour recharger une liste locale (crée un fichier tags</span>
+<span class="Comment">&quot; dans le répertoire du fichier en édition)</span>
+<span class="Comment">&quot; attention, cela entre en conflit avec l'auto-cd défini plus haut !</span>
+<span class="Comment">&quot;</span>
+<span class="Comment">&quot; par ailleurs, je le couple au plugin SnippetsEmu</span>
+<span class="Statement">map</span> <span class="Special">&lt;</span><span class="Special">C-F12</span><span class="Special">&gt;</span> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<span class="Special">&lt;</span><span class="Special">CR</span><span class="Special">&gt;</span>
+<span class="Statement">set</span> <span class="PreProc">tags</span>+=~/.vim/systags
+<span class="Statement">if</span> <span class="Identifier">has</span><span class="Statement">(</span><span class="Constant">&quot;autocmd&quot;</span><span class="Statement">)</span>
+    <span class="Statement">augroup</span> augroup_omni
+    <span class="Statement">au</span>!
+
+        <span class="Statement">autocmd</span> <span class="Type">BufRead</span> * echo <span class="Constant">&quot;File read!&quot;</span>
+        <span class="Statement">setlocal</span>                        <span class="PreProc">omnifunc</span>=syntaxcomplete#Complete
+        <span class="Statement">autocmd</span> <span class="Type">FileType</span> ada        <span class="Statement">set</span> <span class="PreProc">omnifunc</span>=adacomplete#Complete
+        <span class="Statement">autocmd</span> <span class="Type">FileType</span> python     <span class="Statement">set</span> <span class="PreProc">omnifunc</span>=pythoncomplete#Complete
+        <span class="Statement">autocmd</span> <span class="Type">FileType</span> javascript <span class="Statement">set</span> <span class="PreProc">omnifunc</span>=javascriptcomplete#CompleteJS
+        <span class="Statement">autocmd</span> <span class="Type">FileType</span> html       <span class="Statement">set</span> <span class="PreProc">omnifunc</span>=htmlcomplete#CompleteTags
+        <span class="Statement">autocmd</span> <span class="Type">FileType</span> css        <span class="Statement">set</span> <span class="PreProc">omnifunc</span>=csscomplete#CompleteCSS
+        <span class="Statement">autocmd</span> <span class="Type">FileType</span> xml        <span class="Statement">set</span> <span class="PreProc">omnifunc</span>=xmlcomplete#CompleteTags
+        <span class="Statement">autocmd</span> <span class="Type">FileType</span> php        <span class="Statement">set</span> <span class="PreProc">omnifunc</span>=phpcomplete#CompletePHP
+        <span class="Statement">autocmd</span> <span class="Type">FileType</span> c          <span class="Statement">set</span> <span class="PreProc">omnifunc</span>=ccomplete#Complete
+<span class="Comment">        &quot; un peu plus complet pour Ruby et affiliés : <a href="http://vim-ruby.rubyforge.org">http://vim-ruby.rubyforge.org</a></span>
+        <span class="Statement">autocmd</span> <span class="Type">FileType</span> ruby,eruby <span class="Statement">set</span> <span class="PreProc">omnifunc</span>=rubycomplete#Complete
+
+    <span class="Statement">augroup</span> END
+<span class="Statement">endif</span>
+
+<span class="Comment">&quot; des couleurs plus sympas pour le pop-up, en accord avec le thème desert</span>
+:<span class="Statement">highlight</span> Pmenu    <span class="Type">guibg</span>=brown   <span class="Type">gui</span>=<span class="PreProc">bold</span>
+:<span class="Statement">highlight</span> PmenuSel <span class="Type">guibg</span>=DarkRed <span class="Type">gui</span>=<span class="PreProc">bold</span>
+
+<span class="Comment">&quot; }}}</span>
+
+<span class="Comment">&quot; Plugins }}}</span>
+
+<span class="Comment">&quot; {{{ Sessions</span>
+
+<span class="Comment">&quot; <a href="http://vim.wikia.com/wiki/VimTip450">http://vim.wikia.com/wiki/VimTip450</a></span>
+<span class="Comment">&quot; ces fonctions permettent de récupérer un état particulier de Vim.</span>
+<span class="Comment">&quot;</span>
+<span class="Comment">&quot; si on souhaite pouvoir réouvrir tout un ensemble de fichiers, avec leurs</span>
+<span class="Comment">&quot; réglages propres, la répartition en onglets et fenêtres, etc. il suffit de</span>
+<span class="Comment">&quot; faire :SetSession </span><span class="Constant">&quot;truc bidule&quot;</span><span class="Comment"> avant de quitter Vim (:qa)</span>
+<span class="Comment">&quot; &gt; attention aux guillemets autour du nom ! &lt;</span>
+<span class="Comment">&quot; au prochain lancement, une liste permettra de réouvrir </span><span class="Constant">&quot;truc bidule&quot;</span><span class="Comment">, ou</span>
+<span class="Comment">&quot; toute autre session enregistrée par ailleurs, ou continuer avec un Vim</span>
+<span class="Comment">&quot; vierge</span>
+<span class="Comment">&quot;</span>
+<span class="Comment">&quot; il faut créer un répertoire ~/.vim/sessions/ accessible en +rw</span>
+<span class="Comment">&quot;</span>
+<span class="Comment">&quot; cette version est très légèrement modifiée, pour rester full-text, en</span>
+<span class="Comment">&quot; français, avec une commande de chargement à la volée sus</span>
+
+<span class="Statement">au</span> <span class="Type">VimLeave</span> * <span class="Statement">call</span> <span class="Normal">VimLeave</span><span class="Statement">()</span>
+<span class="Statement">au</span> <span class="Type">VimEnter</span> * <span class="Statement">call</span> <span class="Normal">VimEnter</span><span class="Statement">()</span>
+<span class="Statement">let</span> g:PathToSessions <span class="Statement">=</span> <span class="PreProc">$HOME</span> <span class="Statement">.</span> <span class="Constant">&quot;/.vim/sessions/&quot;</span>
+
+<span class="Statement">function</span>! VimEnter<span class="Statement">()</span>
+    <span class="Statement">if</span> <span class="Identifier">argc</span><span class="Statement">()</span> <span class="Statement">==</span> <span class="Constant">0</span> <span class="Comment">&quot; si aucun nom de fichier donné, on peut proposer d'ouvrir une session</span>
+        <span class="Statement">let</span> result       <span class="Statement">=</span> <span class="Constant">&quot;Sessions disponibles :&quot;</span>
+        <span class="Statement">let</span> sessionfiles <span class="Statement">=</span> <span class="Identifier">glob</span><span class="Statement">(</span>g:PathToSessions <span class="Statement">.</span> <span class="Constant">&quot;*.vim&quot;</span><span class="Statement">)</span>
+        <span class="Statement">while</span> <span class="Identifier">stridx</span><span class="Statement">(</span>sessionfiles, <span class="Constant">&quot;\n&quot;</span><span class="Statement">)</span> <span class="Statement">&gt;=</span> <span class="Constant">0</span>
+            <span class="Statement">let</span> index        <span class="Statement">=</span> <span class="Identifier">stridx</span><span class="Statement">(</span>sessionfiles, <span class="Constant">&quot;\n&quot;</span><span class="Statement">)</span>
+            <span class="Statement">let</span> sessionfile  <span class="Statement">=</span> <span class="Identifier">strpart</span><span class="Statement">(</span>sessionfiles, <span class="Constant">0</span>, index<span class="Statement">)</span>
+            <span class="Statement">let</span> result       <span class="Statement">=</span> result <span class="Statement">.</span> <span class="Constant">&quot;\n &quot;</span> <span class="Statement">.</span> <span class="Identifier">fnamemodify</span><span class="Statement">(</span>sessionfile, <span class="Constant">&quot;:t:r&quot;</span><span class="Statement">)</span>
+            <span class="Statement">let</span> sessionfiles <span class="Statement">=</span> <span class="Identifier">strpart</span><span class="Statement">(</span>sessionfiles, index <span class="Statement">+</span> <span class="Constant">1</span><span class="Statement">)</span>
+        <span class="Statement">endwhile</span>
+        <span class="Statement">let</span> result      <span class="Statement">=</span> result <span class="Statement">.</span> <span class="Constant">&quot;\n &quot;</span> <span class="Statement">.</span> <span class="Identifier">fnamemodify</span><span class="Statement">(</span>sessionfiles, <span class="Constant">&quot;:t:r&quot;</span><span class="Statement">)</span>
+        <span class="Statement">let</span> result      <span class="Statement">=</span> result <span class="Statement">.</span> <span class="Constant">&quot;\n&quot;</span> <span class="Statement">.</span> <span class="Constant">&quot;\n&quot;</span> <span class="Statement">.</span> <span class="Constant">&quot;Donnez un nom de session (ou aucun pour démarrer normalement) : &quot;</span>
+        <span class="Statement">let</span> sessionname <span class="Statement">=</span> <span class="Identifier">input</span><span class="Statement">(</span>result<span class="Statement">)</span>
+        <span class="Statement">if</span> sessionname <span class="Statement">!=</span> <span class="Constant">&quot;&quot;</span>
+            <span class="Statement">exe</span> <span class="Constant">&quot;source &quot;</span> <span class="Statement">.</span> g:PathToSessions <span class="Statement">.</span> sessionname <span class="Statement">.</span> <span class="Constant">&quot;.vim&quot;</span>
+        <span class="Statement">endif</span>
+    <span class="Statement">endif</span>
+<span class="Statement">endfunction</span>
+
+<span class="Statement">function</span>! VimLeave<span class="Statement">()</span>
+    <span class="Statement">exe</span> <span class="Constant">&quot;mksession! &quot;</span> <span class="Statement">.</span> g:PathToSessions <span class="Statement">.</span> <span class="Constant">&quot;LastSession.vim&quot;</span>
+    <span class="Statement">if</span> <span class="Identifier">exists</span><span class="Statement">(</span><span class="Constant">&quot;g:SessionFileName&quot;</span><span class="Statement">)</span> <span class="Statement">==</span> <span class="Constant">1</span>
+        <span class="Statement">if</span> g:SessionFileName <span class="Statement">!=</span> <span class="Constant">&quot;&quot;</span>
+            <span class="Statement">exe</span> <span class="Constant">&quot;mksession! &quot;</span> <span class="Statement">.</span> g:SessionFileName
+        <span class="Statement">endif</span>
+    <span class="Statement">endif</span>
+<span class="Statement">endfunction</span>
+
+<span class="Comment">&quot; création d'une nouvelle session avec :SetSession </span><span class="Constant">&quot;[nom]&quot;</span>
+<span class="Statement">command</span>! <span class="Statement">-</span><span class="PreProc">nargs</span><span class="Statement">=</span><span class="Type">1</span> SetSession   :<span class="Statement">let</span> g:SessionFileName = g:PathToSessions <span class="Statement">.</span> <span class="Special">&lt;</span><span class="Special">args</span><span class="Special">&gt;</span> <span class="Statement">.</span> <span class="Constant">&quot;.vim&quot;</span>
+<span class="Comment">&quot; suppression des sessions enregistrées avec :UnsetSession </span><span class="Constant">&quot;[nom]&quot;</span>
+<span class="Comment">&quot; pour en supprimer une en particulier, à la main…</span>
+<span class="Statement">command</span>! <span class="Statement">-</span><span class="PreProc">nargs</span><span class="Statement">=</span><span class="Type">0</span> UnsetSession :<span class="Statement">let</span> g:SessionFileName = <span class="Constant">&quot;&quot;</span>
+<span class="Comment">&quot; ouverture à la volée d'une session dont on connaît le nom</span>
+<span class="Statement">command</span>! <span class="Statement">-</span><span class="PreProc">nargs</span><span class="Statement">=</span><span class="Type">1</span> OpenSession  :exe <span class="Constant">&quot;source&quot;</span> <span class="Statement">.</span> g:PathToSessions <span class="Statement">.</span> <span class="Special">&lt;</span><span class="Special">args</span><span class="Special">&gt;</span> <span class="Statement">.</span> <span class="Constant">&quot;.vim&quot;</span>
+
+<span class="Comment">&quot; Sessions }}}</span>
+
+<span class="Comment">&quot; vim: set foldmethod=marker nonumber:</span>
+
+</pre>
+</body>
+</html>

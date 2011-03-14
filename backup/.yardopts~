@@ -1,0 +1,13 @@
+lib/**/*.rb
+spec/**/*.rb
+--title "evergreen: a fully fledged tree library for Ruby."
+--protected
+--no-private
+--hide-void-return
+--markup markdown
+--readme README.md
+--main README.md
+-
+LICENSE
+VERSION
+TODO.md

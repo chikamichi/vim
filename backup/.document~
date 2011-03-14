@@ -1,0 +1,4 @@
+lib/**/*.rb
+bin/*
+spec/**/*.rb
+features/**/*.feature
