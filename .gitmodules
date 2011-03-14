@@ -58,3 +58,6 @@
 [submodule "bundle/paper"]
 	path = bundle/paper
 	url = git://github.com/vim-scripts/paper.git
+[submodule "bundle/rdoc"]
+	path = bundle/rdoc
+	url = git://github.com/vim-scripts/RDoc.git
