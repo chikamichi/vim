@@ -85,3 +85,6 @@
 [submodule "bundle/ri-browser"]
 	path = bundle/ri-browser
 	url = git://github.com/vim-scripts/ri-browser.git
+[submodule "bundle/rubycomplete"]
+	path = bundle/rubycomplete
+	url = git://github.com/vim-scripts/rubycomplete.vim.git
