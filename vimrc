@@ -359,6 +359,19 @@ map <Leader><Left> :tabprevious<CR>
 " tabnext
 map <Leader><Right> :tabnext<CR>
 
+map <C><Left> gt
+map <C><Right> gT
+map <C-1> 1gt
+map <C-2> 2gt
+map <C-3> 3gt
+map <C-4> 4gt
+map <C-5> 5gt
+map <C-6> 6gt
+map <C-7> 7gt
+map <C-8> 8gt
+map <C-9> 9gt
+map <C-0> :tablast<CR>
+
 " Toggle line numbering
 noremap <silent> <F11> :se nu!<CR>
 
@@ -451,6 +464,15 @@ nmap <C-Down> ]e
 " Bubble multiple lines
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
+
+" tabular
+let mapleader=','
+if exists(":Tabularize")
+  nmap <Leader>a= :Tabularize /=<CR>
+  vmap <Leader>a= :Tabularize /=<CR>
+  nmap <Leader>a: :Tabularize /:\zs<CR>
+  vmap <Leader>a: :Tabularize /:\zs<CR>
+endif
 
 " Plugins }}}
 
