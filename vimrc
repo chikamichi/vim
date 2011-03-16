@@ -366,24 +366,16 @@ nnoremap <Leader><Leader> <Leader>
 " pratique pour ouvrir des fichiers, à défaut d'un auto-cd
 map <Leader>cd :cd %:p:h<CR>
 
-" tabprevious
-map <Leader><Left> :tabprevious<CR>
-
-" tabnext
-map <Leader><Right> :tabnext<CR>
-
+" Need to add this within ~/.Xdefaults
+"! Alt + arrow keys should behave as they do in xterm for vim to catch them
+"URxvt.keysym.M-Down:        \033[1;3B
+"URxvt.keysym.M-Up:          \033[1;3A
+"URxvt.keysym.M-Left:        \033[1;3D
+"URxvt.keysym.M-Right:       \033[1;3C
+" previous tab
 map <M-Left> gt
+" next tab
 map <M-Right> gT
-map <C-1> 1gt
-map <C-2> 2gt
-map <C-3> 3gt
-map <C-4> 4gt
-map <C-5> 5gt
-map <C-6> 6gt
-map <C-7> 7gt
-map <C-8> 8gt
-map <C-9> 9gt
-map <C-0> :tablast<CR>
 
 " Toggle line numbering
 noremap <silent> <F11> :se nu!<CR>
