@@ -372,8 +372,8 @@ map <Leader><Left> :tabprevious<CR>
 " tabnext
 map <Leader><Right> :tabnext<CR>
 
-map <C><Left> gt
-map <C><Right> gT
+map <M-Left> gt
+map <M-Right> gT
 map <C-1> 1gt
 map <C-2> 2gt
 map <C-3> 3gt
