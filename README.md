@@ -26,7 +26,16 @@ git submodule add git://my.plugin bundle/my-plugin
 Update the plugins:
 
 ``` bash
-git submodule update
+git submodule foreach git pull origin master
+```
+
+If needed, add `ignore = dirty` in `.gitignore` (see [this discussion](http://www.nils-haldenwang.de/frameworks-and-tools/git/how-to-ignore-changes-in-git-submodules)).
+
+Update one plugin only:
+
+``` bash
+cd ~/.vim/bundle/[the-plugin]
+git pull origin master
 ```
 
 Remove a plugin:
