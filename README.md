@@ -26,6 +26,7 @@ git submodule add git://my.plugin bundle/my-plugin
 Update the plugins:
 
 ``` bash
+git submodule foreach git checkout master
 git submodule foreach git pull origin master
 ```
 
@@ -48,7 +49,8 @@ git rm --cached bundle/[the-plugin]
 Push on github (chikamichi/vim):
 
 ``` bash
+git commit -a -m "submodules update"
 git hub (aka. git push origin master)
 ```
 
-:)
+See [vim-scripts](https://github.com/vim-scripts/) on github.
