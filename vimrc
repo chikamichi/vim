@@ -95,6 +95,9 @@ set list
 " don't move the cursor to the start of the line when changing buffers
 set nostartofline
 
+" don't highlight JSLint errors
+let g:JSLintHighlightErrorLine = 0
+
 " {{{ correction orthographique
 
 " pas de correction orthographique par défaut
@@ -206,7 +209,7 @@ set incsearch
 " <espace> deux fois en mode normal efface les messages et les résultats de recherche
 nnoremap <silent> <Space><Space> :silent noh<Bar>echo<CR>
 
-" expliciter les espaces insécables
+" expliciter les espaces insécables et tabulations
 set listchars=nbsp:·,tab:>-
 set list
 
@@ -373,9 +376,9 @@ map <Leader>cd :cd %:p:h<CR>
 "URxvt.keysym.M-Left:        \033[1;3D
 "URxvt.keysym.M-Right:       \033[1;3C
 " previous tab
-map <M-Left> gt
+map <M-Left> gT
 " next tab
-map <M-Right> gT
+map <M-Right> gt
 
 " Toggle line numbering
 noremap <silent> <F11> :se nu!<CR>
@@ -462,22 +465,18 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabCrMapping = 0
 
-" unimpaired
-" Bubble single lines
-nmap <C-Up> [e
-nmap <C-Down> ]e
-" Bubble multiple lines
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
-
 " tabular
-let mapleader=','
 if exists(":Tabularize")
   nmap <Leader>a= :Tabularize /=<CR>
   vmap <Leader>a= :Tabularize /=<CR>
   nmap <Leader>a: :Tabularize /:\zs<CR>
   vmap <Leader>a: :Tabularize /:\zs<CR>
 endif
+
+" command-T
+let g:CommandTMatchWindowAtTop = 1
+let g:CommandTAcceptSelection = '<C-t>'
+let g:CommandTAcceptSelectionTabMap = '<CR>'
 
 " Plugins }}}
 
