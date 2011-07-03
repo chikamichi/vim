@@ -8,8 +8,9 @@ Update the plugins:
 
 Remove a plugin:
 
-    git rm bundle/the-plugin
+    # delete relevant lines from .gitmodules and from .git/config
+    git rm --cached bundle/[the-plugin]
 
-Push on github:
+Push on github (chikamichi/vim):
 
-    git hub
+    git hub (aka. git push origin master)
