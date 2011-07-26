@@ -313,7 +313,7 @@ set linebreak
 
 " tabs everywhere!
 " you'll need to edit gvim.desktop:
-" http://vim.wikia.com/wiki/Launch_files_in_new_tabs_under_Unix 
+" http://vim.wikia.com/wiki/Launch_files_in_new_tabs_under_Unix
 tab all
 
 " minimal number of lines used for the current window
@@ -453,7 +453,7 @@ call pathogen#runtime_append_all_bundles()
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 
 " taglist
-nmap <silent> <F7> :TlistToggle<CR> 
+nmap <silent> <F7> :TlistToggle<CR>
 let Tlist_Show_One_File = 1  " Only show tags from the current file
 let Tlist_Sort_Type = 'name' " And sort them by name
 
@@ -501,12 +501,12 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.phtm,*.phtml set filetype php
     autocmd BufNewFile,BufRead *.asy          set filetype asy
     autocmd BufNewFile,BufRead *.rhtml,*.erb  set filetype eruby
-    autocmd BufNewFile,BufRead *.haml         set filetype haml 
-    autocmd BufNewFile,BufRead *.sass,*.scss  set filetype sass 
+    autocmd BufNewFile,BufRead *.haml         set filetype haml
+    autocmd BufNewFile,BufRead *.sass,*.scss  set filetype sass
     autocmd BufNewFile,BufRead *.less         set filetype less
     autocmd BufNewFile,BufRead *.md           set filetype markdown
     autocmd BufNewFile,BufRead *.mustache     set filetype mustache
-    autocmd BufNewFile,BufRead /etc/nginx/sites-available/* set ft=nginx 
+    autocmd BufNewFile,BufRead /etc/nginx/sites-available/* set ft=nginx
 
     " tabulation stricte dans les Makefile
     autocmd FileType make     set noexpandtab

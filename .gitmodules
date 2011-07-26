@@ -182,3 +182,9 @@
 	path = bundle/coffee-script
 	url = git://github.com/kchmck/vim-coffee-script.git
         ignore = dirty
+[submodule "vimerl"]
+	path = vimerl
+	url = git://github.com/oscarh/vimerl.git
+[submodule "bundle/vimerl"]
+	path = bundle/vimerl
+	url = git://github.com/oscarh/vimerl.git
