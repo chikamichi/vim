@@ -256,6 +256,17 @@ set statusline+=\[%{exists('loaded_taglist')?Tlist_Get_Tag_Prototype_By_Line(exp
 set statusline+=0x%-8B\                      " current char
 set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
 
+" OmniCompletion
+set ofu=syntaxcomplete#Complete
+
+" http://vimdoc.sourceforge.net/htmldoc/insert.html#ft-syntax-omni
+if has("autocmd") && exists("+omnifunc")
+  autocmd Filetype *
+             \ if &omnifunc == "" |
+             \ setlocal omnifunc=syntaxcomplete#Complete |
+             \ endif
+endif
+
 " use tab for auto-expansion in menus
 set wc=<TAB>
 

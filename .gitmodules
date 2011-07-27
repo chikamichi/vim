@@ -188,3 +188,6 @@
 [submodule "bundle/vimerl"]
 	path = bundle/vimerl
 	url = git://github.com/oscarh/vimerl.git
+[submodule "bundle/supertab-continued"]
+	path = bundle/supertab-continued
+	url = git://github.com/vim-scripts/SuperTab-continued..git
