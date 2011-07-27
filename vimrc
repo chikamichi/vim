@@ -259,6 +259,10 @@ set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
 " OmniCompletion
 set ofu=syntaxcomplete#Complete
 
+" SuperTab integration with Omni
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextDefaultCompletionType = "<c-n>"
+
 " http://vimdoc.sourceforge.net/htmldoc/insert.html#ft-syntax-omni
 if has("autocmd") && exists("+omnifunc")
   autocmd Filetype *
