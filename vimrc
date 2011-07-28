@@ -223,8 +223,13 @@ syntax on
 " thème de coloration syntaxique par défaut
 " http://vimcolorschemetest.googlecode.com/svn/html/index-c.html
 colorscheme default
-if $COLORTERM == 'rxvt-256color'
-    "set term=rxvt-256color
+if $TERM == 'rxvt-256color'
+    set term=xterm-256color
+    set t_Co=256
+    set background=dark
+    "let g:solarized_termcolors=256
+    "colorscheme solarized
+    "noremap <silent> <F5> :call togglebg()<CR>
     colorscheme jellybeans
 else
     colorscheme jellybeans
