@@ -227,7 +227,7 @@ if $TERM == 'rxvt-256color'
     set term=xterm-256color
     set t_Co=256
     set background=dark
-    "let g:solarized_termcolors=256
+    let g:solarized_termcolors=256
     "colorscheme solarized
     "noremap <silent> <F5> :call togglebg()<CR>
     colorscheme jellybeans
@@ -521,10 +521,8 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.phtm,*.phtml set filetype php
     autocmd BufNewFile,BufRead *.asy          set filetype asy
     autocmd BufNewFile,BufRead *.rhtml,*.erb  set filetype eruby
-    autocmd BufNewFile,BufRead *.haml         set filetype haml
     autocmd BufNewFile,BufRead *.sass,*.scss  set filetype sass
     autocmd BufNewFile,BufRead *.less         set filetype less
-    autocmd BufNewFile,BufRead *.md           set filetype markdown
     autocmd BufNewFile,BufRead *.mustache     set filetype mustache
     autocmd BufNewFile,BufRead /etc/nginx/sites-available/* set ft=nginx
 
@@ -538,6 +536,16 @@ if has("autocmd")
 endif
 
 " Commandes automatiques }}}
+
+" Divers {{{
+
+" Match Octopress/Jekyll's YAML Front Matter sections
+" From http://www.codeography.com/2010/02/20/making-vim-play-nice-with-jekylls-yaml-front-matter.html
+let g:jekyll_path = "/home/jd/blog"
+high link jekyllYamlFrontmatter Comment
+execute "autocmd BufNewFile,BufRead " . g:jekyll_path . "/* syn match jekyllYamlFrontmatter /\\%^---\\_.\\{-}---$/ contains=@Spell"
+
+" }}}
 
 " vim: set foldmethod=marker nonumber:
 
