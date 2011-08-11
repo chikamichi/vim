@@ -62,10 +62,6 @@
 	path = bundle/cucumber
 	url = git://github.com/vim-scripts/cucumber.zip.git
         ignore = dirty
-[submodule "bundle/markdown"]
-	path = bundle/markdown
-	url = git://github.com/hallison/vim-markdown.git
-        ignore = dirty
 [submodule "bundle/railscasts"]
 	path = bundle/railscasts
 	url = git://github.com/vim-scripts/railscasts.git
