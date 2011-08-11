@@ -43,14 +43,14 @@ Remove a plugin:
 
 ``` bash
 # delete relevant lines from .gitmodules and from .git/config
-git rm --cached bundle/[the-plugin]
+git rm --cached bundle/[the-plugin] # without the trailing slash
 ```
 
 Push on github (chikamichi/vim):
 
 ``` bash
 git commit -a -m "submodules update"
-git hub (aka. git push origin master)
+git hub # (my alias for git push origin master)
 ```
 
 See [vim-scripts](https://github.com/vim-scripts/) on github.
