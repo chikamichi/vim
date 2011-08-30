@@ -457,6 +457,10 @@ nmap <Nul> <Nop>
 " switch between header/code files
 map <F2> :A<CR>
 
+" Tagbar toggling
+nnoremap <silent> <F9> :TagbarToggle<CR>
+let g:tagbar_autofocus = 1
+
 " Mappings }}}
 
 " {{{ Plugins
