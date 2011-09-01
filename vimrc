@@ -525,7 +525,6 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.phtm,*.phtml set filetype php
     autocmd BufNewFile,BufRead *.asy          set filetype asy
     autocmd BufNewFile,BufRead *.rhtml,*.erb  set filetype eruby
-    autocmd BufNewFile,BufRead *.sass,*.scss  set filetype sass
     autocmd BufNewFile,BufRead *.less         set filetype less
     autocmd BufNewFile,BufRead *.mustache     set filetype mustache
     autocmd BufNewFile,BufRead /etc/nginx/sites-available/* set ft=nginx
