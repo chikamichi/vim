@@ -532,6 +532,9 @@ if has("autocmd")
     " tabulation stricte dans les Makefile
     autocmd FileType make     set noexpandtab
 
+    " scss https://github.com/skammer/vim-css-color/issues/2
+    autocmd FileType sass,scss,stylus syn cluster sassCssAttributes add=@cssColors
+
     " indent XML inline files
     "au FileType xml exe ":silent 1,$!tidy --input-xml yes --indent auto --utf8 2>/dev/null"
     au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
