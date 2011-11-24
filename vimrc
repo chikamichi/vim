@@ -37,6 +37,9 @@ set timeout timeoutlen=3000 ttimeoutlen=100
 " faster!! do not redraw while running macros (much faster) (LazyRedraw)
 set lazyredraw
 
+" I said faster!!! lazy buffers
+set hidden
+
 " le système d'exploitation décide à la place de Vim du bon moment pour vider le cache
 set nofsync
 
@@ -87,6 +90,7 @@ set foldmethod=marker
 " mouse support in terminals :)
 if !has("gui_running")
   set mouse=a
+  set ttymouse=xterm
 endif
 
 " show chars on end of line, white spaces, tabs, etc
@@ -214,34 +218,6 @@ set listchars=nbsp:·,tab:>-
 set list
 
 " Recherche et subsitution }}}
-
-" {{{ Coloration syntaxique, couleurs, polices
-
-" active la coloration syntaxique quand c'est possible
-syntax on
-
-" thème de coloration syntaxique par défaut
-" http://vimcolorschemetest.googlecode.com/svn/html/index-c.html
-colorscheme default
-if $TERM == 'rxvt-256color'
-    set term=xterm-256color
-    set t_Co=256
-    set background=dark
-    let g:solarized_termcolors=256
-    "colorscheme solarized
-    "noremap <silent> <F5> :call togglebg()<CR>
-    colorscheme jellybeans
-else
-    colorscheme jellybeans
-endif
-
-" how many lines to sync backwards
-syn sync minlines=10000 maxlines=10000
-
-" export HTML (:TOhtml) *avec CSS*
-let html_use_css = 1
-
-" Recherche et substitution }}}
 
 " {{{ Statusline, menu, onglets
 
@@ -461,6 +437,10 @@ map <F2> :A<CR>
 nnoremap <silent> <F9> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
+" Allow Ctrl+PgUp/PgDn in tmux
+set t_kN=[6;*~
+set t_kP=[5;*~
+
 " Mappings }}}
 
 " {{{ Plugins
@@ -491,10 +471,10 @@ let g:SuperTabCrMapping = 0
 
 " tabular
 if exists(":Tabularize")
-  nmap <Leader>a= :Tabularize /=<CR>
-  vmap <Leader>a= :Tabularize /=<CR>
-  nmap <Leader>a: :Tabularize /:\zs<CR>
-  vmap <Leader>a: :Tabularize /:\zs<CR>
+  nmap <Leader>c= :Tabularize/=<CR>
+  vmap <Leader>c= :Tabularize/=<CR>
+  nmap <Leader>c: :Tabularize/:\zs<CR>
+  vmap <Leader>c: :Tabularize/:\zs<CR>
 endif
 
 " command-T
@@ -521,19 +501,16 @@ if has("autocmd")
     autocmd FileType html        set      formatoptions+=tl
 
     " par extension, pour les cas tricky
-    autocmd BufNewFile,BufRead *.pc           set filetype proc
-    autocmd BufNewFile,BufRead *.phtm,*.phtml set filetype php
-    autocmd BufNewFile,BufRead *.asy          set filetype asy
-    autocmd BufNewFile,BufRead *.rhtml,*.erb  set filetype eruby
-    autocmd BufNewFile,BufRead *.less         set filetype less
-    autocmd BufNewFile,BufRead *.mustache     set filetype mustache
+    autocmd BufNewFile,BufRead *.pc            set filetype proc
+    autocmd BufNewFile,BufRead *.phtm,*.phtml  set filetype php
+    autocmd BufNewFile,BufRead *.asy           set filetype asy
+    autocmd BufNewFile,BufRead *.rhtml,*.erb   set filetype eruby
+    autocmd BufNewFile,BufRead *.less          set filetype less
+    autocmd BufNewFile,BufRead *.mustache      set filetype mustache
     autocmd BufNewFile,BufRead /etc/nginx/sites-available/* set ft=nginx
 
     " tabulation stricte dans les Makefile
     autocmd FileType make     set noexpandtab
-
-    " scss https://github.com/skammer/vim-css-color/issues/2
-    autocmd FileType sass,scss,stylus syn cluster sassCssAttributes add=@cssColors
 
     " indent XML inline files
     "au FileType xml exe ":silent 1,$!tidy --input-xml yes --indent auto --utf8 2>/dev/null"
@@ -552,6 +529,33 @@ high link jekyllYamlFrontmatter Comment
 execute "autocmd BufNewFile,BufRead " . g:jekyll_path . "/* syn match jekyllYamlFrontmatter /\\%^---\\_.\\{-}---$/ contains=@Spell"
 
 " }}}
+
+" {{{ Coloration syntaxique, couleurs, polices
+
+" active la coloration syntaxique quand c'est possible
+syntax on
+
+" thème de coloration syntaxique par défaut
+" http://vimcolorschemetest.googlecode.com/svn/html/index-c.html
+colorscheme default
+if $TERM == 'xterm-256color'
+    "set term=xterm-256color
+    "let g:solarized_termcolors=256
+    "colorscheme solarized
+    colorscheme jellybeans
+    set t_Co=256
+    "set background=dark
+else
+    colorscheme jellybeans
+endif
+
+" how many lines to sync backwards
+syn sync minlines=10000 maxlines=10000
+
+" export HTML (:TOhtml) *avec CSS*
+let html_use_css = 1
+
+" Coloration }}}
 
 " vim: set foldmethod=marker nonumber:
 

@@ -1,3 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_cnt =9
 let g:netrw_dirhist_1='/home/jd/blog/tech/source'
+let g:netrw_dirhist_2='/home/jd/af83/atypic/dev/atypic-api-admin/lib/officeo'
+let g:netrw_dirhist_3='/home/jd/.rvm/gems/ruby-1.9.2-p290@global/gems/devise-1.4.5'
+let g:netrw_dirhist_4='/home/jd/af83/ucengine-storm/spec'
+let g:netrw_dirhist_5='/home/jd/af83/ucengine-storm/storm-bricks'
+let g:netrw_dirhist_6='/home/jd/.rvm/gems/ruby-1.9.2-p290@ucengine-storm/gems/aclatraz-0.1.4'
+let g:netrw_dirhist_7='/home/jd/af83/ucengine/ucengine/src'
+let g:netrw_dirhist_8='/home/jd/dev/javascript/impact/lib/impact'
+let g:netrw_dirhist_9='/home/jd/dev/javascript/w3c-html5-games/js/src'
