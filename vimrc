@@ -1,7 +1,7 @@
 " jd AT vauguet DOT fr
 " available at http://github.com/chikamichi/config-files or /vim
 
-" {{{ Génériques
+" {{{ Generic
 
 " no compatibility
 set nocp
@@ -25,22 +25,22 @@ filetype plugin on
 " load indent files for specific filetypes
 filetype indent on
 
-" add : as a file-name character (allow gf to work with http://foo.bar/)
+" add : as a file-name character (allows gf to work with http://foo.bar/)
 set isfname+=:
 
-" accélère le rendu graphique dans les terminaux véloces
+" speed up rendering in modern shells
 set ttyfast
 
 " faster!
 set timeout timeoutlen=3000 ttimeoutlen=100
 
-" faster!! do not redraw while running macros (much faster) (LazyRedraw)
+" faster!! do not redraw while running macros (much faster)
 set lazyredraw
 
 " I said faster!!! lazy buffers
 set hidden
 
-" le système d'exploitation décide à la place de Vim du bon moment pour vider le cache
+" faster!!! let the OS decide when it's appropriate to flush the cache, rather than vim
 set nofsync
 
 " hauteur de la ligne de status (utile pour les plugins de library hints,
@@ -74,7 +74,7 @@ set noerrorbells
 " ne *pas* faire clignoter l'écran lors d'une erreur (relou^2)
 set novisualbell
 
-" quand on tape par ex. un ")", Vim montre le "(" correspondant
+" quand on tape par ex. un ")", Vim montre brièvement le "(" correspondant
 set showmatch
 
 " définitions de ce que sont les commentaires par défaut
@@ -101,6 +101,11 @@ set nostartofline
 
 " don't highlight JSLint errors
 let g:JSLintHighlightErrorLine = 0
+
+" F2 toggles pasting mode (no auto-reindent)
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+set showmode
 
 " {{{ correction orthographique
 
@@ -153,10 +158,11 @@ vnoremap <S-F10> <C-o>:call <SID>spell_en()<CR>
 
 " correction orthographique }}}
 
-" Génériques }}}
+" Generic }}}
 
 " {{{ Indentation
-" à lire avant toute copier/coller stupide : http://vim.wikia.com/wiki/Indenting_source_code
+
+" à lire avant tout copier/coller stupide : http://vim.wikia.com/wiki/Indenting_source_code
 " compte tenu du 'filetype plugin indent on' précédent, pas de smartindent !
 
 " indentation automatique en l'absence de réglages pour le filetype courant
@@ -348,6 +354,10 @@ augroup BWCCreateDir
     autocmd BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand("%:h")) | execute "silent! !mkdir -p %:h" | redraw! | endif
 augroup END
 
+" autosave when focus is lost
+autocmd BufLeave,FocusLost silent! wall
+
+
 " Sauvegarde }}}
 
 " {{{ Mappings
@@ -482,6 +492,11 @@ let g:CommandTMatchWindowAtTop = 1
 let g:CommandTAcceptSelection = '<C-t>'
 let g:CommandTAcceptSelectionTabMap = '<CR>'
 
+" coffee-script auto compile, folding
+au BufWritePost *.coffee silent CoffeeMake! -b | cwindow | redraw!
+au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
+au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+
 " Plugins }}}
 
 " {{{ Commandes automatiques
@@ -548,6 +563,17 @@ if $TERM == 'xterm-256color'
 else
     colorscheme jellybeans
 endif
+
+" solarized theme
+"set background=dark
+"set t_Co=256
+"let g:solarized_termcolors=16
+"colorscheme solarized
+
+" jellybeans theme
+"set background=light
+"set t_Co=256
+"colorscheme oceandeep
 
 " how many lines to sync backwards
 syn sync minlines=10000 maxlines=10000

@@ -170,10 +170,6 @@
 	path = bundle/command-t
 	url = git://github.com/wincent/Command-T.git
         ignore = dirty
-[submodule "bundle/solarized"]
-	path = bundle/solarized
-	url = git://github.com/altercation/vim-colors-solarized.git
-        ignore = dirty
 [submodule "bundle/coffee-script"]
 	path = bundle/coffee-script
 	url = git://github.com/kchmck/vim-coffee-script.git
