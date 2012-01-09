@@ -204,3 +204,6 @@
 [submodule "bundle/markdown"]
 	path = bundle/markdown
 	url = git://github.com/tpope/vim-markdown.git
+[submodule "bundle/jst"]
+	path = bundle/jst
+	url = git://github.com/briancollins/vim-jst.git
