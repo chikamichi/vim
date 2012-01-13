@@ -522,6 +522,7 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.rhtml,*.erb   set filetype eruby
     autocmd BufNewFile,BufRead *.less          set filetype less
     autocmd BufNewFile,BufRead *.mustache      set filetype mustache
+    autocmd BufNewFile,BufRead *.ejs           set filetype=jst
     autocmd BufNewFile,BufRead /etc/nginx/sites-available/* set ft=nginx
 
     " tabulation stricte dans les Makefile
@@ -530,6 +531,9 @@ if has("autocmd")
     " indent XML inline files
     "au FileType xml exe ":silent 1,$!tidy --input-xml yes --indent auto --utf8 2>/dev/null"
     au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
+
+    au Filetype css exe ":set cuc cul"
+    au Filetype sass exe ":set cuc cul"
   augroup END
 endif
 
@@ -549,6 +553,15 @@ execute "autocmd BufNewFile,BufRead " . g:jekyll_path . "/* syn match jekyllYaml
 
 " active la coloration syntaxique quand c'est possible
 syntax on
+
+function! GlobalColorSettings()
+    " Set 'TODO' & 'FIXME' strings to be bold and standout as hell.
+    highlight Todo term=standout ctermfg=196 ctermbg=226 guifg=#ff4500 guibg=#eeee00
+
+    " Set cursor color to be like in jellybeans.vim colorscheme, but with black text (previously white).
+    highlight Cursor ctermfg=Black ctermbg=153 guifg=#000000 guibg=#b0d0f0
+endfunction
+autocmd ColorScheme * call GlobalColorSettings()
 
 " thème de coloration syntaxique par défaut
 " http://vimcolorschemetest.googlecode.com/svn/html/index-c.html
