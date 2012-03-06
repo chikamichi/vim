@@ -1,29 +1,41 @@
 # Installation on a brand-new box
 
+## 1. Clone the repos
+
 ``` bash
 git clone git://github.com/chikamichi/vim.git ~/.vim
+```
 
-# Create symlinks:
+## 2. Create symlinks:
 
+``` bash
 ln -s ~/.vim/vimrc ~/.vimrc
 ln -s ~/.vim/gvimrc ~/.gvimrc
+```
 
-# Switch to the `~/.vim` directory, and fetch submodules:
+## 3. Switch to the `~/.vim` directory, and fetch submodules:
 
+``` bash
 cd ~/.vim
 git submodule init
 git submodule update
 ```
 
+## 4. Create the backup directory
+
+``` bash
+mkdir backup
+```
+
 # Locally
 
-Install a plugin:
+## Installing a plugin
 
 ``` bash
 git submodule add git://my.plugin bundle/my-plugin
 ```
 
-Update the plugins:
+## Updating all plugins:
 
 ``` bash
 git submodule foreach git checkout master
@@ -32,14 +44,14 @@ git submodule foreach git pull origin master
 
 If needed, add `ignore = dirty` in `.gitignore` (see [this discussion](http://www.nils-haldenwang.de/frameworks-and-tools/git/how-to-ignore-changes-in-git-submodules)).
 
-Update one plugin only:
+## Updating one plugin only
 
 ``` bash
 cd ~/.vim/bundle/[the-plugin]
 git pull origin master
 ```
 
-Remove a plugin:
+## Removing a plugin
 
 ``` bash
 # delete relevant lines from .gitmodules and from .git/config
@@ -55,7 +67,7 @@ git hub # (my alias for git push origin master)
 
 See [vim-scripts](https://github.com/vim-scripts/) on github.
 
-## 256 colors (Ubuntu)
+## 256 colors support (Ubuntu-wise)
 
 You'll need a xterm-256colors script. Its location can be found running
 
@@ -102,13 +114,12 @@ gconftool-2 --set "/apps/gnome-terminal/profiles/Default/background_color" --typ
 gconftool-2 --set "/apps/gnome-terminal/profiles/Default/foreground_color" --type string "#65657B7B8383"
 ```
 
-In `.vimrc` (at the end, may complain about solarized theme not available otherwise):
+In `.vimrc` (at the end, may complain about solarized theme not available otherwise), for instance:
 
 ```
 syntax on
 set background=dark
 set t_Co=256
-let g:solarized_termcolors=16
-colorscheme solarized
+colorscheme [YourColorscheme]
 ```
 
