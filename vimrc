@@ -107,6 +107,9 @@ nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
 
+" F5 toggles Gundo
+nnoremap <F5> :GundoToggle<CR>
+
 " {{{ correction orthographique
 
 " pas de correction orthographique par défaut

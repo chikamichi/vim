@@ -210,3 +210,9 @@
 [submodule "bundle/mediawiki"]
 	path = bundle/mediawiki
 	url = git://github.com/chikamichi/mediawiki.vim.git
+[submodule "bundle/gundo"]
+	path = bundle/gundo
+	url = git://github.com/sjl/gundo.vim.git
+[submodule "bundle/threesome"]
+	path = bundle/threesome
+	url = git://github.com/sjl/threesome.vim.git
