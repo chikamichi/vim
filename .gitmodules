@@ -216,3 +216,6 @@
 [submodule "bundle/threesome"]
 	path = bundle/threesome
 	url = git://github.com/sjl/threesome.vim.git
+[submodule "bundle/help"]
+	path = bundle/help
+	url = git://github.com/juanpabloaj/help.vim.git

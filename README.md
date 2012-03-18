@@ -15,6 +15,8 @@ ln -s ~/.vim/gvimrc ~/.gvimrc
 
 ## 3. Switch to the `~/.vim` directory, and fetch submodules:
 
+I manage my bundles using submodules. This is a neat feature of git and is perfectly valid and simple as long as you know what you're doing (hint: `git help submodule`). It also allows for great automation in relation with updates and removal.
+
 ``` bash
 cd ~/.vim
 git submodule init
@@ -32,10 +34,18 @@ mkdir backup
 ## Installing a plugin
 
 ``` bash
-git submodule add git://my.plugin bundle/my-plugin
+git submodule add git://vim-my-plugin bundle/my-plugin
 ```
 
+I choose not to include *vim-* prefix in the directories name.
+
+One may need to run `git submodule init` again so that further updates work smoothly against the local config. To automate this step, use the `--init` option while updating.
+
 ## Updating all plugins:
+
+Updating submodules *binding* is as simple as running `git submodule update [--init]`.
+
+Updating submodules *code* requires a bit more:
 
 ``` bash
 git submodule foreach git checkout master
