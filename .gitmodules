@@ -207,3 +207,6 @@
 [submodule "bundle/jst"]
 	path = bundle/jst
 	url = git://github.com/briancollins/vim-jst.git
+[submodule "bundle/mediawiki"]
+	path = bundle/mediawiki
+	url = git://github.com/chikamichi/mediawiki.vim.git
