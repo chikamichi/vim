@@ -1,10 +1,23 @@
 " jd AT vauguet DOT fr
-" available at http://github.com/chikamichi/config-files or /vim
+" Available at http://github.com/chikamichi/vim. Reading ":help options" is very handy here.
+
+" This, is my beloved .vimrc config file. It's been tailored and updated for
+" several years now. Thanks to everyone, anonyfamous people who contributed to
+" the common knowledge on vim's internal on the Internet.
+"
+" I strive to comment every piece of option introduced in this file. If
+" something is not clear enough, just let me know by sending an email.
+" Using ":help somethingidontknowabout" is the first step, then duckduckgo it.
+" Sometimes, searching in the help pages fails at retrieving the correct
+" entry. Just look for it inside ":help options", it will probably show up.
+"
+" Some settings are particulary particular as I'm using a French Dvorak layout
+" for typing (http://bepo.fr).
 
 " {{{ Generic
 
 " no compatibility
-set nocp
+set nocompatible
 
 " automatically read in external changes if we haven't modified the buffer
 set autoread
@@ -12,17 +25,17 @@ set autoread
 " automatically flush to disk when using :make, etc.
 set autowrite
 
-" default encoding
+" default encoding is UTF-8
 set encoding=utf-8
 set fileencoding=utf-8
 
-" detect the type of file
+" detect file type
 filetype on
 
-" load filetype plugins
+" load filetype-dependent plugins, yes, load them
 filetype plugin on
 
-" load indent files for specific filetypes
+" load filetypes-dependent indent rules, yes, load them as well
 filetype indent on
 
 " add : as a file-name character (allows gf to work with http://foo.bar/)
@@ -37,54 +50,54 @@ set timeout timeoutlen=3000 ttimeoutlen=100
 " faster!! do not redraw while running macros (much faster)
 set lazyredraw
 
-" I said faster!!! lazy buffers
+" I said faas-ter!!! lazy buffers
 set hidden
 
-" faster!!! let the OS decide when it's appropriate to flush the cache, rather than vim
+" faster? let the OS decide when it's appropriate to flush the cache, rather than vim
 set nofsync
 
-" hauteur de la ligne de status (utile pour les plugins de library hints,
-" notifications diverses et variées type mlint, VCS…)
-set ch=2
+" status line height; some plugins are big
+set cmdheight=2
 
-" utiliser des messages plus courts de la part de Vim
+" use short messages, though
 set shortmess=asTI
 
-" conserve du contexte autour du curseur d'édition
+" keep some context around the cursor line
 set scrolloff=3
 set sidescrolloff=3
 
-" gestion des lignes longues (:help wrap)
+" long lines handling: wrap them, allow some more breakable characters
 set wrap
-set sidescroll=5
-set listchars+=precedes:<,extends:>
 
-" affiche les numéros de ligne sur le coté
-set nu!
+" word wrapping -- don't cut words
+set linebreak
 
-" met en évidence la ligne actuellement éditée
+" display line numbers
+set number
+
+" highlight active line
 set cursorline
 
-" la touche backspace peut supprimer tout et n'importe quoi, *dans tous les modes*
+" backspace has the power to erase anything in any mode
 set backspace=2
 
-" *pas de bip* relou lors d'une erreur
+" no fracking *beep* sound
 set noerrorbells
 
-" ne *pas* faire clignoter l'écran lors d'une erreur (relou^2)
+" no fracking screen blinking
 set novisualbell
 
-" quand on tape par ex. un ")", Vim montre brièvement le "(" correspondant
+" show matching characters pair, such as ()
 set showmatch
 
-" définitions de ce que sont les commentaires par défaut
+" redefining what is a default comment
 set com& " reset to default
 set com^=sr:*\ -,mb:*\ \ ,el:*/ com^=sr://\ -,mb://\ \ ,el:///
 
-" autorise le folding
+" enable folding
 set foldenable
 
-" critère par défaut pour replier les blocs : marqueurs explicites {{{ … }}}
+" folding criteria: explicit markers {{{ … }}}
 set foldmethod=marker
 
 " mouse support in terminals :)
@@ -93,89 +106,86 @@ if !has("gui_running")
   set ttymouse=xterm
 endif
 
-" show chars on end of line, white spaces, tabs, etc
-set list
-
 " don't move the cursor to the start of the line when changing buffers
 set nostartofline
 
-" don't highlight JSLint errors
+" don't highlight JSLint errors by default
 let g:JSLintHighlightErrorLine = 0
 
-" F2 toggles pasting mode (no auto-reindent)
+" F2 toggles pasting mode (no auto-reindent), very handy for pasting:
+" turn insert mode on, F2, paste, F2, back to normal mode
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
 
-" F5 toggles Gundo
-nnoremap <F5> :GundoToggle<CR>
+" {{{ Spell checking
 
-" {{{ correction orthographique
-
-" pas de correction orthographique par défaut
+" No spell checking by default
 set nospell
 
-" automatique pour les fichiers .txt et .tex
+" But activate for .txt and .tex files.
+" I mostly write .md files in English, too.
 augroup filetypedetect
   au BufNewFile,BufRead *.txt setlocal spell spelllang=fr
   au BufNewFile,BufRead *.tex setlocal spell spelllang=fr
+  au BufNewFile,BufRead *.md setlocal spell spelllang=en
 augroup END
 
-" painless spell checking
-" for French, you'll need
-" wget http://ftp.vim.org/pub/vim/runtime/spell/fr.utf-8.sug
-" wget http://ftp.vim.org/pub/vim/runtime/spell/fr.utf-8.spl
-" which you may move into ~/.vim/spell
+" Painless spell checking.
+" For French, you'll need to:
+"   wget http://ftp.vim.org/pub/vim/runtime/spell/fr.utf-8.sug
+"   wget http://ftp.vim.org/pub/vim/runtime/spell/fr.utf-8.spl
+" which you may move into ~/.vim/spell.
 function s:spell_fr()
   if !exists("s:spell_check") || s:spell_check == 0
-    echo "Correction orthographique activée (français)"
+    echo "French spell checking activated."
     let s:spell_check = 1
     setlocal spell spelllang=fr
   else
-    echo "Correction orthographique désactivée"
-    let s:spell_check = 0
-    setlocal spell spelllang=
-  endif
-endfunction
-" for English
-function s:spell_en()
-  if !exists("s:spell_check") || s:spell_check == 0
-    echo "Correction orthographique activée (anglais)"
-    let s:spell_check = 1
-    setlocal spell spelllang=en
-  else
-    echo "Correction orthographique désactivée"
+    echo "Spell checking disabled."
     let s:spell_check = 0
     setlocal spell spelllang=
   endif
 endfunction
 
-" mapping français
+" For English.
+function s:spell_en()
+  if !exists("s:spell_check") || s:spell_check == 0
+    echo "English spell checking activated."
+    let s:spell_check = 1
+    setlocal spell spelllang=en
+  else
+    echo "Spell checking disabled."
+    let s:spell_check = 0
+    setlocal spell spelllang=
+  endif
+endfunction
+
 noremap  <F10>        :call <SID>spell_fr()<CR>
 inoremap <F10>   <C-o>:call <SID>spell_fr()<CR>
 vnoremap <F10>   <C-o>:call <SID>spell_fr()<CR>
-" mapping English
 noremap  <S-F10>      :call <SID>spell_en()<CR>
 inoremap <S-F10> <C-o>:call <SID>spell_en()<CR>
 vnoremap <S-F10> <C-o>:call <SID>spell_en()<CR>
 
-" correction orthographique }}}
+" Spell checking }}}
 
 " Generic }}}
 
 " {{{ Indentation
 
-" à lire avant tout copier/coller stupide : http://vim.wikia.com/wiki/Indenting_source_code
-" compte tenu du 'filetype plugin indent on' précédent, pas de smartindent !
+" First, read http://vim.wikia.com/wiki/Indenting_source_code, then
+" taking previous 'filetype plugin indent on' into account, no smartindent required!
 
-" indentation automatique en l'absence de réglages pour le filetype courant
+" automate indent
 set autoindent
 
-" keep the current selection when indenting (thanks cbus)
+" keep the current selection when indenting (thanks cbus, this is the single
+" most valuable piece of conf ever)
 vnoremap < <gv
 vnoremap > >gv
 
-" des espaces à la place du caractère TAB
+" spaces rather than tabulations
 set tabstop=8
 set softtabstop=2
 set shiftwidth=2
@@ -187,50 +197,43 @@ set shiftround
 " some nice options for cindenting, by FOLKE
 set cinoptions={.5s,+.5s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
 
-" {{{ pour le plugin surround
-" permet de redonner la main à vim pour gérer l'indentation automatique
+" enables vim to get control back to handle automated indent if using Surround
 let b:surround_indent = 1
-" surround }}}
 
-" Indentation }}}
+" Indent rules }}}
 
-" {{{ Recherche et substitution
+" {{{ Search and replace
 
-" ignorer la casse des caractères dans les recherches de chaînes
+" ignore case while searching…
 set ignorecase
 
-" mais ne pas l'ignorer s'il y a explicitement des majuscules
-set scs
+" …unless there is a least one upper case character
+set smartcase
 
-" regexp en version magic
-set magic
-
-" recherche circulaire (pour couvrir tout le fichier, quel que soit le point
-" de départ de la recherche)
+" circular search spanning whole files
 set wrapscan
 
-" résultats dynamiques au cours de la recherche (amène le curseur sur le
-" résultat pour le motif actuellement recherché)
-set sm
+" move cursor to the current result's line
+set showmatch
 
-" surlignage des résultats
-set hls
+" highlight results
+set hlsearch
 
-" … y compris en cours de frappe
+" highlight while typing, too
 set incsearch
 
 " <espace> deux fois en mode normal efface les messages et les résultats de recherche
 nnoremap <silent> <Space><Space> :silent noh<Bar>echo<CR>
 
-" expliciter les espaces insécables et tabulations
-set listchars=nbsp:·,tab:>-
+" show chars on end of line, white spaces, tabs, etc
 set list
+set listchars=nbsp:·,tab:>-
 
-" Recherche et subsitution }}}
+" Search and replace }}}
 
-" {{{ Statusline, menu, onglets
+" {{{ Status line, menus, tabs
 
-" all… right
+" all… right: custom status line
 "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 set statusline=
 set statusline+=%3.3n\                       " buffer number
@@ -249,10 +252,6 @@ set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
 " OmniCompletion
 set ofu=syntaxcomplete#Complete
 
-" SuperTab integration with Omni
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<c-n>"
-
 " http://vimdoc.sourceforge.net/htmldoc/insert.html#ft-syntax-omni
 if has("autocmd") && exists("+omnifunc")
   autocmd Filetype *
@@ -261,11 +260,11 @@ if has("autocmd") && exists("+omnifunc")
              \ endif
 endif
 
-" use tab for auto-expansion in menus
-set wc=<TAB>
-
 " show a list of all matches when tabbing a command
-set wmnu
+set wildmenu
+
+" use tab for auto-expansion in menus
+set wildchar=<TAB>
 
 " how command line completion works
 set wildmode=list:longest,list:full
@@ -274,24 +273,21 @@ set wildmode=list:longest,list:full
 set wildignore=*.o,*.r,*.so,*.sl,*.tar,*.tgz,*.pyc,*~,.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
 
 " some filetypes got lower priority
-set su=.h,.bak,~,.o,.info,.swp,.obj
-
-" enhanced command-line completion mode
-set wildmenu
+set suffixes=.h,.bak,~,.o,.info,.swp,.obj
 
 " remember last 2000 typed commands
-set hi=2000
+set history=2000
 
-" afficher la position du curseur
+" display cursor position (line/column) in the status line
 set ruler
 
-" display more information in the ruler
+" actually display more information in the ruler
 set rulerformat=%40(%=%t%h%m%r%w%<\ (%n)\ %4.7l,%-7.(%c%V%)\ %P%)
 
-" toujours afficher le mode courant
+" always display currently used mode
 set showmode
 
-" affichage dynamique des commandes
+" dynamic display of commands
 set showcmd
 
 " a - terse messages (like [+] instead of [Modified]
@@ -302,53 +298,45 @@ set showcmd
 " I - no intro message when starting vim fileless
 set shortmess=aotTWI
 
-" la ligne de status est toujours visible
+" always display status line
 set laststatus=2
 
-" display as much of the last line as possible if it's really long
+" display as much of the last line as possible if it's really long;
 " also display unprintable characters as hex
 set display+=lastline,uhex
 
-" word wrapping -- don't cut words
-set linebreak
+" Status line, menus, tabs }}}
 
-" Statusline, menu, onglets }}}
+" {{{ Windows
 
-" {{{ Gestion du fenêtrage (GVim)
-
-" tabs everywhere!
-" you'll need to edit gvim.desktop:
+" tabs everywhere! You'll need to edit gvim.desktop:
 " http://vim.wikia.com/wiki/Launch_files_in_new_tabs_under_Unix
 tab all
 
-" minimal number of lines used for the current window
-set wh=1
-
-" minimal number of lines used for any window
-set wmh=0
+" minimal number of lines used for any window: as small as possible
+set winminheight=0
 
 " make all windows the same size when adding/removing windows
 set noequalalways
 
-" les nouvelles fenêtres sont crées sous l'actuelle
+" new windows are to be created under the current one
 set splitbelow
 
-" Gestion du fenêtrage }}}
+" Windows }}}
 
-" {{{ Sauvegarde
+" {{{ Save and backup
 
-" activation du backup
+" enable backup
 set backup
 
-" répertoire de backup
+" backup location (must be created by hand!)
 set backupdir=~/.vim/backup
 
-" le swap est mis à jour aprés 50 caractères saisies
-"set updatecount=500
-" suppression de l'utilisation du fichier d'échange
+" don't use a swap file (ie. save all the time asap)
 set updatecount=0
 
-" force save with sudo when using "W"
+" force saving with sudo when using "W"; will prompt for the password
+" Ctrl+C to skip
 command W w !sudo tee % > /dev/null
 
 " create non existing directories upon saving
@@ -360,22 +348,21 @@ augroup END
 " autosave when focus is lost
 autocmd BufLeave,FocusLost silent! wall
 
-
-" Sauvegarde }}}
+" Save and backup }}}
 
 " {{{ Mappings
-" certains mappings sont définis dans la section Plugins
 
-" modifie le <leader> (« \ » par défaut)
-" j'utilise la virgule car sur le clavier bépo, elle est située en plein
-" centre du clavier !
+" Some mappings are defined in the Plugins section
+
+" my <leader> key is the comma as it is at the center of bepo keyboard
+" mappings
 let   mapleader = ","
 let g:mapleader = ","
 
 " easily cancel hitting the leader key once
 nnoremap <Leader><Leader> <Leader>
 
-" pratique pour ouvrir des fichiers, à défaut d'un auto-cd
+" I don't like auto-cd but I'd use a quicker opener (actually using Command-t though)
 map <Leader>cd :cd %:p:h<CR>
 
 " Need to add this within ~/.Xdefaults
@@ -384,15 +371,17 @@ map <Leader>cd :cd %:p:h<CR>
 "URxvt.keysym.M-Up:          \033[1;3A
 "URxvt.keysym.M-Left:        \033[1;3D
 "URxvt.keysym.M-Right:       \033[1;3C
+" Meta is Alt in my setup
+
 " previous tab
 map <M-Left> gT
 " next tab
 map <M-Right> gt
 
 " Toggle line numbering
-noremap <silent> <F11> :se nu!<CR>
+noremap <silent> <F11> :se number!<CR>
 
-" navigation spéciale clavier bépo (dvorak) -- bepo.fr
+" Tailored navigation mappings for bepo.
 " ie. en mode normal/commande, maintenir Alt et utiliser les doigts au
 " repos pour des déplacements rapides, sans flèches
 " éventuellement à étendre pour les modes insertion, visuel…
@@ -402,13 +391,13 @@ nmap <A-s> l
 nmap <A-e> gk
 nmap <A-i> h
 
-" navigation alternatives dans les lignes coupées
+" in wrapped lines, enables to navigate on a per-line basis
 map  <A-DOWN>        gj
 map  <A-UP>          gk
 imap <A-UP>   <ESC>  gki
 imap <A-DOWN> <ESC>  gkj
 
-" sauvegarde rapide
+" quicker way to save a file
 nmap <leader>w :w<CR>
 nmap <leader><Leader>w :W<CR>
 
@@ -416,41 +405,21 @@ nmap <leader><Leader>w :W<CR>
 command! Unixformat :set ff=unix
 command! Dosformat  :set ff=dos
 
-" scroll vers le bas sans bouger le curseur
-"map <C-DOWN> <C-E>
-" scroll vers le haut sans bouger le curseur
-"map <C-UP> <C-Y>
+" scroll upward without moving cursor
+map <C-DOWN> <C-E>
 
-" tout séléctionner
-"noremap <C-A> gggH<C-O>G
-"cnoremap <C-A> <C-C>gggH<C-O>G
+" scroll downward without moving cursor
+map <C-UP> <C-Y>
 
-" <F1> lance la commande d'aide au lieu d'afficher l'intro de l'aide
-nnoremap <F1> :help<Space>
-vmap <F1> <C-C><F1>
-omap <F1> <C-C><F1>
-map! <F1> <C-C><F1>
-
-" forcer la fermeture d'un tampon avec <F4>
-map  <F4> :bd!<cr>
-imap <F4> <C-O>:bd!<cr>
-cmap <F4> <c-c>:bd!<cr>
-
-" gestion du caractère NULL dans tous les modes
+" handle NULL char in all modes as a no-op, except in the the insert mode
+" where it will be converted to a space
 imap <Nul> <Space>
 map  <Nul> <Nop>
 vmap <Nul> <Nop>
 cmap <Nul> <Nop>
 nmap <Nul> <Nop>
 
-" switch between header/code files
-map <F2> :A<CR>
-
-" Tagbar toggling
-nnoremap <silent> <F9> :TagbarToggle<CR>
-let g:tagbar_autofocus = 1
-
-" Allow Ctrl+PgUp/PgDn in tmux
+" Allows Ctrl+PgUp/PgDn in tmux
 set t_kN=[6;*~
 set t_kP=[5;*~
 
@@ -485,25 +454,35 @@ endif
 " - coding styles per project: http://www.vim.org/scripts/script.php?script_id=2633
 
 " see README.md for instructions on installing plugins
-call pathogen#helptags()
+" Using Pathogen!
 call pathogen#infect()
+call pathogen#helptags()
 
 " ack-grep
-" https://github.com/mileszs/ack.vim
-let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+if exists(":Ack")
+  let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+endif
 
 " taglist
-nmap <silent> <F7> :TlistToggle<CR>
-let Tlist_Show_One_File = 1  " Only show tags from the current file
-let Tlist_Sort_Type = 'name' " And sort them by name
+if exists(":Tlist")
+  nmap <silent> <F7> :TlistToggle<CR>
+  let Tlist_Show_One_File = 1  " Only show tags from the current file
+  let Tlist_Sort_Type = 'name' " And sort them by name
+endif
 
 " fugitive
 set statusline+=\ %{fugitive#statusline()}
 
-" supertab
-let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabCrMapping = 0
+" SuperTab
+if exists(":SuperTabHelp")
+  let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+  let g:SuperTabDefaultCompletionType = "context"
+  let g:SuperTabCrMapping = 0
+
+  " SuperTab integration with Omni
+  let g:SuperTabDefaultCompletionType = "context"
+  let g:SuperTabContextDefaultCompletionType = "<c-n>"
+endif
 
 " tabular
 if exists(":Tabularize")
@@ -514,34 +493,57 @@ if exists(":Tabularize")
 endif
 
 " command-T
-let g:CommandTMatchWindowAtTop = 1
-let g:CommandTAcceptSelection = '<C-t>'
-let g:CommandTAcceptSelectionTabMap = '<CR>'
+if exists(":CommandT")
+  let g:CommandTMatchWindowAtTop = 1
+  let g:CommandTAcceptSelection = '<C-t>'
+  let g:CommandTAcceptSelectionTabMap = '<CR>'
+endif
 
 " coffee-script auto compile, folding
 au BufWritePost *.coffee silent CoffeeMake! -b | cwindow | redraw!
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 
+if exists(":GundoToggle")
+  " F5 toggles Gundo
+  nnoremap <F5> :GundoToggle<CR>
+endif
+
+if exists(":A")
+  " switch between header/code files
+  map <F2> :A<CR>
+endif
+
+if exists(":TagbarOpen")
+  " Tagbar toggling
+  nnoremap <silent> <F9> :TagbarToggle<CR>
+  let g:tagbar_autofocus = 1
+endif
+
+if exists(":TOhtml")
+  " export HTML (:TOhtml) *avec CSS*
+  let html_use_css = 1
+endif
+
 " Plugins }}}
 
-" {{{ Commandes automatiques
+" {{{ Autocmd
 
 if has("autocmd")
   augroup augroup_autocmd
     au!
 
-    " se placer à la position du curseur lors de la fermeture du fichier
+    " Get back to last known cursor position
     autocmd BufReadPost *
           \ if line("'\"") > 0 && line("'\"") <= line("$") |
           \   exe "normal g`\"" |
           \ endif
 
-    " par type de fichier
+    " autocmd by filetype
     autocmd FileType text        setlocal textwidth=78 nocindent
     autocmd FileType html        set      formatoptions+=tl
 
-    " par extension, pour les cas tricky
+    " by extension
     autocmd BufNewFile,BufRead *.pc            set filetype proc
     autocmd BufNewFile,BufRead *.phtm,*.phtml  set filetype php
     autocmd BufNewFile,BufRead *.asy           set filetype asy
@@ -551,7 +553,7 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.ejs           set filetype=jst
     autocmd BufNewFile,BufRead /etc/nginx/sites-available/* set ft=nginx
 
-    " tabulation stricte dans les Makefile
+    " strict tabulations in Makefiles
     autocmd FileType make     set noexpandtab
 
     " indent XML inline files
@@ -563,9 +565,9 @@ if has("autocmd")
   augroup END
 endif
 
-" Commandes automatiques }}}
+" Autocmd }}}
 
-" Divers {{{
+" {{{ Misc.
 
 " Match Octopress/Jekyll's YAML Front Matter sections
 " From http://www.codeography.com/2010/02/20/making-vim-play-nice-with-jekylls-yaml-front-matter.html
@@ -573,11 +575,13 @@ let g:jekyll_path = "/home/jd/blog"
 high link jekyllYamlFrontmatter Comment
 execute "autocmd BufNewFile,BufRead " . g:jekyll_path . "/* syn match jekyllYamlFrontmatter /\\%^---\\_.\\{-}---$/ contains=@Spell"
 
-" }}}
+" Misc. }}}
 
-" {{{ Coloration syntaxique, couleurs, polices
+" {{{ Syntax highlighting, colors, fonts
 
-" active la coloration syntaxique quand c'est possible
+" That's pretty tricky: 256 colors support with custom schemes.
+
+" use syntax highlighting whenever possible
 syntax on
 
 function! GlobalColorSettings()
@@ -617,10 +621,7 @@ endif
 " how many lines to sync backwards
 syn sync minlines=10000 maxlines=10000
 
-" export HTML (:TOhtml) *avec CSS*
-let html_use_css = 1
-
-" Coloration }}}
+" Syntax highlighting, colors, fonts }}}
 
 " vim: set foldmethod=marker nonumber:
 
