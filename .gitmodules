@@ -183,6 +183,7 @@
 [submodule "bundle/supertab-continued"]
 	path = bundle/supertab-continued
 	url = git://github.com/vim-scripts/SuperTab-continued..git
+        ignore = dirty
 [submodule "bundle/thor"]
 	path = bundle/thor
 	url = git://github.com/jc00ke/thor.vim.git
@@ -192,6 +193,7 @@
 [submodule "bundle/NrrwRgn"]
 	path = bundle/NrrwRgn
 	url = git://github.com/chrisbra/NrrwRgn.git
+        ignore = dirty
 [submodule "bundle/tagbar"]
 	path = bundle/tagbar
 	url = git://github.com/majutsushi/tagbar.git
