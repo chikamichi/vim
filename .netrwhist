@@ -1,7 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/home/jd/blog/tech/source'
 let g:netrw_dirhist_2='/home/jd/.rvm/gems/ruby-1.9.2-p290@stormz/bundler/gems/ucengine.em-90ff55064602/lib'
 let g:netrw_dirhist_3='/home/jd/dev/ruby/allods/config/deploy'
 let g:netrw_dirhist_4='/etc/nginx/sites-available'
 let g:netrw_dirhist_5='/home/jd/stormz/hubot-stormz'
+let g:netrw_dirhist_6='/home/jd/stormz/stormz/app/assets'
+let g:netrw_dirhist_7='/etc/apt/preferences.d'
