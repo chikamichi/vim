@@ -494,8 +494,8 @@ endif
 
 " command-T
 if exists(":CommandT")
-  let g:CommandTMatchWindowAtTop = 1
-  let g:CommandTAcceptSelection = '<C-t>'
+  "let g:CommandTMatchWindowAtTop = 1
+  let g:CommandTAcceptSelectionMap = '<C-t>'
   let g:CommandTAcceptSelectionTabMap = '<CR>'
 endif
 
@@ -620,6 +620,9 @@ endif
 
 " how many lines to sync backwards
 syn sync minlines=10000 maxlines=10000
+
+"" treat hamlc as haml
+au BufRead,BufNewFile *.hamlc set ft=haml
 
 " Syntax highlighting, colors, fonts }}}
 
