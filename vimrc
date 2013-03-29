@@ -365,17 +365,29 @@ nnoremap <Leader><Leader> <Leader>
 " I don't like auto-cd but I'd use a quicker opener (actually using Command-t though)
 map <Leader>cd :cd %:p:h<CR>
 
-" Need to add this within ~/.Xdefaults
-"! Alt + arrow keys should behave as they do in xterm for vim to catch them
-"URxvt.keysym.M-Down:        \033[1;3B
-"URxvt.keysym.M-Up:          \033[1;3A
-"URxvt.keysym.M-Left:        \033[1;3D
-"URxvt.keysym.M-Right:       \033[1;3C
-" Meta is Alt in my setup
+" Tmux integration.
+" Make Vim recognize xterm escape sequences for Page and Arrow
+" keys, combined with any modifiers such as Shift, Control, and Alt.
+" Expects tmux to be configured to use screen-256color and to have
+" xterm-keys enabled.
+" See http://www.reddit.com/r/vim/comments/1a29vk/_/c8tze8p
+" and http://unix.stackexchange.com/questions/29907/how-to-get-vim-to-work-with-tmux-properly
+if &term =~ '^screen'
+  " Page keys http://sourceforge.net/p/tmux/tmux-code/ci/master/tree/FAQ
+  execute "set t_kP=\e[5;*~"
+  execute "set t_kN=\e[6;*~"
 
-" previous tab
+  " Arrow keys http://unix.stackexchange.com/a/34723
+  execute "set <xUp>=\e[1;*A"
+  execute "set <xDown>=\e[1;*B"
+  execute "set <xRight>=\e[1;*C"
+  execute "set <xLeft>=\e[1;*D"
+endif
+
+" We can now map directions with modifiers!
+" Go to the previous tab
 map <M-Left> gT
-" next tab
+" Go to the next tab
 map <M-Right> gt
 
 " Toggle line numbering
@@ -596,16 +608,6 @@ autocmd ColorScheme * call GlobalColorSettings()
 " thème de coloration syntaxique par défaut
 " http://vimcolorschemetest.googlecode.com/svn/html/index-c.html
 colorscheme default
-if $TERM == 'xterm-256color'
-    "set term=xterm-256color
-    "let g:solarized_termcolors=256
-    "colorscheme solarized
-    colorscheme jellybeans
-    set t_Co=256
-    "set background=dark
-else
-    colorscheme jellybeans
-endif
 
 " solarized theme
 "set background=dark
@@ -614,9 +616,10 @@ endif
 "colorscheme solarized
 
 " jellybeans theme
-"set background=light
-"set t_Co=256
-"colorscheme oceandeep
+set background=light
+set t_Co=256
+set t_ut=y
+colorscheme jellybeans
 
 " how many lines to sync backwards
 syn sync minlines=10000 maxlines=10000
