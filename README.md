@@ -1,19 +1,25 @@
-# Installation on a brand-new box
+My portable vim setup
+=====================
 
-## 1. Clone the repos
+Altough I may use Sublime Text 3, gEdit or Libre Office Writer from time to time depending on the document to be edited, my main editor is vim in console. This repository holds my portable vim setup which can be used to bootstrap a new machine in no time with a fully-fledged vim installation (plugins and color support included).
+
+Installation on a brand-new box
+-------------------------------
+
+### 1. Clone the repos
 
 ``` bash
 git clone git://github.com/chikamichi/vim.git ~/.vim
 ```
 
-## 2. Create symlinks:
+### 2. Create symlinks:
 
 ``` bash
 ln -s ~/.vim/vimrc ~/.vimrc
 ln -s ~/.vim/gvimrc ~/.gvimrc
 ```
 
-## 3. Switch to the `~/.vim` directory, and fetch submodules:
+### 3. Switch to the `~/.vim` directory, and fetch submodules:
 
 I manage my bundles using submodules. This is a neat feature of git and is perfectly valid and simple as long as you know what you're doing (hint: `git help submodule`). It also allows for great automation in relation with updates and removal.
 
@@ -23,15 +29,16 @@ git submodule init
 git submodule update
 ```
 
-## 4. Create the backup directory
+### 4. Create the backup directory
 
 ``` bash
 mkdir backup
 ```
 
-# Locally
+Local managment
+---------------
 
-## Installing a plugin
+### Installing a plugin
 
 ``` bash
 git submodule add git://vim-my-plugin bundle/my-plugin
@@ -41,7 +48,7 @@ I choose not to include *vim-* prefix in the directories name.
 
 One may need to run `git submodule init` again so that further updates work smoothly against the local config. To automate this step, use the `--init` option while updating.
 
-## Updating all plugins:
+### Updating all plugins
 
 Updating submodules *binding* is as simple as running `git submodule update [--init]`.
 
@@ -54,14 +61,14 @@ git submodule foreach git pull origin master
 
 If needed, add `ignore = dirty` in `.gitignore` (see [this discussion](http://www.nils-haldenwang.de/frameworks-and-tools/git/how-to-ignore-changes-in-git-submodules)).
 
-## Updating one plugin only
+### Updating one plugin only
 
 ``` bash
 cd ~/.vim/bundle/[the-plugin]
 git pull origin master
 ```
 
-## Removing a plugin
+### Removing a plugin
 
 ``` bash
 # delete relevant lines from .gitmodules and from .git/config
@@ -77,7 +84,10 @@ git hub # (my alias for git push origin master)
 
 See [vim-scripts](https://github.com/vim-scripts/) on github.
 
-## 256 colors support (tmux-wise)
+256 colors support (tmux-wise)
+------------------------------
+
+*Note: All the configuration on the vim-side is included in this repository, tmux must be configured by hand though.*
 
 I no longer use xterm-256color and XDefaults hack, for tmux requirements make it more complicated than desired.
 
