@@ -227,3 +227,9 @@
 [submodule "vim-css-color"]
 	path = vim-css-color
 	url = git://github.com/ap/vim-css-color.git
+[submodule "bundle/jellybeans"]
+	path = bundle/jellybeans
+	url = git@github.com:nanotech/jellybeans.vim.git
+[submodule "bundle/numbertoggle"]
+	path = bundle/numbertoggle
+	url = git@github.com:jeffkreeftmeijer/vim-numbertoggle.git
