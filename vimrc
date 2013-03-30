@@ -609,17 +609,17 @@ autocmd ColorScheme * call GlobalColorSettings()
 " http://vimcolorschemetest.googlecode.com/svn/html/index-c.html
 colorscheme default
 
-" solarized theme
-"set background=dark
-"set t_Co=256
-"let g:solarized_termcolors=16
-"colorscheme solarized
-
 " jellybeans theme
 set background=light
 set t_Co=256
-set t_ut=y
 colorscheme jellybeans
+
+if &term =~ '256color'
+  " Disable Background Color Erase (BCE) so that color schemes
+  " work properly when Vim is used inside tmux and GNU screen.
+  " See also http://snk.tuxfamily.org/log/vim-256color-bce.html
+  set t_ut=
+endif
 
 " how many lines to sync backwards
 syn sync minlines=10000 maxlines=10000
