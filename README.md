@@ -89,24 +89,24 @@ See [vim-scripts](https://github.com/vim-scripts/) on github.
 
 *Note: All the configuration on the vim-side is included in this repository, tmux must be configured by hand though.*
 
-I no longer use xterm-256color as my `TERM` value, tmux does not like it. Quoting [Tom Ryder](http://blog.sanctum.geek.nz/term-strings/):
+I no longer use `xterm-256color` as my `TERM` value, tmux does not like it. Quoting [Tom Ryder](http://blog.sanctum.geek.nz/term-strings/):
 
-> This is because they are “terminals within terminals”, and provide their own functionality only within the bounds of what the outer terminal can do. In addition to this, they have their own type for terminals within them; both of them use screen and its variants, such as `screen-256color`.
+> This is because they [tmux and screen] are “terminals within terminals”, and provide their own functionality only within the bounds of what the outer terminal can do. In addition to this, they have their own type for terminals within them; both of them use screen and its variants, such as `screen-256color`.
 > 
 > It’s therefore very important to check that both the outer and inner definitions for `TERM` are correct.
 
-Running Ubuntu, its default xterm comes with 256color support (to check whether yours has, run `msgcat --color=test`). To gain 256color support in tmux as well, set the proper `TERM` value in `~/.tmux.conf`:
+Running Ubuntu, its default xterm, acting as the "outer terminal", is handy enough to come with 256color support built-in (to check whether your terminal does, run `msgcat --color=test`). To gain 256color support in tmux as well, you must set the proper `TERM` in `~/.tmux.conf`. A value of `screen-256color` is **required** by tmux:
 
 ```
 set -g default-terminal "screen-256color"
 set -g xterm-keys on
 ```
 
-The former line is to enable 256color support, the latter one is to enable xterm-specific keycodes forwarding from your shell to tmux. This is required to process proper keycodes in vim, as described in tmux documentation:
+The former line is to enable 256color support, while the latter one is to enable xterm-specific keycodes' forwarding, from your shell to tmux. This is required to process proper keycodes inside vim, as explained by tmux documentation:
 
 > tmux supports passing through ctrl (and where supported by the client terminal, alt and shift) modifiers to function keys using xterm(1)-style key sequences. This may be enabled per window, or globally with the [xterm-keys] tmux command.
 
-But vim is not able to automatically detect those xterm keycodes, due to the `TERM` value in use (`screen-256color`). Some further configuration is thus required in `.vimrc`. The following is already included in this bundle, so there is no need for you to edit anything.
+But vim is not able to automatically detect those xterm keycodes, due to the `TERM` value in use (`screen-256color`). Some further configuration is thus required in `.vimrc` (all the remaining, vim-related code is *already included* in this bundle, so there is no need for you to edit anything):
 
 ``` vi
 " Make Vim recognize xterm escape sequences for Page and Arrow
