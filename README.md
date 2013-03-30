@@ -97,7 +97,7 @@ I no longer use `xterm-256color` as my `TERM` value, tmux does not like it. Quot
 
 Running Ubuntu, its default xterm, acting as the "outer terminal", is handy enough to come with 256color support built-in (to check whether your terminal does, run `msgcat --color=test`). To gain 256color support in tmux as well, you must set the proper `TERM` in `~/.tmux.conf`. A value of `screen-256color` is **required** by tmux:
 
-```
+``` tmux
 set -g default-terminal "screen-256color"
 set -g xterm-keys on
 ```
@@ -108,7 +108,7 @@ The former line is to enable 256color support, while the latter one is to enable
 
 But vim is not able to automatically detect those xterm keycodes, due to the `TERM` value in use (`screen-256color`). Some further configuration is thus required in `.vimrc` (all the remaining, vim-related code is *already included* in this bundle, so there is no need for you to edit anything):
 
-``` vi
+``` viml
 " Make Vim recognize xterm escape sequences for Page and Arrow
 " keys, combined with any modifiers such as Shift, Control, and Alt.
 " See http://unix.stackexchange.com/questions/29907/how-to-get-vim-to-work-with-tmux-properly
@@ -127,7 +127,7 @@ endif
 
 One can now map directions with modifiers. For instance, you may want Alt+Left/Right to navigate through your opened tabs (Alt is Meta under Ubuntu):
 
-``` vi
+``` viml
 " Go to the previous tab.
 map <M-Left> gT
 " Go to the next tab.
@@ -136,7 +136,7 @@ map <M-Right> gt
 
 As for the colors and term integration, here is the final configuration in `.vimrc`:
 
-``` vi
+``` viml
 syntax on
 set mouse=a
 set ttymouse=xterm
