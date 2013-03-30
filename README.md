@@ -56,11 +56,13 @@ Local managment
 
 ### Installing a plugin
 
+See [vim-scripts](https://github.com/vim-scripts/) for a list of plugins.
+
 ``` bash
 git submodule add git://vim-my-plugin bundle/my-plugin
 ```
 
-I choose not to include *vim-* prefix in the directories name.
+I choose *not* to include "vim-"" prefixes in the directories.
 
 One may need to run `git submodule init` again so that further updates work smoothly against the local config. To automate this step, use the `--init` option while updating.
 
@@ -106,13 +108,11 @@ git commit -a -m "Removing foo bundle."
 git push your-remote master
 ```
 
-See [vim-scripts](https://github.com/vim-scripts/) on github.
-
 ### Going fully read-only
 
 I never make changes in my bundles submodules, but sometimes, they may become dirty (as in "some files modified"). For instance, generating help tags will often result in a submodule reporting itself as dirty. For more details on this, read [this post](http://www.nils-haldenwang.de/frameworks-and-tools/git/how-to-ignore-changes-in-git-submodules).
 
-You may either run `git status --ignore-submodules=dirty`, or provide bundle-specific rules in `.gitmodules` (in this repository, I systematically do so). Note that the correct value is "dirty", not "all", because you still want to be warned of new commits.
+You may either run `git status --ignore-submodules=dirty`, or provide bundle-specific rules in `.gitmodules`. In this repository, I systematically do so; that is, when installing a plugin, I make sure to add the ignore directive as well. Note that the correct value is "dirty", not "all", because you still want to be warned of new commits.
 
 It is possible to make this global to your git installation using `git config [--global] core.ignore dirty` but I guess this is not without risk (you then have to remember checking whether you want to enable dirty tracking in each git repository you will come by).
 
