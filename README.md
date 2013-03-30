@@ -35,6 +35,10 @@ git submodule update
 mkdir backup
 ```
 
+### 5. Install system dependencies
+
+As for now, it boils down to installing [ctags](http://ctags.sourceforge.net/) in its *Exuberant* flavor. For me, it's a matter of doing `sudo apt-get install exuberant-ctags`.
+
 Local managment
 ---------------
 
