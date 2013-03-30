@@ -1,25 +1,25 @@
 My portable vim setup
 =====================
 
-Altough I may use Sublime Text 3, gEdit or Libre Office Writer from time to time depending on the document to be edited, my main editor is vim `in console`. This repository holds my portable vim setup which can be used to bootstrap a new machine in no time with a fully-fledged vim installation (plugins and color support included).
+Altough I may use Sublime Text 3, gEdit or Libre Office Writer from time to time depending on the document to be edited, my main editor is vim *in console*, inside [tmux](http://tmux.sourceforge.net/). This repository holds my portable vim setup which can be used to bootstrap a new machine in no time with a fully-fledged installation (with plugins, color support and tmux integration all included).
 
 Installation on a brand-new box
 -------------------------------
 
-### 1. Clone the repos
+### 1. Clone this repository
 
 ``` bash
 git clone git://github.com/chikamichi/vim.git ~/.vim
 ```
 
-### 2. Create symlinks:
+### 2. Create required symlinks
 
 ``` bash
 ln -s ~/.vim/vimrc ~/.vimrc
 ln -s ~/.vim/gvimrc ~/.gvimrc
 ```
 
-### 3. Switch to the `~/.vim` directory, and fetch submodules:
+### 3. Fetch the plugins
 
 I manage my bundles using submodules. This is a neat feature of git and is perfectly valid and simple as long as you know what you're doing (hint: `git help submodule`). It also allows for great automation in relation with updates and removal.
 
@@ -29,7 +29,7 @@ git submodule init
 git submodule update
 ```
 
-### 4. Create the backup directory
+### 4. Create the required backup directory
 
 ``` bash
 mkdir backup
@@ -89,13 +89,13 @@ See [vim-scripts](https://github.com/vim-scripts/) on github.
 
 *Note: All the configuration on the vim-side is included in this repository, tmux must be configured by hand though.*
 
-I no longer use xterm-256color, tmux does not like it. Quoting [Tom Ryder](http://blog.sanctum.geek.nz/term-strings/):
+I no longer use xterm-256color as my `TERM` value, tmux does not like it. Quoting [Tom Ryder](http://blog.sanctum.geek.nz/term-strings/):
 
-> This is because they are “terminals within terminals”, and provide their own functionality only within the bounds of what the outer terminal can do. In addition to this, they have their own type for terminals within them; both of them use screen and its variants, such as screen-256color.
+> This is because they are “terminals within terminals”, and provide their own functionality only within the bounds of what the outer terminal can do. In addition to this, they have their own type for terminals within them; both of them use screen and its variants, such as `screen-256color`.
 > 
-> It’s therefore very important to check that both the outer and inner definitions for TERM are correct.
+> It’s therefore very important to check that both the outer and inner definitions for `TERM` are correct.
 
-Running Ubuntu, its default xterm comes with 256color support (to check whether yours has, run `msgcat --color=test`). To gain 256color support in tmux as well, set the proper TERM value in `~/.tmux.conf`:
+Running Ubuntu, its default xterm comes with 256color support (to check whether yours has, run `msgcat --color=test`). To gain 256color support in tmux as well, set the proper `TERM` value in `~/.tmux.conf`:
 
 ```
 set -g default-terminal "screen-256color"
@@ -106,7 +106,7 @@ The former line is to enable 256color support, the latter one is to enable xterm
 
 > tmux supports passing through ctrl (and where supported by the client terminal, alt and shift) modifiers to function keys using xterm(1)-style key sequences. This may be enabled per window, or globally with the [xterm-keys] tmux command.
 
-But vim is not able to automatically detect those xterm keycodes, due to the TERM value in use (`screen-256color`). Some further configuration is thus required in `.vimrc`. The following is already included in this bundle, so there is no need for you to edit anything.
+But vim is not able to automatically detect those xterm keycodes, due to the `TERM` value in use (`screen-256color`). Some further configuration is thus required in `.vimrc`. The following is already included in this bundle, so there is no need for you to edit anything.
 
 ``` vi
 " Make Vim recognize xterm escape sequences for Page and Arrow
@@ -147,7 +147,7 @@ set t_ut=y
 colorscheme jellybeans
 ```
 
-Note that the `t_Co` setting is to `force` vim to trust the term it runs within has 256color support, even though it may not be detected (better safe than sorry).
+Note that the `t_Co` setting is to `force` vim to trust the term it runs within has 256color support, even though it may not be detected.
 
 More (rock-solid) info on `TERM` management on the [Arabesque blog](http://blog.sanctum.geek.nz/term-strings/).
 
