@@ -254,3 +254,7 @@
 	path = bundle/gitgutter
 	url = git://github.com/airblade/vim-gitgutter.git
         ignore = dirty
+[submodule "bundle/Recover"]
+	path = bundle/Recover
+	url = git://github.com/chrisbra/Recover.vim.git
+        ignore = dirty
