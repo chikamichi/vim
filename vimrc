@@ -19,6 +19,46 @@
 " no compatibility
 set nocompatible
 
+" vundle kicks in!
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle "mileszs/ack.vim"
+Bundle "kchmck/vim-coffee-script"
+Bundle "Raimondi/delimitMate"
+Bundle "mbbill/undotree"
+Bundle "tpope/vim-cucumber"
+Bundle "tpope/vim-haml"
+Bundle "tpope/vim-liquid"
+Bundle "tpope/vim-markdown"
+Bundle "tpope/vim-rails"
+Bundle "tpope/vim-surround"
+Bundle "vim-ruby/vim-ruby"
+Bundle "juanpabloaj/help.vim"
+Bundle "othree/html5.vim"
+Bundle "othree/html5-syntax.vim"
+Bundle "vim-scripts/matchit.zip"
+Bundle "chikamichi/mediawiki.vim"
+Bundle "scrooloose/nerdcommenter"
+Bundle "evanmiller/nginx-vim-syntax"
+Bundle "nanotech/jellybeans.vim"
+Bundle "jeffkreeftmeijer/vim-numbertoggle"
+Bundle "slim-template/slim"
+Bundle "ervandew/supertab"
+Bundle "scrooloose/syntastic"
+Bundle "godlygeek/tabular"
+Bundle "sjl/splice.vim"
+Bundle "bronson/vim-trailing-whitespace"
+Bundle "airblade/vim-gitgutter"
+Bundle "suan/vim-instant-markdown"
+"Bundle "chrisbra/NrrwRgn"
+"Bundle "wincent/Command-T"
+
+" load filetype-dependent plugins and indent rules
+filetype plugin indent on
+
 " automatically read in external changes if we haven't modified the buffer
 set autoread
 
@@ -28,15 +68,6 @@ set autowrite
 " default encoding is UTF-8
 set encoding=utf-8
 set fileencoding=utf-8
-
-" detect file type
-filetype on
-
-" load filetype-dependent plugins, yes, load them
-filetype plugin on
-
-" load filetypes-dependent indent rules, yes, load them as well
-filetype indent on
 
 " add : as a file-name character (allows gf to work with http://foo.bar/)
 set isfname+=:
@@ -467,16 +498,6 @@ if exists(":Ack")
   let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 endif
 
-" taglist
-if exists(":Tlist")
-  nmap <silent> <F7> :TlistToggle<CR>
-  let Tlist_Show_One_File = 1  " Only show tags from the current file
-  let Tlist_Sort_Type = 'name' " And sort them by name
-endif
-
-" fugitive
-set statusline+=\ %{fugitive#statusline()}
-
 " SuperTab
 if exists(":SuperTabHelp")
   let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
@@ -496,33 +517,10 @@ if exists(":Tabularize")
   vmap <Leader>c: :Tabularize/:\zs<CR>
 endif
 
-" command-T
-if exists(":CommandT")
-  "let g:CommandTMatchWindowAtTop = 1
-  let g:CommandTAcceptSelectionMap = '<C-t>'
-  let g:CommandTAcceptSelectionTabMap = '<CR>'
-endif
-
 " coffee-script auto compile, folding
 au BufWritePost *.coffee silent CoffeeMake! -b | cwindow | redraw!
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
-
-if exists(":GundoToggle")
-  " F5 toggles Gundo
-  nnoremap <F5> :GundoToggle<CR>
-endif
-
-if exists(":A")
-  " switch between header/code files
-  map <F2> :A<CR>
-endif
-
-if exists(":TagbarOpen")
-  " Tagbar toggling
-  nnoremap <silent> <F9> :TagbarToggle<CR>
-  let g:tagbar_autofocus = 1
-endif
 
 if exists(":TOhtml")
   " export HTML (:TOhtml) *avec CSS*
