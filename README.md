@@ -27,17 +27,9 @@ mkdir backup
 
 ### 4. Install system dependencies
 
-As for now, it boils down to installing [ctags](http://ctags.sourceforge.net/) in its *Exuberant* flavor, and compiling Command-t.
+As for now, it boils down to installing [ctags](http://ctags.sourceforge.net/) in its *Exuberant* flavor.
 
 ctags can be installed with `sudo apt-get install exuberant-ctags`.
-
-Command-t documentation has guidelines on installing under Pathogen, and introduces a dependency on Ruby:
-
-``` bash
-cd bundle/command-t/ruby/command-t
-ruby extconf.rb
-make
-```
 
 ### 5. Fetch the plugins
 
