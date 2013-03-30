@@ -462,14 +462,6 @@ endif
 
 " {{{ Plugins
 
-" interesting ones but not tested yet:
-" - coding styles per project: http://www.vim.org/scripts/script.php?script_id=2633
-
-" see README.md for instructions on installing plugins
-" Using Pathogen!
-call pathogen#infect()
-call pathogen#helptags()
-
 " ack-grep
 if exists(":Ack")
   let g:ackprg="ack-grep -H --nocolor --nogroup --column"
