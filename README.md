@@ -21,12 +21,12 @@ ln -s ~/.vim/gvimrc ~/.gvimrc
 
 ### 3. Fetch the plugins
 
-I manage my bundles using [submodules](http://git-scm.com/book/en/Git-Tools-Submodules). You may have heard bad things about either submodules themselves or using them alongside Pathogen. Don't be afraid: submodules is a great feature of git and levaraging them here is perfectly valid and simple, as long as you know what you're doing (hint: `git help submodule` or click on the former link). It allows for an efficient automation (note to self: *planning to wrap it up with a Thor script to reduce typing*).
+I manage my bundles using [submodules](http://git-scm.com/book/en/Git-Tools-Submodules) ([man page for git-submodule(1)](https://www.kernel.org/pub/software/scm/git/docs/git-submodule.html)). You may have heard bad things about either submodules themselves or using them alongside Pathogen. Don't be afraid: submodules is a great feature of git and levaraging them here is perfectly valid and simple, as long as you know what you're doing. It allows for an efficient automation (note to self: *planning to wrap it up with a Thor script to reduce typing*).
 
 ``` bash
 cd ~/.vim
 git submodule init
-git submodule update
+git submodule update --recursive
 ```
 
 ### 4. Create the required backup directory
@@ -68,9 +68,9 @@ One may need to run `git submodule init` again so that further updates work smoo
 
 ### Updating all plugins
 
-Updating submodules is as simple as running `git submodule update [--init]`.
+Updating submodules is as simple as running `git submodule update --recursive --init`.
 
-The `--init` option tells git to initialize all submodules for which `git submodule init` has not been called so far, before updating. It comes in handy when a new bundle has been added to this repository and has not been fetched yet, so that you `init` and `update` in a single one command.
+The `--init` option tells git to initialize all "pending" submodules for which `git submodule init` has not been called so far, before updating. It comes in handy when a new bundle has been added to this repository and has not been fetched yet, so that you `init` and `update` in a single one command.
 
 ---
 
@@ -115,6 +115,8 @@ I never make changes in my bundles submodules, but sometimes, they may become di
 You may either run `git status --ignore-submodules=dirty`, or provide bundle-specific rules in `.gitmodules`. In this repository, I systematically do so; that is, when installing a plugin, I make sure to add the ignore directive as well. Note that the correct value is "dirty", not "all", because you still want to be warned of new commits.
 
 It is possible to make this global to your git installation using `git config [--global] core.ignore dirty` but I guess this is not without risk (you then have to remember checking whether you want to enable dirty tracking in each git repository you will come by).
+
+In read-only mode, you can optimize submodules by running `git submodule foreach 'echo `git gc [--aggressive]`'`. The `--aggressive` option may not be used each time.
 
 256 colors support (tmux-wise)
 ------------------------------
