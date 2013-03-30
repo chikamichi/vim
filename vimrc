@@ -596,20 +596,6 @@ execute "autocmd BufNewFile,BufRead " . g:jekyll_path . "/* syn match jekyllYaml
 " use syntax highlighting whenever possible
 syntax on
 
-function! GlobalColorSettings()
-    " Set 'TODO' & 'FIXME' strings to be bold and standout as hell.
-    highlight Todo term=standout ctermfg=196 ctermbg=226 guifg=#ff4500 guibg=#eeee00
-
-    " Set cursor color to be like in jellybeans.vim colorscheme, but with black text (previously white).
-    highlight Cursor ctermfg=Black ctermbg=153 guifg=#000000 guibg=#b0d0f0
-endfunction
-autocmd ColorScheme * call GlobalColorSettings()
-
-" thème de coloration syntaxique par défaut
-" http://vimcolorschemetest.googlecode.com/svn/html/index-c.html
-colorscheme default
-
-" jellybeans theme
 set background=light
 colorscheme jellybeans
 
