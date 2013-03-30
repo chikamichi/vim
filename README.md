@@ -19,23 +19,13 @@ ln -s ~/.vim/vimrc ~/.vimrc
 ln -s ~/.vim/gvimrc ~/.gvimrc
 ```
 
-### 3. Fetch the plugins
-
-I manage my bundles using [submodules](http://git-scm.com/book/en/Git-Tools-Submodules) ([man page for git-submodule(1)](https://www.kernel.org/pub/software/scm/git/docs/git-submodule.html)). You may have heard bad things about either submodules themselves or using them alongside Pathogen. Don't be afraid: submodules is a great feature of git and levaraging them here is perfectly valid and simple, as long as you know what you're doing. It allows for an efficient automation (note to self: *planning to wrap it up with a Thor script to reduce typing*).
-
-``` bash
-cd ~/.vim
-git submodule init
-git submodule update --recursive
-```
-
-### 4. Create the required backup directory
+### 3. Create the required backup directory
 
 ``` bash
 mkdir backup
 ```
 
-### 5. Install system dependencies
+### 4. Install system dependencies
 
 As for now, it boils down to installing [ctags](http://ctags.sourceforge.net/) in its *Exuberant* flavor, and compiling Command-t.
 
@@ -49,79 +39,12 @@ ruby extconf.rb
 make
 ```
 
-Then, refresh Pathogen's doc: `:call pathogen#helptags`.
+### 5. Fetch the plugins
 
-Local managment
----------------
-
-### Installing a plugin
-
-See [vim-scripts](https://github.com/vim-scripts/) for a list of plugins, and [usevim](http://usevim.com/) for weekly selections.
+I use [Vundle](https://github.com/gmarik/vundle).
 
 ``` bash
-git submodule add git://vim-my-plugin bundle/my-plugin
-git commit -m "New plugin: my-plugin."
-git push
-```
-
-I choose *not* to include "vim-"" prefixes in the directories. I also usually ignore dirty changes (see Read-Only mode below).
-
-One may need to run `git submodule init` again so that further updates work smoothly against the local config. To automate this step, use the `--init` option while updating.
-
-### Updating all plugins
-
-Updating submodules is as simple as running `git submodule update --recursive --init`.
-
-The `--init` option tells git to initialize all "pending" submodules for which `git submodule init` has not been called so far, before updating. It comes in handy when a new bundle has been added to this repository and has not been fetched yet, so that you `init` and `update` in a single one command.
-
----
-
-Sometimes, for some reasons, it will fail. The internet is sorry. A brute-force method can be attempted, though:
-
-``` bash
-git submodule foreach git checkout master
-git submodule foreach git pull origin master
-```
-
-### Updating one plugin only
-
-Provide the bundle name: `git submodule update bundle/the-plugin`.
-
----
-
-The brute-force method, in case you need it:
-
-``` bash
-cd ~/.vim/bundle/[the-plugin]
-git pull origin master
-```
-
-### Removing a plugin
-
-``` bash
-# delete relevant lines from .gitmodules and from .git/config
-git rm --cached bundle/[the-plugin] # without the trailing slash
-```
-
-Push on github on github then easy. Don't forget to provide a custom remote if you use my repository as the foundation for your own bundle.
-
-``` bash
-git commit -a -m "Removing foo bundle."
-git push your-remote master
-```
-
-### Going Read-Only
-
-I never make changes in my bundles submodules, but sometimes, they may become dirty (as in "some files modified"). For instance, generating help tags will often result in a submodule reporting itself as dirty. For more details on this, read [this post](http://www.nils-haldenwang.de/frameworks-and-tools/git/how-to-ignore-changes-in-git-submodules).
-
-You may either run `git status --ignore-submodules=dirty`, or provide bundle-specific rules in `.gitmodules`. In this repository, I systematically do so; that is, when installing a plugin, I make sure to add the ignore directive as well in `.gitmodules`. Note that the correct value is "dirty", not "all", because you still want to be warned of new commits.
-
-It is possible to make this global to your git installation using `git config [--global] core.ignore dirty` but I guess this is not without risk (you then have to remember checking whether you want to enable dirty tracking in each git repository you will come by).
-
-In read-only mode, you can optimize submodules by running: 
-
-``` bash
-git submodule foreach 'echo `git gc [--aggressive]`'
+vim +BundleInstall +qall
 ```
 
 256 colors support (tmux-wise)
