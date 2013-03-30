@@ -35,6 +35,8 @@ Bundle "tpope/vim-liquid"
 Bundle "tpope/vim-markdown"
 Bundle "tpope/vim-rails"
 Bundle "tpope/vim-surround"
+Bundle "tpope/vim-speeddating"
+Bundle "tpope/vim-eunuch"
 Bundle "vim-ruby/vim-ruby"
 Bundle "juanpabloaj/help.vim"
 Bundle "othree/html5.vim"
@@ -53,6 +55,7 @@ Bundle "sjl/splice.vim"
 Bundle "bronson/vim-trailing-whitespace"
 Bundle "airblade/vim-gitgutter"
 Bundle "suan/vim-instant-markdown"
+Bundle "kien/ctrlp.vim"
 "Bundle "chrisbra/NrrwRgn"
 "Bundle "wincent/Command-T"
 
@@ -526,6 +529,16 @@ if exists(":TOhtml")
   " export HTML (:TOhtml) *avec CSS*
   let html_use_css = 1
 endif
+
+"if exists(":CtrlP")
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<c-t>'],
+    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+    \ }
+nmap <leader>c :CtrlP<CR>
+nmap <leader>b :CtrlP<CR>
+"endif
 
 " Plugins }}}
 
