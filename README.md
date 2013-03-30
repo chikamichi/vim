@@ -1,7 +1,7 @@
 My portable vim setup
 =====================
 
-Altough I may use Sublime Text 3, gEdit or Libre Office Writer from time to time depending on the document to be edited, my main editor is vim in console. This repository holds my portable vim setup which can be used to bootstrap a new machine in no time with a fully-fledged vim installation (plugins and color support included).
+Altough I may use Sublime Text 3, gEdit or Libre Office Writer from time to time depending on the document to be edited, my main editor is vim `in console`. This repository holds my portable vim setup which can be used to bootstrap a new machine in no time with a fully-fledged vim installation (plugins and color support included).
 
 Installation on a brand-new box
 -------------------------------
@@ -106,7 +106,7 @@ The former line is to enable 256color support, the latter one is to enable xterm
 
 > tmux supports passing through ctrl (and where supported by the client terminal, alt and shift) modifiers to function keys using xterm(1)-style key sequences. This may be enabled per window, or globally with the [xterm-keys] tmux command.
 
-But vim is not able to automatically detect those xterm keycodes, due to the TERM value in use (`screen-256color`). Some further configuration is thus required in `.vimrc`:
+But vim is not able to automatically detect those xterm keycodes, due to the TERM value in use (`screen-256color`). Some further configuration is thus required in `.vimrc`. The following is already included in this bundle, so there is no need for you to edit anything.
 
 ``` vi
 " Make Vim recognize xterm escape sequences for Page and Arrow
@@ -134,10 +134,13 @@ map <M-Left> gT
 map <M-Right> gt
 ```
 
-As for the colors, here is the final configuration in `.vimrc`:
+As for the colors and term integration, here is the final configuration in `.vimrc`:
 
 ``` vi
 syntax on
+set mouse=a
+set ttymouse=xterm
+set ttyfast
 set background=light
 set t_Co=256
 set t_ut=y
