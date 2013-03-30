@@ -116,7 +116,11 @@ You may either run `git status --ignore-submodules=dirty`, or provide bundle-spe
 
 It is possible to make this global to your git installation using `git config [--global] core.ignore dirty` but I guess this is not without risk (you then have to remember checking whether you want to enable dirty tracking in each git repository you will come by).
 
-In read-only mode, you can optimize submodules by running `git submodule foreach 'echo `git gc [--aggressive]`'`. The `--aggressive` option may not be used each time.
+In read-only mode, you can optimize submodules by running: 
+
+``` bash
+git submodule foreach 'echo `git gc [--aggressive]`'
+```
 
 256 colors support (tmux-wise)
 ------------------------------
