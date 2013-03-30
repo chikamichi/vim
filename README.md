@@ -147,7 +147,7 @@ set t_ut=
 colorscheme jellybeans
 ```
 
-Note that the `t_Co` setting is to `force` vim to trust the term it runs within has 256color support, even though it may not be detected.
+Note that the `t_Co` setting is to *force* vim to trust the term it runs within has 256color support, even though it may not be detected.
 
 More (rock-solid) info on `TERM` management on the [Arabesque blog](http://blog.sanctum.geek.nz/term-strings/).
 
