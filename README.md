@@ -21,7 +21,7 @@ ln -s ~/.vim/gvimrc ~/.gvimrc
 
 ### 3. Fetch the plugins
 
-I manage my bundles using submodules. This is a neat feature of git and is perfectly valid and simple as long as you know what you're doing (hint: `git help submodule`). It also allows for great automation in relation with updates and removal.
+I manage my bundles using [submodules](http://git-scm.com/book/en/Git-Tools-Submodules). You may have heard bad things about either submodules themselves or using them alongside Pathogen. Don't be afraid: submodules is a great feature of git and levaraging them here is perfectly valid and simple, as long as you know what you're doing (hint: `git help submodule` or click on the former link). It allows for an efficient automation (note to self: *planning to wrap it up with a Thor script to reduce typing*).
 
 ``` bash
 cd ~/.vim
