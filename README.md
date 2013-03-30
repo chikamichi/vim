@@ -56,7 +56,7 @@ Local managment
 
 ### Installing a plugin
 
-See [vim-scripts](https://github.com/vim-scripts/) for a list of plugins.
+See [vim-scripts](https://github.com/vim-scripts/) for a list of plugins, and [usevim](http://usevim.com/) for weekly selections.
 
 ``` bash
 git submodule add git://vim-my-plugin bundle/my-plugin
