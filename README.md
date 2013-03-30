@@ -50,18 +50,26 @@ One may need to run `git submodule init` again so that further updates work smoo
 
 ### Updating all plugins
 
-Updating submodules *binding* is as simple as running `git submodule update [--init]`.
+Updating submodules is as simple as running `git submodule update [--init]`.
 
-Updating submodules *code* requires a bit more:
+The `--init` option tells git to initialize all submodules for which `git submodule init` has not been called so far, before updating. It comes in handy when a new bundle has been added to this repository and has not been fetched yet, so that you `init` and `update` in a single one command.
+
+---
+
+Sometimes, for some reasons, it will fail. The internet is sorry. A brute-force method can be attempted, though:
 
 ``` bash
 git submodule foreach git checkout master
 git submodule foreach git pull origin master
 ```
 
-If needed, add `ignore = dirty` in `.gitignore` (see [this discussion](http://www.nils-haldenwang.de/frameworks-and-tools/git/how-to-ignore-changes-in-git-submodules)).
-
 ### Updating one plugin only
+
+Provide the bundle name: `git submodule update bundle/the-plugin`.
+
+---
+
+The brute-force method, in case you need it:
 
 ``` bash
 cd ~/.vim/bundle/[the-plugin]
@@ -75,14 +83,22 @@ git pull origin master
 git rm --cached bundle/[the-plugin] # without the trailing slash
 ```
 
-Push on github (chikamichi/vim):
+Push on github on github then easy. Don't forget to provide a custom remote if you use my repository as the foundation for your own bundle.
 
 ``` bash
-git commit -a -m "submodules update"
-git hub # (my alias for git push origin master)
+git commit -a -m "Removing foo bundle."
+git push your-remote master
 ```
 
 See [vim-scripts](https://github.com/vim-scripts/) on github.
+
+### Going fully read-only
+
+I never make changes in my bundles submodules, but sometimes, they may become dirty (as in "some files modified"). For instance, generating help tags will often result in a submodule reporting itself as dirty. For more details on this, read [this post](http://www.nils-haldenwang.de/frameworks-and-tools/git/how-to-ignore-changes-in-git-submodules).
+
+You may either run `git status --ignore-submodules=dirty`, or provide bundle-specific rules in `.gitmodules` (in this repository, I systematically do so). Note that the correct value is "dirty", not "all", because you still want to be warned of new commits.
+
+It is possible to make this global to your git installation using `git config [--global] core.ignore dirty` but I guess this is not without risk (you then have to remember checking whether you want to enable dirty tracking in each git repository you will come by).
 
 256 colors support (tmux-wise)
 ------------------------------
