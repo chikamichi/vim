@@ -95,7 +95,7 @@ I no longer use xterm-256color, tmux does not like it. Quoting [Tom Ryder](http:
 > 
 > It’s therefore very important to check that both the outer and inner definitions for TERM are correct.
 
-Running Ubuntu, its default xterm comes with 256color support. To gain 256color support in tmux as well, set the proper TERM value in `~/.tmux.conf`:
+Running Ubuntu, its default xterm comes with 256color support (to check whether yours has, run `msgcat --color=test`). To gain 256color support in tmux as well, set the proper TERM value in `~/.tmux.conf`:
 
 ```
 set -g default-terminal "screen-256color"
