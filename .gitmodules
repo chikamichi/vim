@@ -250,3 +250,7 @@
 	path = bundle/numbertoggle
 	url = git@github.com:jeffkreeftmeijer/vim-numbertoggle.git
         ignore = dirty
+[submodule "bundle/gitgutter"]
+	path = bundle/gitgutter
+	url = git://github.com/airblade/vim-gitgutter.git
+        ignore = dirty
