@@ -143,7 +143,7 @@ set ttymouse=xterm
 set ttyfast
 set background=light
 set t_Co=256
-set t_ut=y
+set t_ut=
 colorscheme jellybeans
 ```
 

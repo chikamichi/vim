@@ -611,13 +611,13 @@ colorscheme default
 
 " jellybeans theme
 set background=light
-set t_Co=256
 colorscheme jellybeans
 
 if &term =~ '256color'
   " Disable Background Color Erase (BCE) so that color schemes
   " work properly when Vim is used inside tmux and GNU screen.
   " See also http://snk.tuxfamily.org/log/vim-256color-bce.html
+  set t_Co=256
   set t_ut=
 endif
 
