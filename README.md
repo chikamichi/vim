@@ -37,7 +37,19 @@ mkdir backup
 
 ### 5. Install system dependencies
 
-As for now, it boils down to installing [ctags](http://ctags.sourceforge.net/) in its *Exuberant* flavor. For me, it's a matter of doing `sudo apt-get install exuberant-ctags`.
+As for now, it boils down to installing [ctags](http://ctags.sourceforge.net/) in its *Exuberant* flavor, and compiling Command-t.
+
+ctags can be installed with `sudo apt-get install exuberant-ctags`.
+
+Command-t documentation has guidelines on installing under Pathogen, and introduces a dependency on Ruby:
+
+``` bash
+cd bundle/command-t/ruby/command-t
+ruby extconf.rb
+make
+```
+
+Then, refresh Pathogen's doc: `:call pathogen#helptags`.
 
 Local managment
 ---------------
