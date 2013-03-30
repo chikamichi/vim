@@ -89,16 +89,24 @@ See [vim-scripts](https://github.com/vim-scripts/) on github.
 
 *Note: All the configuration on the vim-side is included in this repository, tmux must be configured by hand though.*
 
-I no longer use xterm-256color and XDefaults hack, for tmux requirements make it more complicated than desired.
+I no longer use xterm-256color, tmux does not like it. Quoting [Tom Ryder](http://blog.sanctum.geek.nz/term-strings/):
 
-To gain 256color support in tmux, set the following in `~/.tmux.conf`:
+> This is because they are “terminals within terminals”, and provide their own functionality only within the bounds of what the outer terminal can do. In addition to this, they have their own type for terminals within them; both of them use screen and its variants, such as screen-256color.
+> 
+> It’s therefore very important to check that both the outer and inner definitions for TERM are correct.
+
+Running Ubuntu, its default xterm comes with 256color support. To gain 256color support in tmux as well, set the proper TERM value in `~/.tmux.conf`:
 
 ```
 set -g default-terminal "screen-256color"
 set -g xterm-keys on
 ```
 
-The former line is to enable 256color support, the latter one is to enable keycodes forwarding from your shell to tmux. This is required to process proper keycodes in vim, with some further configration in `.vimrc`:
+The former line is to enable 256color support, the latter one is to enable xterm-specific keycodes forwarding from your shell to tmux. This is required to process proper keycodes in vim, as described in tmux documentation:
+
+> tmux supports passing through ctrl (and where supported by the client terminal, alt and shift) modifiers to function keys using xterm(1)-style key sequences. This may be enabled per window, or globally with the [xterm-keys] tmux command.
+
+But vim is not able to automatically detect those xterm keycodes, due to the TERM value in use (`screen-256color`). Some further configuration is thus required in `.vimrc`:
 
 ``` vi
 " Make Vim recognize xterm escape sequences for Page and Arrow
@@ -135,4 +143,8 @@ set t_Co=256
 set t_ut=y
 colorscheme jellybeans
 ```
+
+Note that the `t_Co` setting is to `force` vim to trust the term it runs within has 256color support, even though it may not be detected (better safe than sorry).
+
+More (rock-solid) info on `TERM` management on the [Arabesque blog](http://blog.sanctum.geek.nz/term-strings/).
 
