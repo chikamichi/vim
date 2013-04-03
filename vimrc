@@ -396,7 +396,7 @@ let g:mapleader = ","
 " easily cancel hitting the leader key once
 nnoremap <Leader><Leader> <Leader>
 
-" I don't like auto-cd but I'd use a quicker opener (actually using Command-t though)
+" I don't like auto-cd but I'd use a quicker opener
 map <Leader>cd :cd %:p:h<CR>
 
 " Tmux integration.
@@ -536,7 +536,7 @@ let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<c-t>'],
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
-nmap <leader>c :CtrlP<CR>
+nmap <leader>t :CtrlP<CR>
 nmap <leader>b :CtrlP<CR>
 "endif
 
