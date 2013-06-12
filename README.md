@@ -22,7 +22,7 @@ ln -s ~/.vim/gvimrc ~/.gvimrc
 ### 3. Create the required backup directory
 
 ``` bash
-mkdir backup
+mkdir ~/.vim/backup
 ```
 
 ### 4. Install system dependencies
@@ -33,7 +33,7 @@ ctags can be installed with `sudo apt-get install exuberant-ctags`.
 
 ### 5. Fetch the plugins
 
-I use [Vundle](https://github.com/gmarik/vundle).
+I use [Vundle](https://github.com/gmarik/vundle). Install it, then:
 
 ``` bash
 vim +BundleInstall +qall
@@ -55,6 +55,12 @@ Running Ubuntu, its default xterm, acting as the "outer terminal", is handy enou
 ``` tmux
 set -g default-terminal "screen-256color"
 set -g xterm-keys on
+```
+
+If it fails, you may need to force the outer term. In your `.bashrc`:
+
+``` shell
+export TERM="xterm-256color"
 ```
 
 The former line is to enable 256color support, while the latter one is to enable xterm-specific keycodes' forwarding, from your shell to tmux. This is required to process proper keycodes inside vim, as explained by tmux documentation:
