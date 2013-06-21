@@ -576,6 +576,7 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.less          set filetype less
     autocmd BufNewFile,BufRead *.mustache      set filetype mustache
     autocmd BufNewFile,BufRead *.ejs           set filetype=jst
+    autocmd BufNewFile,BufRead *.liquid.haml   set filetype=liquid
     autocmd BufNewFile,BufRead /etc/nginx/sites-available/* set ft=nginx
 
     " strict tabulations in Makefiles
