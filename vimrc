@@ -56,6 +56,8 @@ Bundle "bronson/vim-trailing-whitespace"
 Bundle "airblade/vim-gitgutter"
 Bundle "suan/vim-instant-markdown"
 Bundle "kien/ctrlp.vim"
+Bundle "digitaltoad/vim-jade"
+Bundle "claco/jasmine.vim"
 "Bundle "chrisbra/NrrwRgn"
 "Bundle "wincent/Command-T"
 
