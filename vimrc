@@ -521,9 +521,9 @@ if exists(":Tabularize")
 endif
 
 " coffee-script auto compile, folding
-au BufWritePost *.coffee silent CoffeeMake! -b | cwindow | redraw!
-au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
-au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+"au BufWritePost *.coffee silent CoffeeMake! -b | cwindow | redraw!
+"au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
+"au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 
 if exists(":TOhtml")
   " export HTML (:TOhtml) *avec CSS*
