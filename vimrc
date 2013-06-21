@@ -204,6 +204,14 @@ noremap  <S-F10>      :call <SID>spell_en()<CR>
 inoremap <S-F10> <C-o>:call <SID>spell_en()<CR>
 vnoremap <S-F10> <C-o>:call <SID>spell_en()<CR>
 
+" Yank to the clipboard
+nnoremap <C-y> "+y
+vnoremap <C-y> "+y
+
+" Paste from the clipboard
+nnoremap <C-p> "+gP
+vnoremap <C-p> "+gP
+
 " Spell checking }}}
 
 " Generic }}}
