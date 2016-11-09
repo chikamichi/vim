@@ -20,6 +20,8 @@
 set nocompatible
 
 " vundle kicks in!
+" to install new plugins: vim +BundleInstall +qall (or :BundleInstall[!]
+" where the optional "!" stands for Update-Them-All-As-Well)
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -32,7 +34,8 @@ Bundle "mbbill/undotree"
 Bundle "tpope/vim-cucumber"
 Bundle "tpope/vim-haml"
 Bundle "tpope/vim-liquid"
-Bundle "tpope/vim-markdown"
+"Bundle "tpope/vim-markdown"
+Bundle "jtratner/vim-flavored-markdown"
 Bundle "tpope/vim-rails"
 Bundle "tpope/vim-surround"
 Bundle "tpope/vim-speeddating"
@@ -46,7 +49,7 @@ Bundle "chikamichi/mediawiki.vim"
 Bundle "scrooloose/nerdcommenter"
 Bundle "evanmiller/nginx-vim-syntax"
 Bundle "nanotech/jellybeans.vim"
-Bundle "jeffkreeftmeijer/vim-numbertoggle"
+"Bundle "jeffkreeftmeijer/vim-numbertoggle"
 Bundle "slim-template/slim"
 Bundle "ervandew/supertab"
 Bundle "scrooloose/syntastic"
@@ -58,8 +61,19 @@ Bundle "suan/vim-instant-markdown"
 Bundle "kien/ctrlp.vim"
 Bundle "digitaltoad/vim-jade"
 Bundle "claco/jasmine.vim"
+Bundle "troydm/easybuffer.vim"
+Bundle "vim-scripts/tComment"
+Bundle "tpope/vim-sensible"
+Bundle "tpope/vim-fugitive"
 "Bundle "chrisbra/NrrwRgn"
 "Bundle "wincent/Command-T"
+Bundle "slim-template/vim-slim"
+Bundle "vim-scripts/SyntaxRange"
+Bundle "2072/PHP-Indenting-for-VIm"
+Bundle "juvenn/mustache.vim"
+Bundle "pangloss/vim-javascript"
+Bundle "mxw/vim-jsx"
+Bundle "mtscout6/vim-cjsx"
 
 " load filetype-dependent plugins and indent rules
 filetype plugin indent on
@@ -200,9 +214,9 @@ endfunction
 noremap  <F10>        :call <SID>spell_fr()<CR>
 inoremap <F10>   <C-o>:call <SID>spell_fr()<CR>
 vnoremap <F10>   <C-o>:call <SID>spell_fr()<CR>
-noremap  <S-F10>      :call <SID>spell_en()<CR>
-inoremap <S-F10> <C-o>:call <SID>spell_en()<CR>
-vnoremap <S-F10> <C-o>:call <SID>spell_en()<CR>
+noremap  <C-F10>      :call <SID>spell_en()<CR>
+inoremap <C-F10> <C-o>:call <SID>spell_en()<CR>
+vnoremap <C-F10> <C-o>:call <SID>spell_en()<CR>
 
 " Yank to the clipboard
 nnoremap <C-y> "+y
@@ -398,6 +412,11 @@ autocmd BufLeave,FocusLost silent! wall
 
 " Some mappings are defined in the Plugins section
 
+" Now when we type %% on Vim’s : command-line prompt, it automatically expands
+" to the path of the active buffer, just as though we had typed %:h <Tab>
+" taken from Practical Vim
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
 " my <leader> key is the comma as it is at the center of bepo keyboard
 " mappings
 let   mapleader = ","
@@ -456,6 +475,12 @@ imap <A-DOWN> <ESC>  gkj
 " quicker way to save a file
 nmap <leader>w :w<CR>
 nmap <leader><Leader>w :W<CR>
+
+" ctrl-c to yank a selection to clipboard
+noremap <Leader>y "*y
+noremap <Leader>p "*p
+noremap <Leader>Y "+y
+noremap <Leader>P "+p
 
 " converts file format to/from unix
 command! Unixformat :set ff=unix
@@ -549,6 +574,16 @@ let g:ctrlp_prompt_mappings = {
 nmap <leader>t :CtrlP<CR>
 nmap <leader>b :CtrlP<CR>
 "endif
+
+" tComment
+nnoremap // :TComment<CR>
+vnoremap // :TComment<CR>
+
+" vim-flavored-markdown
+augroup markdown
+  au!
+  au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+augroup END
 
 " Plugins }}}
 
