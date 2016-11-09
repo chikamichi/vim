@@ -36,7 +36,7 @@ ctags can be installed with `sudo apt-get install exuberant-ctags`.
 I use [Vundle](https://github.com/gmarik/vundle). Install it, then:
 
 ``` bash
-vim +BundleInstall +qall
+vim +PluginInstall +qall
 ```
 
 256 colors support (tmux-wise)
