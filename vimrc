@@ -1,100 +1,84 @@
 " jd AT vauguet DOT fr
-" Available at http://github.com/chikamichi/vim. Reading ":help options" is very handy here.
+" Available at http://github.com/chikamichi/vim. Reading ":help options" is
+" a must.
 
-" This, is my beloved .vimrc config file. It's been tailored and updated for
+" This, is my beloved vi/nvim config file. It's been tailored and updated for
 " several years now. Thanks to everyone, anonyfamous people who contributed to
-" the common knowledge on vim's internal on the Internet.
+" the common knowledge about vim's customizing over the years.
 "
-" I strive to comment every piece of option introduced in this file. If
+" I have tried to comment every piece of option introduced in this file. If
 " something is not clear enough, just let me know by sending an email.
-" Using ":help somethingidontknowabout" is the first step, then duckduckgo it.
+" Using ":help somethingidontknowabout" is the first step.
 " Sometimes, searching in the help pages fails at retrieving the correct
 " entry. Just look for it inside ":help options", it will probably show up.
 "
-" Some settings are particulary particular as I'm using a French Dvorak layout
-" for typing (http://bepo.fr).
+" Some settings are peculiar for I'm using a French Dvorak layout known as
+" Bépo (http://bepo.fr).
 
 " {{{ Generic
 
-" no compatibility
-set nocompatible
-filetype off
+" https://github.com/neovim/neovim/issues/6082
+set mouse=a
 
-" vundle kicks in!
-" to install new plugins: vim +BundleInstall +qall (or :BundleInstall[!]
-" where the optional "!" stands for Update-Them-All-As-Well)
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" https://github.com/junegunn/vim-plug
+" Install/update with :PlugUpdate.
+call plug#begin('~/.local/share/nvim/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'mileszs/ack.vim'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'Raimondi/delimitMate'
-Plugin 'mbbill/undotree'
-Plugin 'tpope/vim-cucumber'
-Plugin 'tpope/vim-haml'
-Plugin 'tpope/vim-liquid'
-"Plugin 'tpope/vim-markdown'
-Plugin 'jtratner/vim-flavored-markdown'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-speeddating'
-Plugin 'tpope/vim-eunuch'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'juanpabloaj/help.vim'
-Plugin 'othree/html5.vim'
-Plugin 'othree/html5-syntax.vim'
-Plugin 'vim-scripts/matchit.zip'
-Plugin 'chikamichi/mediawiki.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'evanmiller/nginx-vim-syntax'
-Plugin 'nanotech/jellybeans.vim'
-"Plugin 'jeffkreeftmeijer/vim-numbertoggle'
-Plugin 'slim-template/slim'
-Plugin 'ervandew/supertab'
-Plugin 'scrooloose/syntastic'
-Plugin 'godlygeek/tabular'
-Plugin 'sjl/splice.vim'
-Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'suan/vim-instant-markdown'
-Plugin 'kien/ctrlp.vim'
-Plugin 'digitaltoad/vim-jade'
-Plugin 'claco/jasmine.vim'
-Plugin 'troydm/easybuffer.vim'
-Plugin 'vim-scripts/tComment'
-Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-fugitive'
-"Plugin 'chrisbra/NrrwRgn'
-"Plugin 'wincent/Command-T'
-Plugin 'slim-template/vim-slim'
-Plugin 'vim-scripts/SyntaxRange'
-Plugin '2072/PHP-Indenting-for-VIm'
-Plugin 'juvenn/mustache.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'mtscout6/vim-cjsx'
+Plug 'mileszs/ack.vim'
+Plug 'kchmck/vim-coffee-script'
+Plug 'Raimondi/delimitMate'
+Plug 'mbbill/undotree'
+Plug 'tpope/vim-cucumber'
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-liquid'
+"Plug 'tpope/vim-markdown'
+Plug 'jtratner/vim-flavored-markdown'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-eunuch'
+Plug 'vim-ruby/vim-ruby'
+Plug 'juanpabloaj/help.vim'
+Plug 'othree/html5.vim'
+Plug 'othree/html5-syntax.vim'
+Plug 'vim-scripts/matchit.zip'
+Plug 'chikamichi/mediawiki.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'evanmiller/nginx-vim-syntax'
+Plug 'nanotech/jellybeans.vim'
+"Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'slim-template/slim'
+Plug 'ervandew/supertab'
+Plug 'scrooloose/syntastic'
+Plug 'godlygeek/tabular'
+Plug 'sjl/splice.vim'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'airblade/vim-gitgutter'
+Plug 'suan/vim-instant-markdown'
+Plug 'kien/ctrlp.vim'
+Plug 'digitaltoad/vim-jade'
+Plug 'claco/jasmine.vim'
+Plug 'troydm/easybuffer.vim'
+Plug 'vim-scripts/tComment'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-fugitive'
+"Plug 'chrisbra/NrrwRgn'
+"Plug 'wincent/Command-T'
+Plug 'slim-template/vim-slim'
+Plug 'vim-scripts/SyntaxRange'
+Plug '2072/PHP-Indenting-for-VIm'
+Plug 'juvenn/mustache.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'mtscout6/vim-cjsx'
 
-call vundle#end()
-
-" load filetype-dependent plugins and indent rules
-filetype plugin indent on
-
-" automatically read in external changes if we haven't modified the buffer
-set autoread
+call plug#end()
 
 " automatically flush to disk when using :make, etc.
 set autowrite
 
-" default encoding is UTF-8
-set encoding=utf-8
-set fileencoding=utf-8
-
 " add : as a file-name character (allows gf to work with http://foo.bar/)
 set isfname+=:
-
-" speed up rendering in modern shells
-set ttyfast
 
 " faster!
 set timeout timeoutlen=3000 ttimeoutlen=100
@@ -146,17 +130,8 @@ set showmatch
 set com& " reset to default
 set com^=sr:*\ -,mb:*\ \ ,el:*/ com^=sr://\ -,mb://\ \ ,el:///
 
-" enable folding
-set foldenable
-
 " folding criteria: explicit markers {{{ … }}}
 set foldmethod=marker
-
-" mouse support in terminals :)
-if !has("gui_running")
-  set mouse=a
-  set ttymouse=xterm
-endif
 
 " don't move the cursor to the start of the line when changing buffers
 set nostartofline
@@ -175,8 +150,8 @@ set showmode
 " No spell checking by default
 set nospell
 
-" But activate for .txt and .tex files.
-" I mostly write .md files in English, too.
+" But activate French-spellchecking for .txt and .tex files.
+" I usually write .md files in English, though.
 augroup filetypedetect
   au BufNewFile,BufRead *.txt setlocal spell spelllang=fr
   au BufNewFile,BufRead *.tex setlocal spell spelllang=fr
@@ -276,18 +251,12 @@ set wrapscan
 " move cursor to the current result's line
 set showmatch
 
-" highlight results
-set hlsearch
-
-" highlight while typing, too
-set incsearch
-
 " <espace> deux fois en mode normal efface les messages et les résultats de recherche
 nnoremap <silent> <Space><Space> :silent noh<Bar>echo<CR>
 
 " show chars on end of line, white spaces, tabs, etc
 set list
-set listchars=nbsp:·,tab:>-
+set listchars=nbsp:·,tab:>-,trail:-
 
 " Search and replace }}}
 
@@ -320,9 +289,6 @@ if has("autocmd") && exists("+omnifunc")
              \ endif
 endif
 
-" show a list of all matches when tabbing a command
-set wildmenu
-
 " use tab for auto-expansion in menus
 set wildchar=<TAB>
 
@@ -335,20 +301,11 @@ set wildignore=*.o,*.r,*.so,*.sl,*.tar,*.tgz,*.pyc,*~,.svn,CVS,.git,*.o,*.a,*.cl
 " some filetypes got lower priority
 set suffixes=.h,.bak,~,.o,.info,.swp,.obj
 
-" remember last 2000 typed commands
-set history=2000
-
-" display cursor position (line/column) in the status line
-set ruler
-
-" actually display more information in the ruler
+" display more information in the ruler than the defaults
 set rulerformat=%40(%=%t%h%m%r%w%<\ (%n)\ %4.7l,%-7.(%c%V%)\ %P%)
 
 " always display currently used mode
 set showmode
-
-" dynamic display of commands
-set showcmd
 
 " a - terse messages (like [+] instead of [Modified]
 " o - don't show both reading and writing messages if both occur at once
@@ -357,9 +314,6 @@ set showcmd
 " W - don't show [w] when writing
 " I - no intro message when starting vim fileless
 set shortmess=aotTWI
-
-" always display status line
-set laststatus=2
 
 " display as much of the last line as possible if it's really long;
 " also display unprintable characters as hex
@@ -454,9 +408,6 @@ endif
 map <M-Left> gT
 " Go to the next tab
 map <M-Right> gt
-
-" Toggle line numbering
-noremap <silent> <F11> :se number!<CR>
 
 " Tailored navigation mappings for bepo.
 " ie. en mode normal/commande, maintenir Alt et utiliser les doigts au
@@ -666,5 +617,5 @@ au BufRead,BufNewFile *.hamlc set ft=haml
 
 " Syntax highlighting, colors, fonts }}}
 
-" vim: set foldmethod=marker nonumber:
+" vim: set foldmethod=marker
 

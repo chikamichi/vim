@@ -1,7 +1,9 @@
 My portable vim setup
 =====================
 
-Altough I may use Sublime Text 3, gEdit or Libre Office Writer from time to time depending on the document to be edited, my main editor is vim *in console*, inside [tmux](http://tmux.sourceforge.net/). This repository holds my portable vim setup which can be used to bootstrap a new machine in no time with a fully-fledged installation (with plugins, color support and tmux integration all included).
+My main GUI editor is Atom for long-standing coding session, but my main TUI/console editor has been vim for years. This repository holds my portable [Neovim](https://neovim.io/) setup, which can be used to bootstrap a new machine in no time with a fully-fledged installation (including plugins, color support and tmux integration).
+
+For the most part, that is a language-agnostic setup, but small areas are tied to the French language and my usage of a specific keyboard layout. YMMV.
 
 Installation on a brand-new box
 -------------------------------
@@ -12,31 +14,37 @@ Installation on a brand-new box
 git clone git://github.com/chikamichi/vim.git ~/.vim
 ```
 
-### 2. Create required symlinks
+### 2. Create required symlink
 
 ``` bash
-ln -s ~/.vim/vimrc ~/.vimrc
-ln -s ~/.vim/gvimrc ~/.gvimrc
+ln -s ~/.config/nvim/init.vim ~/.vim/vimrc
 ```
 
-### 3. Create the required backup directory
+### 3. Create and populate required directories
 
 ``` bash
-mkdir ~/.vim/backup
+mkdir -p ~/.local/share/nvim/backup ~/.config/nvim/spell ~/.local/share/nvim/site/autoload/ ~/.local/share/nvim/plugged
+ln -s ~/.vim/spell/fr.utf-8.sug ~/.config/nvim/spell
+ln -s ~/.vim/spell/fr.utf-8.spl ~/.config/nvim/spell
+```
+
+Alternatively you may re-fetch the spell dict:
+
+```bash
+wget http://ftp.vim.org/pub/vim/runtime/spell/fr.utf-8.sug
+wget http://ftp.vim.org/pub/vim/runtime/spell/fr.utf-8.spl
 ```
 
 ### 4. Install system dependencies
 
-As for now, it boils down to installing [ctags](http://ctags.sourceforge.net/) in its *Exuberant* flavor.
-
-ctags can be installed with `sudo apt-get install exuberant-ctags`.
+As for now, it boils down to installing [ctags](http://ctags.sourceforge.net/) in its *Exuberant* flavor, which is usually available as a system package known as *exuberant-ctags* or *ctags* (with the latter, check that it actually is the Exuberant version).
 
 ### 5. Fetch the plugins
 
-I use [Vundle](https://github.com/gmarik/vundle). Install it, then:
+I use [vim-plug](https://github.com/junegunn/vim-plug). Install it, then:
 
 ``` bash
-vim +PluginInstall +qall
+vim +PlugInstall +qall
 ```
 
 256 colors support (tmux-wise)
@@ -50,14 +58,14 @@ I no longer use `xterm-256color` as my `TERM` value, tmux does not like it. Quot
 > 
 > It’s therefore very important to check that both the outer and inner definitions for `TERM` are correct.
 
-Running Ubuntu, its default xterm, acting as the "outer terminal", is handy enough to come with 256color support built-in (to check whether your terminal does, run `msgcat --color=test`). To gain 256color support in tmux as well, you must set the proper `TERM` in `~/.tmux.conf`. A value of `screen-256color` is **required** by tmux:
+I am running GNU/Linux Solus with a `$TERM` of "screen-256color", which acts as the "outer terminal" and obviously provides 256 colors support (to check whether your terminal does, run `msgcat --color=test`). To gain 256color support in tmux as well, one must set the proper `TERM` in `~/.tmux.conf` and it must match the outer, hosting term. A value of `screen-256color` is therefore **required** by tmux:
 
 ``` tmux
 set -g default-terminal "screen-256color"
 set -g xterm-keys on
 ```
 
-If it fails, you may need to force the outer term. In your `.bashrc`:
+It should be enough to get you up and running; may it fail, you would need to force the outer term. In your `.bashrc`, `.zshrc` or equivalent:
 
 ``` shell
 export TERM="xterm-256color"
@@ -67,7 +75,7 @@ The former line is to enable 256color support, while the latter one is to enable
 
 > tmux supports passing through ctrl (and where supported by the client terminal, alt and shift) modifiers to function keys using xterm(1)-style key sequences. This may be enabled per window, or globally with the [xterm-keys] tmux command.
 
-But vim is not able to automatically detect those xterm keycodes, due to the `TERM` value in use (`screen-256color`). Some further configuration is thus required in `.vimrc` (all the remaining, vim-related code is *already included* in this bundle, so there is no need for you to edit anything):
+Unfortunately vim is not able to automatically detect those xterm keycodes, due to the `TERM` value in use (`screen-256color`). Some further configuration is thus required in `.vimrc` (all the remaining, vim-related code is *already included* in this bundle, so there is no need for you to edit anything):
 
 ``` viml
 " Make Vim recognize xterm escape sequences for Page and Arrow
