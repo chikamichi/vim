@@ -341,12 +341,6 @@ set splitbelow
 
 " {{{ Save and backup
 
-" enable backup
-set backup
-
-" backup location (must be created by hand!)
-set backupdir=~/.vim/backup
-
 " don't use a swap file (ie. save all the time asap)
 set updatecount=0
 
