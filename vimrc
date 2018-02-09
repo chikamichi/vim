@@ -24,6 +24,7 @@ set mouse=a
 " Install/update with :PlugUpdate.
 call plug#begin('~/.local/share/nvim/plugged')
 
+Plug 'ap/vim-buftabline'
 Plug 'mileszs/ack.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'Raimondi/delimitMate'
@@ -403,12 +404,6 @@ if &term =~ '^screen'
   execute "set <xLeft>=\e[1;*D"
 endif
 
-" We can now map directions with modifiers!
-" Go to the previous tab
-map <M-Left> gT
-" Go to the next tab
-map <M-Right> gt
-
 " Tailored navigation mappings for bepo.
 " ie. en mode normal/commande, maintenir Alt et utiliser les doigts au
 " repos pour des déplacements rapides, sans flèches
@@ -483,6 +478,22 @@ endif
 " Mappings }}}
 
 " {{{ Plugins
+
+" Buftabline
+let g:buftabline_indicators=1
+let g:buftabline_numbers=1
+nmap <Leader>p :bp<CR>
+nmap <Leader>n :bn<CR>
+nmap <leader>1 <Plug>BufTabLine.Go(1)
+nmap <leader>2 <Plug>BufTabLine.Go(2)
+nmap <leader>3 <Plug>BufTabLine.Go(3)
+nmap <leader>4 <Plug>BufTabLine.Go(4)
+nmap <leader>5 <Plug>BufTabLine.Go(5)
+nmap <leader>6 <Plug>BufTabLine.Go(6)
+nmap <leader>7 <Plug>BufTabLine.Go(7)
+nmap <leader>8 <Plug>BufTabLine.Go(8)
+nmap <leader>9 <Plug>BufTabLine.Go(9)
+nmap <leader>0 <Plug>BufTabLine.Go(10)
 
 " ack-grep
 if exists(":Ack")
