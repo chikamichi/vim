@@ -148,7 +148,7 @@ set showmode
 
 " {{{ Spell checking
 
-" No spell checking by default
+" No spell checking by default.
 set nospell
 
 " But activate French-spellchecking for .txt and .tex files.
@@ -163,7 +163,7 @@ augroup END
 " For French, you'll need to:
 "   wget http://ftp.vim.org/pub/vim/runtime/spell/fr.utf-8.sug
 "   wget http://ftp.vim.org/pub/vim/runtime/spell/fr.utf-8.spl
-" which you may move into ~/.vim/spell.
+" which you may move into ~/.config/nvim/spell.
 function s:spell_fr()
   if !exists("s:spell_check") || s:spell_check == 0
     echo "French spell checking activated."
@@ -189,9 +189,9 @@ function s:spell_en()
   endif
 endfunction
 
-noremap  <F10>        :call <SID>spell_fr()<CR>
-inoremap <F10>   <C-o>:call <SID>spell_fr()<CR>
-vnoremap <F10>   <C-o>:call <SID>spell_fr()<CR>
+noremap  <C-F9>       :call <SID>spell_fr()<CR>
+inoremap <C-F9>  <C-o>:call <SID>spell_fr()<CR>
+vnoremap <C-F9>  <C-o>:call <SID>spell_fr()<CR>
 noremap  <C-F10>      :call <SID>spell_en()<CR>
 inoremap <C-F10> <C-o>:call <SID>spell_en()<CR>
 vnoremap <C-F10> <C-o>:call <SID>spell_en()<CR>
