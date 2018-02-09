@@ -25,6 +25,10 @@ set mouse=a
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'ap/vim-buftabline'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ternjs/tern_for_vim'
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+Plug 'mhartington/nvim-typescript'
 Plug 'mileszs/ack.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'Raimondi/delimitMate'
@@ -50,6 +54,8 @@ Plug 'nanotech/jellybeans.vim'
 "Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'slim-template/slim'
 Plug 'ervandew/supertab'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'scrooloose/syntastic'
 Plug 'godlygeek/tabular'
 Plug 'sjl/splice.vim'
@@ -252,12 +258,13 @@ set wrapscan
 " move cursor to the current result's line
 set showmatch
 
-" <espace> deux fois en mode normal efface les messages et les résultats de recherche
+" hitting <space> twice in a row in normale mode wipes out messages and search
+" results
 nnoremap <silent> <Space><Space> :silent noh<Bar>echo<CR>
 
 " show chars on end of line, white spaces, tabs, etc
 set list
-set listchars=nbsp:·,tab:>-,trail:-
+set listchars=nbsp:·,tab:>-,trail:·
 
 " Search and replace }}}
 
@@ -278,17 +285,6 @@ set statusline+=%=                           " right align
 set statusline+=\[%{exists('loaded_taglist')?Tlist_Get_Tag_Prototype_By_Line(expand('%'),line('.')):'no\ tags'}]\   " show tag prototype
 set statusline+=0x%-8B\                      " current char
 set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
-
-" OmniCompletion
-set ofu=syntaxcomplete#Complete
-
-" http://vimdoc.sourceforge.net/htmldoc/insert.html#ft-syntax-omni
-if has("autocmd") && exists("+omnifunc")
-  autocmd Filetype *
-             \ if &omnifunc == "" |
-             \ setlocal omnifunc=syntaxcomplete#Complete |
-             \ endif
-endif
 
 " use tab for auto-expansion in menus
 set wildchar=<TAB>
@@ -489,6 +485,13 @@ nmap <leader>8 <Plug>BufTabLine.Go(8)
 nmap <leader>9 <Plug>BufTabLine.Go(9)
 nmap <leader>0 <Plug>BufTabLine.Go(10)
 
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+
+" Deoplete-ternjs
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
+
 " ack-grep
 if exists(":Ack")
   let g:ackprg="ack-grep -H --nocolor --nogroup --column"
@@ -496,13 +499,13 @@ endif
 
 " SuperTab
 if exists(":SuperTabHelp")
-  let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+  " https://gregjs.com/vim/2016/neovim-deoplete-jspc-ultisnips-and-tern-a-config-for-kickass-autocompletion/
+  let g:SuperTabDefaultCompletionType = "<C-x><C-o>"
   let g:SuperTabDefaultCompletionType = "context"
+  let g:SuperTabContextDefaultCompletionType = "<C-n>"
   let g:SuperTabCrMapping = 0
-
-  " SuperTab integration with Omni
-  let g:SuperTabDefaultCompletionType = "context"
-  let g:SuperTabContextDefaultCompletionType = "<c-n>"
+  let g:UltiSnipsExpandTrigger="<C-j>"
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 endif
 
 " tabular

@@ -8,43 +8,40 @@ For the most part, that is a language-agnostic setup, but small areas are tied t
 Installation on a brand-new box
 -------------------------------
 
-### 1. Clone this repository
+### System dependencies
+
+As for now, it boils down to:
+
+* installing [ctags](http://ctags.sourceforge.net/) in its *Exuberant* flavor, which is usually available as a system package known as *exuberant-ctags* or *ctags* (with the latter, check that it actually is the Exuberant version).
+* installing Node/npm
+
+
+### Synopsis
+
+I use [vim-plug](https://github.com/junegunn/vim-plug).
 
 ``` bash
 git clone git://github.com/chikamichi/vim.git ~/.vim
-```
-
-### 2. Create required symlink
-
-``` bash
 ln -s ~/.config/nvim/init.vim ~/.vim/vimrc
-```
-
-### 3. Create and populate required directories
-
-``` bash
 mkdir -p ~/.local/share/nvim/backup ~/.config/nvim/spell ~/.local/share/nvim/site/autoload/ ~/.local/share/nvim/plugged
 ln -s ~/.vim/spell/fr.utf-8.sug ~/.config/nvim/spell
 ln -s ~/.vim/spell/fr.utf-8.spl ~/.config/nvim/spell
+pip3 install neovim # For https://github.com/Shougo/deoplete.nvim
+vim +PlugInstall +qall
 ```
 
-Alternatively you may re-fetch the spell dict:
+Wish this could be automated:
+
+```sh
+cd ~/.local/share/nvim/plugged/tern_for_vim
+npm install
+```
+
+Note: you may alternatively manually fetch the French spell dict:
 
 ```bash
 wget http://ftp.vim.org/pub/vim/runtime/spell/fr.utf-8.sug
 wget http://ftp.vim.org/pub/vim/runtime/spell/fr.utf-8.spl
-```
-
-### 4. Install system dependencies
-
-As for now, it boils down to installing [ctags](http://ctags.sourceforge.net/) in its *Exuberant* flavor, which is usually available as a system package known as *exuberant-ctags* or *ctags* (with the latter, check that it actually is the Exuberant version).
-
-### 5. Fetch the plugins
-
-I use [vim-plug](https://github.com/junegunn/vim-plug). Install it, then:
-
-``` bash
-vim +PlugInstall +qall
 ```
 
 256 colors support (tmux-wise)
