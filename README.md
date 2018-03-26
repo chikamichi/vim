@@ -18,11 +18,13 @@ As for now, it boils down to:
 
 ### Synopsis
 
-I use [vim-plug](https://github.com/junegunn/vim-plug).
+I use [vim-plug](https://github.com/junegunn/vim-plug) with Neovim.
 
 ``` bash
+# install Neovim first
 git clone git://github.com/chikamichi/vim.git ~/.vim
-ln -s ~/.config/nvim/init.vim ~/.vim/vimrc
+mkdir -p ~/.config/nvim
+ln -s ~/.vim/vimrc ~/.config/nvim/init.vim
 mkdir -p ~/.local/share/nvim/backup ~/.config/nvim/spell ~/.local/share/nvim/site/autoload/ ~/.local/share/nvim/plugged
 ln -s ~/.vim/spell/fr.utf-8.sug ~/.config/nvim/spell
 ln -s ~/.vim/spell/fr.utf-8.spl ~/.config/nvim/spell
