@@ -93,7 +93,7 @@ if &term =~ '^screen'
 endif
 ```
 
-One can now map directions with modifiers. For instance, you may want Alt+Left/Right to navigate through your opened tabs (Alt is Meta under Ubuntu):
+One can now map directions with modifiers. For instance, you may want Alt+Left/Right to navigate through your opened tabs (Alt is Meta under most Linux distributions):
 
 ``` viml
 " Go to the previous tab.
@@ -112,7 +112,7 @@ set ttyfast
 set background=light
 set t_Co=256
 set t_ut=
-colorscheme jellybeans
+colorscheme whateveryoulike
 ```
 
 Note that the `t_Co` setting is to *force* vim to trust the term it runs within has 256color support, even though it may not be detected.
