@@ -64,11 +64,11 @@ set -g default-terminal "screen-256color"
 set -g xterm-keys on
 ```
 
-It should be enough to get you up and running; may it fail, you would need to force the outer term. In your `.bashrc`, `.zshrc` or equivalent:
-
-``` shell
-export TERM="xterm-256color"
-```
+> It should be enough to get you up and running; may it fail, you would need to force the outer term. In your `.bashrc`, `.zshrc` or equivalent:
+>
+> ``` shell
+> export TERM="screen-256color" # some may prefer "xterm-256color" though
+> ```
 
 The former line is to enable 256color support, while the latter one is to enable xterm-specific keycodes' forwarding, from your shell to tmux. This is required to process proper keycodes inside vim, as explained by tmux documentation:
 
